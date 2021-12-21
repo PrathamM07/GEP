@@ -21,12 +21,14 @@ import {
 export interface IWhitePaperDetailsWebPartProps {
   description: string;
 apiURL: string;
-sliderproperty: string;
+sliderproperty: number;
+maxItem:number;
   
 }
 
 export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhitePaperDetailsWebPartProps> {
 
+  public maxItem = 5;
   public render(): void {
   
     const element: React.ReactElement<IWhitePaperDetailsProps> = React.createElement(
@@ -35,7 +37,7 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         description: this.properties.description,
         context:this.context,
       
-        maxItems: this.properties.sliderproperty ? this.properties.sliderproperty : "10",
+        maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 22,
         apiURL: this.properties.apiURL
       } 
     );
@@ -53,10 +55,7 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
     return Version.parse('1.0');
   }
 
-  protected get disableReactivePropertyChanges(): boolean {
-    
-    return true;
-  }
+ 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [
@@ -75,13 +74,14 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
                   label: "News API URL"
                 }),
                  
+              
+                
                 PropertyPaneSlider('sliderproperty', {
                   label: "Max Items",
                   min: 1,
-                  max:20,
+                  max: 22,
                   showValue: true,
-                  value: 10,
-                  step: 1
+                  value: this.maxItem
                 })
             
               ]

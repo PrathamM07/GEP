@@ -53,74 +53,74 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
 
-   // this._ops = this.props.context.serviceScope.consume(GDService.serviceKey);
+    // this._ops = this.props.context.serviceScope.consume(GDService.serviceKey);
 
     return (
 
-     
+
       <section className="section__content bg-white">
-      <div className="container">
+        <div className="container">
           <div className="row">
 
 
-         
 
-        {
-          this.state.list.map((detail, index) => {
-            let imgSrc = detail.image_url;
-            return (
 
-              // <div className="card border" style={{ width: '18rem', backgroundColor: 'black' }}>
-              //   <img className="card-img-top" src={imgSrc} alt="Card image cap" />
+            {
+              this.state.list.slice(0, this.props.maxItem).map((detail, index) => {
+                let imgSrc = detail.image_url;
+                return (
 
-              //   <div className="card-body text-white">
-              //     <h5 className="card-title">{detail.service_title}</h5>
-              //     {/* <p className="card-text">{detail.description}</p> */}
+                  // <div className="card border" style={{ width: '18rem', backgroundColor: 'black' }}>
+                  //   <img className="card-img-top" src={imgSrc} alt="Card image cap" />
 
-              //     <a href="#" className="btn btn-primary">View More</a>
-              //   </div>
-              // </div>
+                  //   <div className="card-body text-white">
+                  //     <h5 className="card-title">{detail.service_title}</h5>
+                  //     {/* <p className="card-text">{detail.description}</p> */}
 
-              <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-              <div className="card" >
-                <img src={imgSrc} alt="imageCard" className="imageCard" />
-                {/* {(props.play === '') ? '' : <img className="play" src={props.play} alt="playButton" onClick={play} />}
+                  //     <a href="#" className="btn btn-primary">View More</a>
+                  //   </div>
+                  // </div>
+
+                  <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div className="card" >
+                      <img src={imgSrc} alt="imageCard" className="imageCard" />
+                      {/* {(props.play === '') ? '' : <img className="play" src={props.play} alt="playButton" onClick={play} />}
                   */}
-                <div className="imageContent row-no-padding">
-                  <div className="row align-items-end">
-                    <div className="col-9 col-md-9">
-                      {/* <h3 className="mb-0">{detail.service_title}</h3> */}
-                    </div>
-                    {/* {(props.view === '') ? '' : */}
-                    <div className="col-3 col-md-3 text-right">
+                      <div className="imageContent row-no-padding">
+                        <div className="row align-items-end">
+                          <div className="col-9 col-md-9">
+                            {/* <h3 className="mb-0">{detail.service_title}</h3> */}
+                          </div>
+                          {/* {(props.view === '') ? '' : */}
+                          <div className="col-3 col-md-3 text-right">
 
-                      <a href="#" className="d-block"> View More</a>
+                            <a href="#" className="d-block"> View More</a>
 
-                    </div>
-                    {/* //    } */}
+                          </div>
+                          {/* //    } */}
 
-                  </div>
+                        </div>
 
 
-                </div>
+                      </div>
 
-                {/* <div className="video-popup">
+                      {/* <div className="video-popup">
                     <div className="video-popup__inner">
                       <span className="close__button" onClick={closeButton}>&times;</span>
                       <div className="video-con">
                       </div>
                     </div>
                   </div> */}
+                    </div>
                   </div>
-              </div>
 
-            )
-          })
-        }
-
+                )
+              })
+            }
 
 
-        {/* <div className="list-paging">
+
+            {/* <div className="list-paging">
           <Pagination
             currentPage={this.state.currentPage}
             totalPages={this.state.totalPages}
@@ -129,12 +129,12 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
           />
         </div> */}
 
-    
-</div>
-      </div>
-                    
-                    
-                </section>
+
+          </div>
+        </div>
+
+
+      </section>
     )
   }
 
@@ -153,9 +153,9 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
 
 
-  private async getDetails(){
+  private async getDetails() {
 
-    axios.get('https://webdev.gep.com/WhitePaperList')
+    axios.get(this.props.apiURL)
       .then((result) => {
         console.log('This is your data', result.data.data[2].list)
         this.setState({ list: result.data.data[2].list });
