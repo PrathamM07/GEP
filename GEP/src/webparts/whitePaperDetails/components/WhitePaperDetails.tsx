@@ -94,7 +94,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                           {/* {(props.view === '') ? '' : */}
                           <div className="col-3 col-md-3 text-right">
 
-                            <a href="#" className="d-block"> View More</a>
+                            <a href="#" style={{textDecoration: 'none'}} className="d-block"> View More</a>
 
                           </div>
                           {/* //    } */}
@@ -112,6 +112,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                     </div>
                   </div> */}
                     </div>
+                    <br></br>
                   </div>
 
                 )
