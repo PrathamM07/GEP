@@ -38,7 +38,7 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         context:this.context,
       
         maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 22,
-        apiURL: this.properties.apiURL
+        apiURL: this.properties.apiURL? this.properties.apiURL:"https://webdev.gep.com/WhitePaperList"
       } 
     );
 
