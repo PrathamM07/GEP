@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "white-paper-details-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/whitePaperDetails/WhitePaperDetailsWebPart.js",
+          "manifest": "./src/webparts/whitePaperDetails/WhitePaperDetailsWebPart.manifest.json"
+        }
+      ]
+    },
+    "body-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/body/BodyApplicationCustomizer.js",
+          "manifest": "./src/extensions/body/BodyApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "WhitePaperDetailsWebPartStrings": "lib/webparts/whitePaperDetails/loc/{locale}.js",
+    "BodyApplicationCustomizerStrings": "lib/extensions/body/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,12 @@
+@import '../asset/css/Body.css';
+
+*{
+  margin: 0px;
+  padding:0px;
+  
+
+}
+.wrapper{
+  width: 100%;
+  overflow: hidden;
+}
