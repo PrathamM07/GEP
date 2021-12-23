@@ -12,7 +12,7 @@ import { IAllItems, IListOperationsService } from "./IListOperation";
 
 interface IOps {
     getListData(listName,topquery?): Promise<any>;
-    getListData(listName, columns?, expand?, filter?): Promise<any>;
+    
    
 }
 
