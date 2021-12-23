@@ -9,7 +9,7 @@
   },
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://prathameshneo.sharepoint.com/SiteAssets/Forms/AllItems.aspx",
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
         "1a18b35d-f1fc-4d72-b165-af0c46adfb07": {
           "location": "ClientSideExtension.ApplicationCustomizer",
@@ -20,7 +20,7 @@
       }
     },
     "body": {
-      "pageUrl": "https://prathameshneo.sharepoint.com/SiteAssets/Forms/AllItems.aspx",
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
         "1a18b35d-f1fc-4d72-b165-af0c46adfb07": {
           "location": "ClientSideExtension.ApplicationCustomizer",
