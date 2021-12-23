@@ -6,4 +6,7 @@ export interface IWhitePaperDetailsProps {
   apiURL?: string;
   maxItem?: number;
   PageData?: any[];
+  webparttitle:string;
+  assettype:string;
+ 
 }

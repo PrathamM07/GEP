@@ -39,7 +39,6 @@ html {
 }
 
 
-
 .heading {
     font-family: 'Roboto';
     color: #006BAA;
@@ -239,7 +238,10 @@ html {
 
 }
 
-
+.d-block{
+    display: block!important;
+    
+}
 /* cards Button */
 .addtocalender a {
     border: 1px solid #026AAA;
