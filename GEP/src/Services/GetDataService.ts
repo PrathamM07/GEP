@@ -30,25 +30,7 @@ export default class GetDataService implements IOps {
             });
         });
     }
-    public getListDatas(listName, columns?, expand?,filter?){
-
-      let _items:IItems = sp.web.lists.getByTitle(listName).items;
-     
-      if(expand){
-          _items = _items.expand(expand);
-      }        
-      if(columns){
-          _items = _items.select(columns);
-      }       
-      if(filter){
-          _items = _items.filter(filter);
-      }        
-
-      return new Promise<any>((resolve) => {
-          return _items.getAll().then(data => { resolve(data); });
-      });
-  }
-
+ 
     public getListData(listName) {
 
         return axios.get(listName);
