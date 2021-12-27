@@ -10,26 +10,29 @@ import { IWeb } from "@pnp/sp/webs";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { IAllItems, IListOperationsService } from "./IListOperation";
 
-interface IOps {
-    getListData(listName,topquery?): Promise<any>;
-    
-   
-}
 
-export default class GetDataService implements IOps {
+export default class GetDataService implements IListOperationsService {
 
-    public static readonly serviceKey: ServiceKey<IOps> = ServiceKey.create<IOps>("ops", GetDataService);
-
-    constructor(serviceScope: ServiceScope) {
-        serviceScope.whenFinished(() => {
-            const pageContext = serviceScope.consume(PageContext.serviceKey);
-            sp.setup({
-                spfxContext: {
-                    pageContext: pageContext
-                }
-            });
+    constructor(private _context: WebPartContext) {
+        sp.setup({
+          spfxContext: _context
         });
-    }
+      }
+    public async getAllListItems(Item: IAllItems): Promise<any[]> {
+        try {
+          const orderByColumn = Item.orderByQuery ? Item.orderByQuery.columnName : 'Id';
+          const orderByAscending = Item.orderByQuery ? Item.orderByQuery.ascending : true;
+          return await sp.web.lists.getByTitle(Item.listName).items
+            .filter(Item.filterQuery ? Item.filterQuery : '')
+            .select(Item.selectQuery ? Item.selectQuery : '*')
+            .expand(Item.expandQuery ? Item.expandQuery : '')
+            .top(Item.topQuery ? Item.topQuery : 100)
+            .orderBy(orderByColumn, orderByAscending).get();
+        } catch (error) {
+          // return Promise.reject(error);
+          throw error;
+        }
+      }
  
     public getListData(listName) {
 

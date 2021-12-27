@@ -40,7 +40,7 @@ html {
 
 
 .heading {
-    font-family: 'Roboto';
+    font-family:'Roboto';
     color: #006BAA;
     font-weight: bold;
     font-size: 2.8rem;
@@ -51,11 +51,21 @@ html {
 /*--- card styling--- */
 .card{
     cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
 }
 .card .imageCard {
     height: 216px;
     cursor: pointer;
-
+    display: block;
+    width: 100%;
 }
 
 .card .imageCardTv {
@@ -364,6 +374,7 @@ html {
     }
     .heading {
         font-size: 2.4rem;
+        
     }
 }
 

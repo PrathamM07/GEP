@@ -4,7 +4,7 @@ export interface IWhitePaperDetailsProps {
   description?: string;
   context?: WebPartContext;
   apiURL?: string;
-  maxItem?: number;
+  maxItem: number;
   PageData?: any[];
   webparttitle:string;
   assettype:string;
