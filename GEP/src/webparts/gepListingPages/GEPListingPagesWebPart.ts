@@ -11,12 +11,12 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'WhitePaperDetailsWebPartStrings';
-import WhitePaperDetails from './components/WhitePaperDetails';
-import { IWhitePaperDetailsProps } from './components/IWhitePaperDetailsProps';
+import GEPListingPages from './components/GEPListingPages';
+import { IGEPListingPagesProps } from './components/IGEPListingPagesProps';
 import { sp } from '@pnp/sp';
 import { Web } from '@pnp/sp/presets/all';
 
-export interface IWhitePaperDetailsWebPartProps {
+export interface IGEPListingPagesWebPartProps {
   description: string;
   apiURL: string;
   sliderproperty: number;
@@ -26,14 +26,14 @@ export interface IWhitePaperDetailsWebPartProps {
 }
 var propertypaneitem = [];
 
-export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhitePaperDetailsWebPartProps> {
+export default class GEPListingPagesWebPart extends BaseClientSideWebPart<IGEPListingPagesWebPartProps> {
 
   private _listFields: IPropertyPaneDropdownOption[] = [];
 
   public render(): void {
 
-    const element: React.ReactElement<IWhitePaperDetailsProps> = React.createElement(
-      WhitePaperDetails,
+    const element: React.ReactElement<IGEPListingPagesProps> = React.createElement(
+      GEPListingPages,
       {
         description: this.properties.description,
         context: this.context,
@@ -85,9 +85,6 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
                   label: "Webpart Label",
                 }),
 
-                PropertyPaneTextField('apiURL', {
-                  label: "News API URL"
-                }),
                 PropertyPaneSlider('sliderproperty', {
                   label: "Max Items",
                   min: 1,

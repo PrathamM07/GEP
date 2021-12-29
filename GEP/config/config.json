@@ -1,12 +1,21 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
-  "bundles": {
+  "bundles": { 
+  
     "white-paper-details-web-part": {
       "components": [
         {
           "entrypoint": "./lib/webparts/whitePaperDetails/WhitePaperDetailsWebPart.js",
           "manifest": "./src/webparts/whitePaperDetails/WhitePaperDetailsWebPart.manifest.json"
+        }
+      ]
+    },
+    "gep-listing-pages-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/gepListingPages/GEPListingPagesWebPart.js",
+          "manifest": "./src/webparts/gepListingPages/GEPListingPagesWebPart.manifest.json"
         }
       ]
     },
@@ -19,9 +28,19 @@
       ]
     }
   },
-  "externals": {},
+  "externals": { "jquery": {
+    "path": "node_modules/jquery/dist/jquery.min.js",
+    "globalName": "jQuery"
+  },
+  "bootstrap": {
+    "path": "node_modules/bootstrap/dist/js/bootstrap.min.js",
+    "globalName": "bootstrap"
+  }},
   "localizedResources": {
     "WhitePaperDetailsWebPartStrings": "lib/webparts/whitePaperDetails/loc/{locale}.js",
+    "GEPListingPagesWebPartStrings": "lib/webparts/gepListingPages/loc/{locale}.js",
+
+
     "BodyApplicationCustomizerStrings": "lib/extensions/body/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
