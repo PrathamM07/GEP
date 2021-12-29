@@ -7,7 +7,6 @@
     "libraryId": "55a96b74-9aef-4d37-aa1c-de125dacfd48",
     "packageManager": "npm",
     "isDomainIsolated": false,
-    "componentType": "extension",
-    "extensionType": "ApplicationCustomizer"
+    "componentType": "webpart"
   }
 }
