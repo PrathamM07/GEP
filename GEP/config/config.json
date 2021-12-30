@@ -27,16 +27,7 @@
       ]
     }
   },
-  "externals": {
-    "jquery": {
-      "path": "node_modules/jquery/dist/jquery.min.js",
-      "globalName": "jQuery"
-    },
-    "bootstrap": {
-      "path": "node_modules/bootstrap/dist/js/bootstrap.min.js",
-      "globalName": "bootstrap"
-    }
-  },
+ 
   "localizedResources": {
     "WhitePaperDetailsWebPartStrings": "lib/webparts/whitePaperDetails/loc/{locale}.js",
     "BodyApplicationCustomizerStrings": "lib/extensions/body/loc/{locale}.js",

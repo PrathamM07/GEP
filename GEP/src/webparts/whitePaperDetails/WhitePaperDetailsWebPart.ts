@@ -22,7 +22,7 @@ export interface IWhitePaperDetailsWebPartProps {
   sliderproperty: number;
   webpartname: string;
   dropdownTitle: string;
-
+  
 }
 var propertypaneitem = [];
 
@@ -41,6 +41,7 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 8,
         apiURL: this.properties.apiURL ? this.properties.apiURL : "",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
+       
       }
     );
     this.getPropertyPaneValue();
@@ -85,9 +86,9 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
                   label: "Webpart Label",
                 }),
 
-                PropertyPaneTextField('apiURL', {
-                  label: "News API URL"
-                }),
+                // PropertyPaneTextField('apiURL', {
+                //   label: "News API URL"
+                // }),
                 PropertyPaneSlider('sliderproperty', {
                   label: "Max Items",
                   min: 1,

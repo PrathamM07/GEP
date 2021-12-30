@@ -12,8 +12,11 @@ import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
+import GepListingPage from '../../gepListingPage/components/GepListingPage';
+import { DetailsList } from 'office-ui-fabric-react';
 //import {TilesDetailPage} from './TilesDetailPage';
 
+ 
 export interface IWhitePaperDetailsStates {
 
   list: IPageItem[];
@@ -21,6 +24,7 @@ export interface IWhitePaperDetailsStates {
   totalPages: number;
   items: IPageItem[];
   currentPage: number;
+  dynamicUrl:string;
   
   //assettype:string;
 }
@@ -38,7 +42,7 @@ export interface IPageItem {
 
 let listItems: any[] = [];
 export default class WhitePaperDetails extends React.Component<IWhitePaperDetailsProps, IWhitePaperDetailsStates> {
-
+ 
   public _ops: GDService;
   private ServiceInatance: GDService;
 
@@ -47,13 +51,14 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
   public constructor(props: IWhitePaperDetailsProps, state: IWhitePaperDetailsStates) {
 
     super(props);
-
+    
     this.state = {
       list: [],
       currentPageItems: [],
       totalPages: 5,
       items: [],
       currentPage: 5,
+      dynamicUrl:"" ,
       //assettype: []
     };
   }
@@ -71,7 +76,8 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     str = str.replace(/\s+/g, '-').toLowerCase();
     console.log(str);
     let weburl=listItems[0];
-   // console.log("str",listItems);
+
+    
     return (
       <section className="section__content bg-white">
         <div className="container">
@@ -98,6 +104,9 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
             {
               this.state.list.slice(0, this.props.maxItem).map((detail, index) => {
                 let imgSrc = detail.Image;//detail.image_url;
+               // console.log("detailpage",detail.PageDetailUrl);
+                var title=(detail.Title).replace(" ","");
+                console.log("Title name is",title);
                 return (
                   
                //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
@@ -116,9 +125,13 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
                           <div className="col-3 col-md-12">
                             
-                          {/* <Link to='./TilesDetailPage' target='_blank'><a><h2 className="d-block">View All</h2></a></Link> */}
-                             <a href={detail.PageDetailUrl} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View All</a> 
-                            {/*<a href={pageItem.pageLink} className="read-more">{this.state.textArticleLabel}</a> */}
+                            {/* <a onClick={this.sendData.bind(detail.PageDetailUrl)} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View All</a>  */}
+                             {/* <a href={`https://prathameshneo.sharepoint.com/sites/GEP/SitePages/GepListing-Page.aspx?category=${detail.Title}`} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View All</a>  */}
+                             <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(`https://prathameshneo.sharepoint.com/sites/GEP/SitePages/GepListing-Page.aspx?category=${title}`); return false; }}>View all</a>
+                            
+                             {/* <GepListingPage apiURL ={this.handleCallback} assettype='' maxItem={0} webparttitle='' >View All</GepListingPage> */}
+                         
+                          
                           </div>
                           {/* //    } */}
 
@@ -183,47 +196,5 @@ var listdata=pageData;
       );
       }
  
-  // public async getSitePageDetails() {
-  //   this.ServiceInatance = new GDService(this.props.context);
-  //   let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
-  //   //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
-  //   const orderByQuery = { columnName: "Modified", ascending: false };
-  //   const internalColumnName = ["AssetType/Title", "Url", "MethodName"];
-  //   const expandColumnName = ["AssetType"];
-  //   let filterQuery = `AssetType/Title eq '${this.props.assettype}'`;
-  //   const ListDetails: IAllItems = {
-  //     listName: "GepConfigurationList",
-  //     selectQuery: internalColumnName.join(','),
-  //     expandQuery: expandColumnName.join(','),
-  //     filterQuery: filterQuery,
-  //     // topQuery: parseInt(maxItems.toString()),
-  //     // orderByQuery: orderByQuery
-  //   };
-
-  //   await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
-
-  //     if (listData && listData.length > 0) {
-  //       console.log("ListDetails:", listData[0].Url);
-  //       var url = listData[0].Url + "/" + listData[0].MethodName;
-  //       var weburl=listData[0].Url;
-  //       this.getDetails(url);
-  //       listItems.push(weburl);
-  //      // sp_url=listdata[0].Url;
-  //     }
-    
-  //   }).catch((error) => {
-  //     console.log(error);
-
-  //   });
-  // }
-
-//   private async getDetails(url: string) {
-//     axios.get(url)
-//       .then((result) => {
-//         console.log('This is your data', result.data.data[2].list);
-//         this.setState({ list: result.data.data[2].list });
-//       }
-
-//       );
-//       }
+ 
 }

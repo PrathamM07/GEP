@@ -5,7 +5,7 @@ import {
 } from '@microsoft/sp-application-base';
 import { Dialog } from '@microsoft/sp-dialog';
 
-import * as strings from 'BodyApplicationCustomizerStrings';
+//import * as strings from 'BodyApplicationCustomizerStrings';
 
 const LOG_SOURCE: string = 'BodyApplicationCustomizer';
 
@@ -16,7 +16,7 @@ const LOG_SOURCE: string = 'BodyApplicationCustomizer';
  */
 export interface IBodyApplicationCustomizerProperties {
   // This is an example; replace with your own property
-  testMessage: string;
+ // testMessage: string;
 }
 
 /** A Custom Action which can be run during execution of a Client Side Application */
@@ -25,15 +25,6 @@ export default class BodyApplicationCustomizer
 
   @override
   public onInit(): Promise<void> {
-    Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
-
-    let message: string = this.properties.testMessage;
-    if (!message) {
-      message = '(No properties were provided.)';
-    }
-
-    Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);
-
     return Promise.resolve();
   }
 }

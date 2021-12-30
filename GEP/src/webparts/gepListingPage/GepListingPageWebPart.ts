@@ -80,14 +80,14 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
                   label: "Webpart Label",
                 }),
 
-                PropertyPaneSlider('sliderproperty', {
-                  label: "Max Items",
-                  min: 1,
-                  max: 8,
-                  showValue: true,
-                  value: 8,
-                  step: 1
-                }),
+                //PropertyPaneSlider('sliderproperty', {
+                  //label: "Max Items",
+                  //min: 1,
+                  //max: 8,
+                  //showValue: true,
+                  //value: 8,
+                  //step: 1
+                //}),
 
                 PropertyPaneDropdown('dropdownTitle', {
                   label: 'Choose the Asset Type',

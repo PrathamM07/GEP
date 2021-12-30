@@ -12,6 +12,8 @@ import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
+
+import WhitePaperDetails from '../../whitePaperDetails/components/WhitePaperDetails';
 export interface IGEPListingPageStates {
 
   list: IPageItem[];
@@ -56,12 +58,12 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
   }
   public render(): React.ReactElement<IGepListingPageProps> {
     var titlealias = window.location.protocol;
-    console.log("**********", this.props.assettype);
+    //console.log("**********", this.props.assettype);
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
     console.log(str);
-    let weburl=listItems[0];
-   // console.log("str",listItems);
+    //let weburl=listItems[0];
+    console.log("*********str",listItems);
     return (
       <section className="section__content bg-white">
         <div className="container">
@@ -71,7 +73,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
                            <Link to={detailPage}><h2 className="heading"><img src={Img} alt="icon" className="icon"/> PROMOTIONAL CONTENT</h2></Link>
                             </div> */}
                              
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <a href={weburl + "/knowledge-bank/" + str} target="_blank" className="heading">
                 {
                   (this.props.webparttitle == "") ?
@@ -81,7 +83,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
                 }
 
               </a>
-            </div>
+            </div> */}
 
             {
               this.state.list.map((detail, index) => {
@@ -103,7 +105,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
                           <div className="col-3 col-md-12">
 
-                            <a href={weburl +"/"+ detail.title_alias} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a>
+                            {/* <a href="#" target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a> */}
                             {/* <a href={pageItem.pageLink} className="read-more">{this.state.textArticleLabel}</a> */}
                           </div>
                           {/* //    } */}
@@ -126,19 +128,24 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     );
   }
 
-
+  public async PageDetails() {
+    
+  }
   public async getSitePageDetails() {
+    let category=window.location.href;
+    var myParam = location.search.split('category=')[1]
+    console.log("Blog Category is ******", myParam);
     this.ServiceInatance = new GDService(this.props.context);
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
     //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
     const orderByQuery = { columnName: "Modified", ascending: false };
-    const internalColumnName = ["AssetType/Title", "Url", "MethodName"];
-    const expandColumnName = ["AssetType"];
-    let filterQuery = `AssetType/Title eq '${this.props.assettype}'`;
+    const internalColumnName = ["Title", "ApiUrl"];
+    //const expandColumnName = ["AssetType"];
+    let filterQuery = `Title eq '${myParam}'`;
     const ListDetails: IAllItems = {
-      listName: "GepConfigurationList",
+      listName: "InformationalContentList",
       selectQuery: internalColumnName.join(','),
-      expandQuery: expandColumnName.join(','),
+     // expandQuery: expandColumnName.join(','),
       filterQuery: filterQuery,
       // topQuery: parseInt(maxItems.toString()),
       // orderByQuery: orderByQuery
@@ -147,11 +154,11 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
 
       if (listData && listData.length > 0) {
-        console.log("ListDetails:", listData[0].Url);
-        var url = listData[0].Url + "/" + listData[0].MethodName;
-        var weburl=listData[0].Url;
+        console.log("ListDetails:", listData[0].ApiUrl);
+        var url = listData[0].ApiUrl;
+        //var weburl=listData[0].Url;
         this.getDetails(url);
-        listItems.push(weburl);
+        listItems.push(url);
        // sp_url=listdata[0].Url;
       }
     
