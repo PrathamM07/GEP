@@ -22,10 +22,11 @@ export interface IWhitePaperDetailsWebPartProps {
   sliderproperty: number;
   webpartname: string;
   dropdownTitle: string;
+  dropdowncontent:string;
+  
   
 }
 var propertypaneitem = [];
-
 export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhitePaperDetailsWebPartProps> {
 
   private _listFields: IPropertyPaneDropdownOption[] = [];
@@ -41,11 +42,12 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 8,
         apiURL: this.properties.apiURL ? this.properties.apiURL : "",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
-       
+        contenttype:this.properties.dropdowncontent?this.properties.dropdowncontent:"Promotional Content",
       }
     );
     this.getPropertyPaneValue();
-    ReactDom.render(element, this.domElement);
+   // this.getIconValue();
+        ReactDom.render(element, this.domElement);
   }
   public async getPropertyPaneValue() {
     // get all the items from a sharepoint list
@@ -53,7 +55,7 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
     var items = [];
     const columnName = ["Title"];
     let web = Web(`${this.context.pageContext.web.absoluteUrl}/`);
-    web.lists.getByTitle("AssetType").items.select(columnName.join(',')).get().then((data) => {
+    web.lists.getByTitle("Contents").items.select(columnName.join(',')).get().then((data) => {
       for (var assettype in data) {
         items.push({ key: data[assettype].Title, text: data[assettype].Title });
       }
@@ -61,6 +63,8 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
       propertypaneitem = items;
     });
   }
+
+  
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
@@ -82,27 +86,36 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
               groupFields: [
 
 
-                PropertyPaneTextField('webpartname', {
-                  label: "Webpart Label",
+                // PropertyPaneTextField('webpartname', {
+                //   label: "Webpart Label",
+                // }),
+                PropertyPaneDropdown('dropdowncontent', {
+                  label: 'Choose Page Content',
+                   options: propertypaneitem,
+                  //  [{ key: 'Promotional Content', text: 'Promotional Content' },
+                  //            { key: 'Informational Content', text: 'Informational Content' },
+                  //            { key: 'Image Library', text: 'Image Library' },
+                  //           ],
+                   selectedKey: "Promotional Content",
+                   
                 }),
-
                 // PropertyPaneTextField('apiURL', {
                 //   label: "News API URL"
                 // }),
-                PropertyPaneSlider('sliderproperty', {
-                  label: "Max Items",
-                  min: 1,
-                  max: 8,
-                  showValue: true,
-                  value: 8,
-                  step: 1
-                }),
+                // PropertyPaneSlider('sliderproperty', {
+                //   label: "Max Items",
+                //   min: 1,
+                //   max: 8,
+                //   showValue: true,
+                //   value: 8,
+                //   step: 1
+                // }),
 
-                PropertyPaneDropdown('dropdownTitle', {
-                  label: 'Choose the Asset Type',
-                  options: propertypaneitem,
-                  selectedKey: "White Papers"
-                }),
+                // PropertyPaneDropdown('dropdownTitle', {
+                //   label: 'Choose the Asset Type',
+                //   options: propertypaneitem,
+                //   selectedKey: "White Papers"
+                // }),
               ]
             }
           ]

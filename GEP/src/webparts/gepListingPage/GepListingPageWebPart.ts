@@ -36,7 +36,7 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
         context: this.context,
         assettype: this.properties.dropdownTitle ? this.properties.dropdownTitle : "White Papers",
         maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 8,
-        apiURL: this.properties.apiURL ? this.properties.apiURL : "",
+        apiURL: this.properties.apiURL ? this.properties.apiURL :"https://webdev.gep.com/",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
       }
     );
@@ -76,8 +76,9 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
               groupFields: [
 
 
-                PropertyPaneTextField('webpartname', {
-                  label: "Webpart Label",
+                PropertyPaneTextField('apiURL', {
+                  label: "News API URL",
+                  placeholder: "https://webdev.gep.com/",
                 }),
 
                 //PropertyPaneSlider('sliderproperty', {

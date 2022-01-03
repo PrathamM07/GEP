@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './GepListingPage.module.scss';
+//import styles from './GepListingPage.module.scss';
 import { IGepListingPageProps } from './IGepListingPageProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import axios from "axios";
@@ -15,20 +15,17 @@ import { IAllItems } from '../../../Services/IListOperation';
 
 import WhitePaperDetails from '../../whitePaperDetails/components/WhitePaperDetails';
 export interface IGEPListingPageStates {
-
   list: IPageItem[];
   currentPageItems: IPageItem[];
   totalPages: number;
   items: IPageItem[];
   currentPage: number;
-  //assettype:string;
 }
 export interface IPageItem {
   service_title: string;
   image_url: string;
   description: string;
   title_alias: string;
- 
 }
 
 let listItems: any[] = [];
@@ -56,36 +53,69 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
   public componentDidMount() {
     this.getSitePageDetails();
   }
+
+  public async getSitePageDetails() {
+    let category=window.location.href;
+    var myParam = location.search.split('category=')[1]
+    console.log("Blog Category is ******", myParam);
+    this.ServiceInatance = new GDService(this.props.context);
+    let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
+    //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
+    const orderByQuery = { columnName: "Modified", ascending: false };
+    const internalColumnName = ["Title", "ExternalApi"];
+    //const expandColumnName = ["AssetType"];
+    let filterQuery = `Title eq '${myParam}'`;
+    const ListDetails: IAllItems = {
+      listName: "Informational Content",
+      selectQuery: internalColumnName.join(','),
+     // expandQuery: expandColumnName.join(','),
+      filterQuery: filterQuery,
+      // topQuery: parseInt(maxItems.toString()),
+      // orderByQuery: orderByQuery
+    };
+
+    await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
+
+      if (listData && listData.length > 0) {
+        console.log("ListDetails:", listData[0].ExternalApi);
+        var externalurl = listData[0].ExternalApi;
+        var weburl="listData[0].ExternalApi";
+        var url=this.props.apiURL+externalurl;
+
+        this.getDetails(url);
+        listItems.push(url);
+       // sp_url=listdata[0].Url;
+      }
+    
+    }).catch((error) => {
+      console.log(error);
+
+    });
+  }
+
+  private async getDetails(url: string) {
+    axios.get(url)
+      .then((result) => {
+        console.log('This is api list data', result.data.data[2].list);
+        this.setState({ list: result.data.data[2].list });
+      }
+
+      );
+      }
+
   public render(): React.ReactElement<IGepListingPageProps> {
     var titlealias = window.location.protocol;
-    //console.log("**********", this.props.assettype);
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
-    console.log(str);
-    //let weburl=listItems[0];
-    console.log("*********str",listItems);
+   
+    let weburl="https://webdev.gep.com/";
+ 
     return (
       <section className="section__content bg-white">
         <div className="container">
           <div className="row">
-        
-            {/* <div className="col-md-12">
-                           <Link to={detailPage}><h2 className="heading"><img src={Img} alt="icon" className="icon"/> PROMOTIONAL CONTENT</h2></Link>
-                            </div> */}
-                             
-            {/* <div className="col-md-12">
-              <a href={weburl + "/knowledge-bank/" + str} target="_blank" className="heading">
-                {
-                  (this.props.webparttitle == "") ?
-                    <div className="heading">{this.props.assettype}</div>
-                    :
-                    <div className="heading">{this.props.webparttitle}</div>
-                }
 
-              </a>
-            </div> */}
-
-            {
+          {
               this.state.list.map((detail, index) => {
                 let imgSrc = detail.image_url;
                 return (
@@ -105,7 +135,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
                           <div className="col-3 col-md-12">
 
-                            {/* <a href="#" target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a> */}
+                            <a href={weburl+detail.title_alias} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a>
                             {/* <a href={pageItem.pageLink} className="read-more">{this.state.textArticleLabel}</a> */}
                           </div>
                           {/* //    } */}
@@ -128,53 +158,6 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     );
   }
 
-  public async PageDetails() {
-    
-  }
-  public async getSitePageDetails() {
-    let category=window.location.href;
-    var myParam = location.search.split('category=')[1]
-    console.log("Blog Category is ******", myParam);
-    this.ServiceInatance = new GDService(this.props.context);
-    let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
-    //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
-    const orderByQuery = { columnName: "Modified", ascending: false };
-    const internalColumnName = ["Title", "ApiUrl"];
-    //const expandColumnName = ["AssetType"];
-    let filterQuery = `Title eq '${myParam}'`;
-    const ListDetails: IAllItems = {
-      listName: "InformationalContentList",
-      selectQuery: internalColumnName.join(','),
-     // expandQuery: expandColumnName.join(','),
-      filterQuery: filterQuery,
-      // topQuery: parseInt(maxItems.toString()),
-      // orderByQuery: orderByQuery
-    };
 
-    await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
-
-      if (listData && listData.length > 0) {
-        console.log("ListDetails:", listData[0].ApiUrl);
-        var url = listData[0].ApiUrl;
-        //var weburl=listData[0].Url;
-        this.getDetails(url);
-        listItems.push(url);
-       // sp_url=listdata[0].Url;
-      }
-    
-    }).catch((error) => {
-      console.log(error);
-
-    });
-  }
-
-  private async getDetails(url: string) {
-    axios.get(url)
-      .then((result) => {
-        console.log('This is your data', result.data.data[2].list);
-        this.setState({ list: result.data.data[2].list });
-      }
-
-      );
-      }
+ 
 }

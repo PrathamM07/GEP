@@ -43,7 +43,7 @@ html {
     font-family: 'Roboto', sans-serif;
     color: #006BAA;
     font-weight: bold;
-    font-size:2.8rem;
+    font-size:2.7rem;
     text-transform: uppercase;
     vertical-align: middle;
    
@@ -104,18 +104,16 @@ html {
 
 .imageContent h3 {
     color: white;
-    font-size: 21px;
-    font-family: 'Roboto';
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
 
 }
-
-
 .imageContentTv h4 {
     color: #026AAA;
     font-size: 21px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     text-align: left;
@@ -127,7 +125,7 @@ html {
 .imageContentTv p {
     color: #393939;
     font-size: 14px;
-    font-family: 'Roboto';
+    font-family:'Roboto', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     text-align: left;
@@ -141,9 +139,9 @@ html {
     color: white;
     text-transform: uppercase;
     text-decoration: underline;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 7px;
     text-underline-offset: 3px;
     text-align: right;
 }
@@ -196,7 +194,7 @@ html {
 
 
 .cards .content p {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;;
     font-weight: 500;
     font-size: 11px;
     padding: 0px;
@@ -206,7 +204,7 @@ html {
 }
 
 .cards .content h4 {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: #2D69A5;
     font-size: 18px;
@@ -287,7 +285,7 @@ html {
     color: #006BAA !important;
     background-color: white;
     font-size: 11px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     padding: 4px 13px;
     border-radius: 4px;

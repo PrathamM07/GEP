@@ -8,7 +8,5 @@ export interface IWhitePaperDetailsProps {
   PageData?: any[];
   webparttitle:string;
   assettype:string;
- // parentCallback:(url :string) =>string;
-
- 
+  contenttype:string;
 }
