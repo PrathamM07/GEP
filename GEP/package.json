@@ -20,6 +20,7 @@
     "@pnp/sp": "^2.11.0",
     "@pnp/spfx-property-controls": "^3.3.0",
     "bootstrap": "^5.1.3",
+    "jquery": "^3.6.0",
     "office-ui-fabric-react": "7.156.0",
     "react": "16.9.0",
     "react-bootstrap": "^2.0.3",

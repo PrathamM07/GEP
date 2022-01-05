@@ -108,7 +108,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
    
-    let weburl="https://webdev.gep.com/";
+    let weburl=this.props.apiURL;
  
     return (
       <section className="section__content bg-white">

@@ -10,14 +10,14 @@ import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import "@pnp/sp/site-groups/web";
-
+import * as $ from 'jquery';
 import * as strings from 'BodyApplicationCustomizerStrings';
 import {Constant} from '../../Frameworks/Constants/Constant'
 import { Web } from '@pnp/sp/webs';
 import GDService from '../../Services/GetDataService';
-
+import "./home-logo.css";
 //import * as strings from 'BodyApplicationCustomizerStrings';
-
+require('./../../../node_modules/bootstrap/dist/css/bootstrap.min.css');
 const LOG_SOURCE: string = 'BodyApplicationCustomizer';
 
 /**
@@ -48,52 +48,43 @@ export default class BodyApplicationCustomizer
     try {
       console.log(this.context.pageContext.web.absoluteUrl);
       const listName = "DefaultLogo";
-      sp.site.rootWeb.lists.getByTitle(listName).items.orderBy("Modified",false).top(1).filter("Active eq 1").get().then((items: any[]) => {
+      sp.site.rootWeb.lists.getByTitle(listName).items.orderBy("Modified",false).top(1).filter("ID eq 1").get().then((items: any[]) => {
 
         var extLogo = JSON.parse(items[0].ImageThumbnail);
         var Sitelogo = extLogo.serverUrl + "" + extLogo.serverRelativeUrl;
-        //var redirectUrl = items[0].ExtensionUrl.Url;
-        var activeStatue = items[0].Active;
-        var openInNewTab = items[0].OpenInNewTab;
-
-        console.log("Sitelogo:" + Sitelogo + ", redirectUrl:" + "" + ", activeStatus: " + activeStatue + ", openInNewTab:" + openInNewTab);
+        var redirectUrl = items[0].ExternalApi;
+        
+       
+        console.log("Sitelogo:" + Sitelogo + ", redirectUrl:" + redirectUrl );
 
         // Checking for both condition if both are true will open in new Tab
-        // if (activeStatue == true && openInNewTab == true) {
-        //   $(() => {
-        //     ($('[class^="logoImg"]')).each(function () {
-        //       $(this).attr("src", Sitelogo);
-        //     }
-        //     );
-            
-        //     //On scroll set image logic logic and Url
-        //     $("div").scroll(() => {
-        //       ($('[class^="shyLogoImg"]')).each(function () {
-        //         $(this).attr("src", Sitelogo);
-        //       }
-        //       );
-              
-        //     });
-        //   });
-        // }
-        // //Logic for open the url in different Tab if openInNewTab is false          
-        // if (activeStatue == true && openInNewTab == false) {
-        //   $(() => {
-        //     ($('[class^="logoImg"]')).each(function () {
-        //       $(this).attr("src", Sitelogo);
-        //     }
-        //     );
-           
-        //     //On scroll set image and Url and open the url in same tab
-        //     $("div").scroll(() => {
-        //       ($('[class^="shyLogoImg"]')).each(function () {
-        //         $(this).attr("src", Sitelogo);
-        //       }
-        //       );
-             
-        //     });
-        //   });
-        // }
+        if (Sitelogo != "") {
+          $(() => {
+            ($('[class^="logoImg-50"]')).each(function () {
+              $(this).attr("src", Sitelogo);
+            }
+            );
+            ($('[class^="logoWrapper-49"]')).each(function () {
+              $(this).attr("href", redirectUrl);
+              $(this).attr("target", "_blank");
+            }
+            );
+            //On scroll set image logic logic and Url
+            $("div").scroll(() => {
+              ($('[class^="shyLogoImg-69"]')).each(function () {
+                $(this).attr("src", Sitelogo);
+              }
+              );
+              ($('[class^="shyLogoWrapper-68"]')).each(function () {
+                $(this).attr("href", redirectUrl);
+                $(this).attr("target", "_blank");
+              }
+              );
+            });
+          });
+        }
+        //Logic for open the url in different Tab if openInNewTab is false          
+       
 
       });
     } catch (error) {

@@ -1,0 +1,9 @@
+
+.logoImg-50{width: 100%;}
+@media all and (max-width:1024px){
+    .logoImg-50{width: 100%;}
+}
+
+@media all and (max-width:991px){
+    .logoImg-50{width: 100%;}
+}

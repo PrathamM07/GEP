@@ -152,7 +152,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     };
     try {
       tempPageItem.defaultImageUrl = JSON.parse(libraryData[0].ImageThumbnail).serverRelativeUrl;
-      console.log("DefaultImageurl: ", tempPageItem.defaultImageUrl);
+      // console.log("DefaultImageurl: ", tempPageItem.defaultImageUrl);
 
       this.setState({
         defaultIcon: tempPageItem.defaultImageUrl,
@@ -168,10 +168,10 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     var titlealias = window.location.protocol;
 
     let str = this.props.webparttitle;
-    
-   
-    
-    console.log("new list icon", this.state.list);
+
+
+
+    // console.log("new list icon", this.state.list);
     return (
       <section className="section__content bg-white">
         <div className="container">
@@ -193,12 +193,12 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
 
               this.state.list.slice(0, this.props.maxItem).map((detail, index) => {
-                let imgSrc = detail.ImageThumbnail;//detail.image_url;
-                // console.log("detailpage",detail.PageDetailUrl);
+                let imgSrc = detail.ImageThumbnail;
+
                 var title = (detail.Title).replace(/\s+/g, '-');
                 var subtitle = (detail.Title).replace('-', " ");
-               // str = str.replace(/\s+/g, '-').toLowerCase();
-                console.log("detailpage is ***",title);            
+
+                //console.log("detailpage is ***",title);            
                 return (
 
                   //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
@@ -222,7 +222,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                               <a href="#" ></a>
                             }
                           </div>
-                          {/* //    } */}
+
 
                         </div>
                       </div>
