@@ -6,8 +6,7 @@ import axios from "axios";
 import GDService from '../../../Services/GetDataService';
 import { Web } from '@pnp/sp/presets/all';
 import './../../../Frameworks/common/css/bootstrap.min.css';
-import './Body.css';
-
+import '../../../asset/Body.css';
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
@@ -56,7 +55,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
   public async getSitePageDetails() {
     let category=window.location.href;
-    var myParam = location.search.split('category=')[1]
+    var myParam = location.search.split('category=')[1];
     console.log("Blog Category is ******", myParam);
     this.ServiceInatance = new GDService(this.props.context);
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);

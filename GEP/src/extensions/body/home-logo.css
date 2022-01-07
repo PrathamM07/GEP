@@ -1,9 +1,51 @@
 
-.logoImg-50{width: 100%;}
+ .logoImg-50{max-width: 100%;
+    max-height: 48px;
+    
+}
+.title-53{
+    display: none;
+    
+}
+.adjacentTitleSubcell-54{
+    padding-top:30px;
+}
+.shyLogoImg-69{
+    max-width: 100%;
+    max-height: 32px;
+ }.shyTitle-70{
+    display: none;
+ }
+ .ms-HorizontalNavItems {
+    padding: 10px 30px;
+}
 @media all and (max-width:1024px){
-    .logoImg-50{width: 100%;}
+    .logoImg-50{max-width: 100%;
+        max-height: 32px;
+        
+    }
+    .title-53{
+        display: none;
+        
+    }
+    .adjacentTitleSubcell-54{
+        padding-top:30px;
+    }
+ .shyLogoImg-69{
+    max-width: 100%;
+    max-height: 26px;
+ }.shyTitle-70{
+    display: none;
+ }
 }
 
 @media all and (max-width:991px){
-    .logoImg-50{width: 100%;}
+    .logoImg-50{max-width: 100%;
+        max-height: 26px;}
+        .shyLogoImg-69{
+            max-width: 100%;
+            max-height: 20px;
+         }.shyTitle-70{
+            display: none;
+         }
 }

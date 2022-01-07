@@ -46,7 +46,8 @@ html {
     font-size:2.7rem;
     text-transform: uppercase;
     vertical-align: middle;
-   
+    margin-bottom: 15px;
+    
 }
 
 /*--- card styling--- */
@@ -268,18 +269,21 @@ html {
     
 }
 
-.row {
+/* .row {
     --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 1.5rem;
-   
-
+     --bs-gutter-y: 1.5rem;
+    
+} */
+.a_a_50a7110f:not(.b_a_50a7110f) {
+    padding: 0px;
+    margin: 24px 0;
 }
 .col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4{
     position: relative;
     width: 100%;
      padding-right: 7px; 
      padding-left: 7px; 
-     margin-top: -7px;
+     margin-top: -4px;
 }
 .imageLibrary {
     display: flex;

@@ -23,12 +23,12 @@ html {
   
 
 
-/* ------------ */
+/* ------------
 .section__content {
     margin-top: 45px;
     margin-bottom: 45px;
 }
-
+ */
 
 .section__content .icon {
     width: 43px;
@@ -46,6 +46,7 @@ html {
     font-size:2.7rem;
     text-transform: uppercase;
     vertical-align: middle;
+    margin-bottom: 20px;
    
 }
 
@@ -86,7 +87,7 @@ html {
     height: 100%;
     left: 0;
     top: 0;
-    background: linear-gradient(360deg, rgba(255, 255, 255, 0) 0%, rgba(4, 20, 51, 0.5018382352941176) 100%);
+  
     cursor: pointer;
 }
 
@@ -165,8 +166,6 @@ html {
     width: 40%;
 
 }
-
-
 
 
 /* .library >.card>.imageContent>.col-3>a {
@@ -270,11 +269,22 @@ html {
     
 }
 
-.row {
+/* .row {
     --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 1.5rem;
+     --bs-gutter-y: 1.5rem;
+    
+} */
+.a_a_50a7110f:not(.b_a_50a7110f) {
+    padding: 0px;
+    margin: 24px 0;
 }
-
+.col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4{
+    position: relative;
+    width: 100%;
+     padding-right: 7px; 
+     padding-left: 7px; 
+     margin-top: -7px;
+}
 .imageLibrary {
     display: flex;
     justify-content: space-between;

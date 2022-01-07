@@ -90,11 +90,11 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
                   //step: 1
                 //}),
 
-                PropertyPaneDropdown('dropdownTitle', {
-                  label: 'Choose the Asset Type',
-                  options: propertypaneitem,
-                  selectedKey: "White Papers"
-                }),
+                // PropertyPaneDropdown('dropdownTitle', {
+                //   label: 'Choose the Asset Type',
+                //   options: propertypaneitem,
+                //   selectedKey: "White Papers"
+                // }),
               ]
             }
           ]

@@ -12,7 +12,7 @@ import "@pnp/sp/items";
 import "@pnp/sp/site-groups/web";
 import * as $ from 'jquery';
 import * as strings from 'BodyApplicationCustomizerStrings';
-import {Constant} from '../../Frameworks/Constants/Constant'
+import {Constant} from '../../Frameworks/Constants/Constant';
 import { Web } from '@pnp/sp/webs';
 import GDService from '../../Services/GetDataService';
 import "./home-logo.css";
