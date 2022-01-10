@@ -9,4 +9,5 @@ export interface IWhitePaperDetailsProps {
   webparttitle:string;
   assettype:string;
   contenttype:string;
+  buttonColor: string;
 }

@@ -6,12 +6,12 @@ import axios from "axios";
 import GDService from '../../../Services/GetDataService';
 import { Web } from '@pnp/sp/presets/all';
 import './../../../Frameworks/common/css/bootstrap.min.css';
-import '../../../asset/Body.css';
+import './Body.css';
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
-
+import ReactLoading from "react-loading";
 import WhitePaperDetails from '../../whitePaperDetails/components/WhitePaperDetails';
 export interface IGEPListingPageStates {
   list: IPageItem[];
@@ -19,6 +19,8 @@ export interface IGEPListingPageStates {
   totalPages: number;
   items: IPageItem[];
   currentPage: number;
+  isDataLoading: boolean;
+  buttonColor: string;
 }
 export interface IPageItem {
   service_title: string;
@@ -44,6 +46,8 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
       totalPages: 5,
       items: [],
       currentPage: 5,
+      isDataLoading: true,
+      buttonColor: props.buttonColor,
       //assettype: []
     };
   }
@@ -51,6 +55,13 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
   public componentDidMount() {
     this.getSitePageDetails();
+  }
+  public async componentWillReceiveProps(nextProps) {
+    //this.getSitePageDetails();
+    
+    this.setState({
+      buttonColor: nextProps.buttonColor
+    });
   }
 
   public async getSitePageDetails() {
@@ -88,6 +99,9 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     
     }).catch((error) => {
       console.log(error);
+      this.setState({
+        isDataLoading: false
+      });
 
     });
   }
@@ -96,21 +110,30 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     axios.get(url)
       .then((result) => {
         console.log('This is api list data', result.data.data[2].list);
-        this.setState({ list: result.data.data[2].list });
+        this.setState({ list: result.data.data[2].list,
+          isDataLoading:false });
+      
       }
 
       );
       }
 
   public render(): React.ReactElement<IGepListingPageProps> {
+    document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
    
     let weburl=this.props.apiURL;
- 
+    
     return (
       <section className="section__content bg-white">
+         {
+          this.state.isDataLoading ?
+            <ReactLoading className="mainLoader"
+              type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
+
+            :
         <div className="container">
           <div className="row">
 
@@ -119,7 +142,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
                 let imgSrc = detail.image_url;
                 return (
                //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
-               <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+               <div key={index} className="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">
                   <div className="card">
  
                       <img src={imgSrc} alt="imageCard" className="imageCard" />
@@ -153,6 +176,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
           </div>
         </div>
+  }
       </section>
     );
   }

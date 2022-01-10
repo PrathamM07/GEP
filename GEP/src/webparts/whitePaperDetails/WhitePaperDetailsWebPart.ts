@@ -23,9 +23,10 @@ export interface IWhitePaperDetailsWebPartProps {
   webpartname: string;
   dropdownTitle: string;
   dropdowncontent:string;
-  
+  color: string;
   
 }
+
 var propertypaneitem = [];
 export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhitePaperDetailsWebPartProps> {
 
@@ -43,12 +44,17 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         apiURL: this.properties.apiURL ? this.properties.apiURL : "",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
         contenttype:this.properties.dropdowncontent?this.properties.dropdowncontent:"Promotional Content",
+        buttonColor: this.properties.color ? this.properties.color : "#0083cf",
       }
     );
-    this.getPropertyPaneValue();
-   // this.getIconValue();
+       
+        this.getPropertyPaneValue();
         ReactDom.render(element, this.domElement);
+     
+        
   }
+
+  
   public async getPropertyPaneValue() {
     // get all the items from a sharepoint list
     var reacthandler = this;
@@ -61,10 +67,20 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
       }
       console.log(items);
       propertypaneitem = items;
+     
     });
+    
   }
 
-  
+  protected get disableReactivePropertyChanges(): boolean {
+    this.render();
+    this.getPropertyPaneValue();
+    return true;
+    
+    }
+  // protected onDispose(): void {
+  //   ReactDom.unmountComponentAtNode(this.domElement);
+  // }
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
@@ -73,7 +89,7 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
   private listsFetched: boolean;
   private dropdownOptions: IPropertyPaneDropdownOption[];
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-
+      
     return {
       pages: [
         {
@@ -92,13 +108,10 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
                 PropertyPaneDropdown('dropdowncontent', {
                   label: 'Choose Page Content',
                    options: propertypaneitem,
-                  //  [{ key: 'Promotional Content', text: 'Promotional Content' },
-                  //            { key: 'Informational Content', text: 'Informational Content' },
-                  //            { key: 'Image Library', text: 'Image Library' },
-                  //           ],
                    selectedKey: "Promotional Content",
-                   
+                                
                 }),
+              
                 // PropertyPaneTextField('apiURL', {
                 //   label: "News API URL"
                 // }),

@@ -14,6 +14,7 @@ import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
 import { DetailsList, List } from 'office-ui-fabric-react';
+import ReactLoading from "react-loading";
 
 export interface IWhitePaperDetailsStates {
   list: IPageItem[];
@@ -23,6 +24,8 @@ export interface IWhitePaperDetailsStates {
   currentPage: number;
   dynamicUrl: string;
   defaultIcon: string;
+  isDataLoading: boolean;
+  buttonColor: string;
 }
 export interface IPageItem {
   service_title: string;
@@ -42,13 +45,9 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
   public _ops: GDService;
   private ServiceInatance: GDService;
-
   public tempPageItems: IPageItem[] = [];
-
   public constructor(props: IWhitePaperDetailsProps, state: IWhitePaperDetailsStates) {
-
     super(props);
-
     this.state = {
       list: [],
       currentPageItems: [],
@@ -57,23 +56,30 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
       currentPage: 5,
       dynamicUrl: "",
       defaultIcon: "",
+      isDataLoading: true,
+      buttonColor: props.buttonColor,
       //assettype: []
     };
+    this.getHomePageDetails = this.getHomePageDetails.bind(this);
+    this.getIconDetails = this.getIconDetails.bind(this);
+    
   }
 
-
-
-
-  public componentDidMount() {
-
+  public async componentDidMount() {
     this.getHomePageDetails();
     this.getIconDetails();
   }
 
+  public async componentWillReceiveProps(nextProps) { 
+   
+     this.getHomePageDetails();
+     this.getIconDetails();
+     this.setState({
+      buttonColor: nextProps.buttonColor
+    });
+  }
   public async getHomePageDetails() {
-
     this.ServiceInatance = new GDService(this.props.context);
-
     const internalColumnName = ["Title", "ImageThumbnail", "ExternalApi"];
     // let maxItems = this.props.maxItems;
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
@@ -87,17 +93,17 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     await this.ServiceInatance.getAllListItems(SitePagesList).then((pageData) => {
 
       if (pageData && pageData.length > 0) {
-        console.log("promotional data is >>>>>>>>>>>>>", pageData);
-        this.setState({ list: pageData });
-
+        console.log("Content data type is >>>>>>>>>>>>>", pageData);
+        this.setState({ list: pageData,isDataLoading: false });     
         var listdata = pageData;
         this.getData(listdata.toString());
-
-
         //this.mapPageData(pageData, web);
       }
     }).catch((error) => {
       console.log(error);
+      this.setState({
+        isDataLoading: false
+      });
 
     });
   }
@@ -107,14 +113,10 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
         console.log('This is your data', result.data);
         // this.setState({ list: result.data.data[2].list });
       }
-
       );
   }
 
-
   public async getIconDetails() {
-
-
     this.ServiceInatance = new GDService(this.props.context);
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
     //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
@@ -133,17 +135,15 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     };
 
     await this.ServiceInatance.getAllListItems(ListDetails).then((IconData: any[]) => {
-
       if (IconData && IconData.length > 0) {
-
-
         this.mapIconData(IconData);
-
       }
 
     }).catch((error) => {
       console.log(error);
-
+      this.setState({
+        isDataLoading: false
+      });
     });
   }
 
@@ -157,15 +157,18 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
       this.setState({
         defaultIcon: tempPageItem.defaultImageUrl,
-        //  isDataLoading: true
+         
       });
     } catch (error) {
       console.log(error);
-
+      this.setState({
+        isDataLoading: false
+      });
     }
   }
 
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
+    document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
 
     let str = this.props.webparttitle;
@@ -175,6 +178,12 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     // console.log("new list icon", this.state.list);
     return (
       <section className="section__content bg-white">
+         {
+          this.state.isDataLoading ?
+            <ReactLoading className="mainpageLoader"
+              type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'}/>
+
+            :
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -239,6 +248,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
           </div>
         </div>
+  }
       </section>
     );
   }

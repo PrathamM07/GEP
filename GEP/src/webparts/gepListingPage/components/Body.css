@@ -46,15 +46,29 @@ html {
     font-size:2.7rem;
     text-transform: uppercase;
     vertical-align: middle;
-   
+    margin-bottom: 15px;
+    
 }
-
+.mainLoader {
+    margin: 0;
+    position: absolute;
+    top: -2%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+  }
+  .mainpageLoader{
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+  }
 /*--- card styling--- */
 .card{
     cursor: pointer;
 }
 .card .imageCard {
-    height: 216px;
+    height: 230px;
     cursor: pointer;
     display: block;
 
@@ -268,18 +282,22 @@ html {
     
 }
 
-.row {
+/* .row {
     --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 1.5rem;
-   
-
+     --bs-gutter-y: 1.5rem;
+    
+} */
+.a_a_50a7110f:not(.b_a_50a7110f) {
+    padding: 0px;
+    margin: 24px 0;
 }
-.col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4{
+.col-12, .col-sm-8, .col-md-6 .col-lg-4, .col-xl-4{
     position: relative;
     width: 100%;
-     padding-right: 7px; 
-     padding-left: 7px; 
-     margin-top: -7px;
+     padding-right: 12px; 
+     padding-left: 12px;
+     margin-bottom: 30px; 
+     
 }
 .imageLibrary {
     display: flex;

@@ -22,6 +22,7 @@ export interface IGepListingPageWebPartProps {
   sliderproperty: number;
   webpartname: string;
   dropdownTitle: string;
+  color: string;
 
 }
 var propertypaneitem = [];
@@ -38,9 +39,11 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
         maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 8,
         apiURL: this.properties.apiURL ? this.properties.apiURL :"https://webdev.gep.com/",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
+        buttonColor: this.properties.color ? this.properties.color : "#0083cf",
       }
     );
     this.getPropertyPaneValue();
+    
     ReactDom.render(element, this.domElement);
   }
   public async getPropertyPaneValue() {

@@ -47,9 +47,22 @@ html {
     text-transform: uppercase;
     vertical-align: middle;
     margin-bottom: 15px;
-    
+    margin-top: 15px;
 }
-
+.mainLoader {
+    margin: 0;
+    position: absolute;
+    top: -2%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+  }
+  .mainpageLoader{
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+  }
 /*--- card styling--- */
 .card{
     cursor: pointer;
