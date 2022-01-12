@@ -15,7 +15,7 @@ import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
 import { DetailsList, List } from 'office-ui-fabric-react';
 import ReactLoading from "react-loading";
-
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 export interface IWhitePaperDetailsStates {
   list: IPageItem[];
   currentPageItems: IPageItem[];
@@ -68,6 +68,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
   public async componentDidMount() {
     this.getHomePageDetails();
     this.getIconDetails();
+    this. getLibrarydata();
   }
 
   public async componentWillReceiveProps(nextProps) { 
@@ -166,7 +167,31 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
       });
     }
   }
+  public async getLibrarydata() {
+    
 
+    this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
+      
+      `/_api/Web/GetFolderByServerRelativeUrl('ImageGallery/OFFICES')?$expand=Folders,Files`,
+     
+
+      SPHttpClient.configurations.v1,
+      {
+        headers: {
+          'Accept': 'application/json;odata=nometadata',
+          //'Content-type': 'application/json;odata=nometadata',
+          'odata-version': ''
+        }
+      })
+      .then((response: SPHttpClientResponse) => {
+        debugger;
+        if (response.ok) {
+          response.json().then((responseJSON) => {
+            console.log("data is >>>>", responseJSON.Files);
+          });
+        }
+      });
+  }
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -226,7 +251,9 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
 
                           <div className="col-3 col-md-3 text-right">
-                            {(this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ?
+                            {/* {(this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ? */}
+                                  {(this.props.contenttype != "") ?
+                             
                               <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(`https://prathameshneo.sharepoint.com/sites/GEP/SitePages/GepListing-Page.aspx?category=${title}`); return false; }}>View all</a>
                               :
                               <a href="#" ></a>

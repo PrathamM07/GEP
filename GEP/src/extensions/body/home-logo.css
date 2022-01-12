@@ -3,6 +3,10 @@
     max-height: 48px;
     
 }
+.logoImg{max-width: 100%;
+    max-height: 48px;
+    
+}
 .title-53{
     display: none;
     
@@ -10,10 +14,15 @@
 .adjacentTitleSubcell-54{
     padding-top:30px;
 }
+.shyLogoImg{
+    max-width: 100%;
+    max-height: 32px;
+ }
 .shyLogoImg-69{
     max-width: 100%;
     max-height: 32px;
- }.shyTitle-70{
+ }
+ .shyTitle-70{
     display: none;
  }
  .ms-HorizontalNavItems {
@@ -24,6 +33,10 @@
         max-height: 32px;
         
     }
+    .logoImg{max-width: 100%;
+        max-height: 32px;
+        
+    }
     .title-53{
         display: none;
         
@@ -31,6 +44,10 @@
     .adjacentTitleSubcell-54{
         padding-top:30px;
     }
+    .shyLogoImg{
+        max-width: 100%;
+        max-height: 26px;
+     }
  .shyLogoImg-69{
     max-width: 100%;
     max-height: 26px;
@@ -45,7 +62,14 @@
         .shyLogoImg-69{
             max-width: 100%;
             max-height: 20px;
-         }.shyTitle-70{
+         }
+         .logoImg{max-width: 100%;
+            max-height: 26px;}
+            .shyLogoImg{
+                max-width: 100%;
+                max-height: 20px;
+             }
+         .shyTitle-70{
             display: none;
          }
 }

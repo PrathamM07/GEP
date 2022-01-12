@@ -12,6 +12,8 @@ import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
 import ReactLoading from "react-loading";
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+
 import WhitePaperDetails from '../../whitePaperDetails/components/WhitePaperDetails';
 export interface IGEPListingPageStates {
   list: IPageItem[];
@@ -55,15 +57,10 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
   public componentDidMount() {
     this.getSitePageDetails();
+  // this.getGalleryDetails();
   }
-  public async componentWillReceiveProps(nextProps) {
-    //this.getSitePageDetails();
-    
-    this.setState({
-      buttonColor: nextProps.buttonColor
-    });
-  }
-
+ 
+ 
   public async getSitePageDetails() {
     let category=window.location.href;
     var myParam = location.search.split('category=')[1];
@@ -117,6 +114,90 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
       );
       }
+      public async getGalleryDetails() {
+        let category=window.location.href;
+        var myParam = location.search.split('category=')[1];
+        console.log("Blog Category is ******", myParam);
+        this.ServiceInatance = new GDService(this.props.context);
+        let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
+        //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
+        const orderByQuery = { columnName: "Modified", ascending: false };
+        const internalColumnName = ["Title", "Name"];
+        //const expandColumnName = ["AssetType"];
+        let filterQuery = `Title eq '${myParam}'`;
+        const ListDetails: IAllItems = {
+          listName: "Image Gallery",
+          selectQuery: internalColumnName.join(','),
+         // expandQuery: expandColumnName.join(','),
+          filterQuery: filterQuery,
+          // topQuery: parseInt(maxItems.toString()),
+          // orderByQuery: orderByQuery
+        };
+    
+        await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
+    
+          if (listData && listData.length > 0) {
+            console.log("ListDetails:", listData[0].ExternalApi);
+            console.log("Library Details is now:", listData);
+            // var externalurl = listData[0].ExternalApi;
+            // var weburl="listData[0].ExternalApi";
+            // var url=this.props.apiURL+externalurl;
+    
+            // this.getDetails(url);
+            // listItems.push(url);
+           // sp_url=listdata[0].Url;
+          }
+        
+        }).catch((error) => {
+          console.log(error);
+          this.setState({
+            isDataLoading: false
+          });
+    
+        });
+      }
+
+      // public async getLibrarydata() {
+    
+      //   let category=window.location.href;
+      //   var myParam = location.search.split('category=')[1];
+      //   var titlename="ImageGallery/"+`'${myParam}'`;
+      //   this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
+          
+      //     `/_api/Web/GetFolderByServerRelativeUrl('titlename')?$expand=Folders,Files`,
+      //     SPHttpClient.configurations.v1,
+      //     {
+      //       headers: {
+      //         'Accept': 'application/json;odata=nometadata',
+      //         //'Content-type': 'application/json;odata=nometadata',
+      //         'odata-version': ''
+      //       }
+      //     })
+      //     .then((response: SPHttpClientResponse) => {
+      //       debugger;
+      //       if (response.ok) {
+      //         response.json().then((responseJSON) => {
+      //           console.log("data is >>>>", responseJSON.Files);
+      //           let imgurl=responseJSON.Files;
+      //           this.getLibraryDetails(imgurl);
+      //         });
+      //       }
+      //     });
+      // }
+      // private async getLibraryDetails(imgurl: string) {
+      //   axios.get(imgurl)
+      //     .then((result) => {
+      //       console.log('This is api list data', result.data);
+      //       this.setState({ list: result.data,
+      //         isDataLoading:false });
+          
+      //     }
+    
+      //     );
+      //     }
+
+
+    
 
   public render(): React.ReactElement<IGepListingPageProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);

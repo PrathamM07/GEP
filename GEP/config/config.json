@@ -25,13 +25,21 @@
           "manifest": "./src/webparts/gepListingPage/GepListingPageWebPart.manifest.json"
         }
       ]
+    },
+    "imagegallery-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/imagegallery/ImagegalleryWebPart.js",
+          "manifest": "./src/webparts/imagegallery/ImagegalleryWebPart.manifest.json"
+        }
+      ]
     }
   },
- 
   "localizedResources": {
     "WhitePaperDetailsWebPartStrings": "lib/webparts/whitePaperDetails/loc/{locale}.js",
     "BodyApplicationCustomizerStrings": "lib/extensions/body/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
-    "GepListingPageWebPartStrings": "lib/webparts/gepListingPage/loc/{locale}.js"
+    "GepListingPageWebPartStrings": "lib/webparts/gepListingPage/loc/{locale}.js",
+    "ImagegalleryWebPartStrings": "lib/webparts/imagegallery/loc/{locale}.js"
   }
 }

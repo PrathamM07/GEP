@@ -15,7 +15,6 @@ import GepListingPage from './components/GepListingPage';
 import { IGepListingPageProps } from './components/IGepListingPageProps';
 import { sp } from '@pnp/sp';
 import { Web } from '@pnp/sp/presets/all';
-
 export interface IGepListingPageWebPartProps {
   description: string;
   apiURL: string;
@@ -42,25 +41,29 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
       }
     );
-    this.getPropertyPaneValue();
+  
     
     ReactDom.render(element, this.domElement);
   }
-  public async getPropertyPaneValue() {
-    // get all the items from a sharepoint list
-    var reacthandler = this;
-    var items = [];
-    const columnName = ["Title"];
-    let web = Web(`${this.context.pageContext.web.absoluteUrl}/`);
-    web.lists.getByTitle("AssetType").items.select(columnName.join(',')).get().then((data) => {
-      for (var assettype in data) {
-        items.push({ key: data[assettype].Title, text: data[assettype].Title });
-      }
-      console.log(items);
-      propertypaneitem = items;
-    });
-  }
 
+  // public async getPropertyPaneValue() {
+  //   // get all the items from a sharepoint list
+  //   var reacthandler = this;
+  //   var items = [];
+  //   const columnName = ["Title"];
+  //   let web = Web(`${this.context.pageContext.web.absoluteUrl}/`);
+  //   web.lists.getByTitle("AssetType").items.select(columnName.join(',')).get().then((data) => {
+  //     for (var assettype in data) {
+  //       items.push({ key: data[assettype].Title, text: data[assettype].Title });
+  //     }
+  //     console.log(items);
+  //     propertypaneitem = items;
+  //   });
+  // }
+  protected get disableReactivePropertyChanges(): boolean {
+    return true;
+    
+    }
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
