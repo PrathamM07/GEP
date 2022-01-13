@@ -30,6 +30,7 @@ export interface IPageItem {
   image_url: string;
   description: string;
   title_alias: string;
+  ServerRelativeUrl:string;
 }
 let listItems: any[] = [];
 export default class Imagegallery extends React.Component<IImagegalleryProps,IImageGalleryStates, {}> {
@@ -48,7 +49,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps,IIm
       totalPages: 5,
       items: [],
       currentPage: 5,
-      isDataLoading: true,
+      isDataLoading: false,
       buttonColor: props.buttonColor,
       //assettype: []
     };
@@ -61,10 +62,12 @@ export default class Imagegallery extends React.Component<IImagegalleryProps,IIm
     
     let category=window.location.href;
     var myParam = location.search.split('category=')[1];
-    var titlename="ImageGallery/"+`'${myParam}'`;
+    var titlename="ImageGallery/OFFICES"//+myParam;
+    
+   // let titlename="ImageGallery/TEAMPHOTOS";
     this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
       
-      `/_api/Web/GetFolderByServerRelativeUrl('titlename')?$expand=Folders,Files`,
+      `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
       SPHttpClient.configurations.v1,
       {
         headers: {
@@ -77,24 +80,25 @@ export default class Imagegallery extends React.Component<IImagegalleryProps,IIm
         debugger;
         if (response.ok) {
           response.json().then((responseJSON) => {
-            console.log("data is >>>>", responseJSON.Files);
-            let imgurl=responseJSON.Files;
-            this.getLibraryDetails(imgurl);
+            console.log("data is >>>>", responseJSON);
+            var imgurl=responseJSON.Files;
+            //listItems.push(imgurl);
+           // this.getLibraryDetails(imgurl);
+            this.setState({ list: imgurl,isDataLoading:false});
+            
           });
         }
       });
   }
-  private async getLibraryDetails(imgurl: string) {
-    axios.get(imgurl)
-      .then((result) => {
-        console.log('This is api list data', result.data);
-        this.setState({ list: result.data,
-          isDataLoading:false });
-      
-      }
-
-      );
-      }
+//   private async getLibraryDetails(data: string) {
+//     axios.get(data)
+//     .then((result) => {
+//       console.log('This is api list data', result.data);
+//       this.setState({ list: result.data,
+//         isDataLoading:false });
+    
+//     });
+//  }
   public render(): React.ReactElement<IImagegalleryProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -116,7 +120,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps,IIm
 
           {
               this.state.list.map((detail, index) => {
-                let imgSrc = detail.image_url;
+                let imgSrc = detail.ServerRelativeUrl;
                 return (
                //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
                <div key={index} className="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">

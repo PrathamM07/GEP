@@ -29,6 +29,7 @@ export interface IPageItem {
   image_url: string;
   description: string;
   title_alias: string;
+  ServerRelativeUrl:string;
 }
 
 let listItems: any[] = [];
@@ -39,7 +40,6 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
   public tempPageItems: IPageItem[] = [];
 
   public constructor(props: IGepListingPageProps, state: IGEPListingPageStates) {
-
     super(props);
 
     this.state = {
@@ -56,8 +56,17 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
 
   public componentDidMount() {
-    this.getSitePageDetails();
-  // this.getGalleryDetails();
+  //  let category=window.location.href;
+  //  var myParam = location.search.split('category=')[1];
+  //  if(myParam == "OFFICES" || myParam == "TEAM-PHOTOS")
+  //  {
+  //   this.getLibrarydata();
+  //  }
+  //  else{
+  //   this.getSitePageDetails();
+  //  }
+   this.getSitePageDetails();
+   this.getLibrarydata();
   }
  
  
@@ -114,88 +123,40 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
       );
       }
-      public async getGalleryDetails() {
+     
+ public async getLibrarydata() {
+    
         let category=window.location.href;
         var myParam = location.search.split('category=')[1];
-        console.log("Blog Category is ******", myParam);
-        this.ServiceInatance = new GDService(this.props.context);
-        let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
-        //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
-        const orderByQuery = { columnName: "Modified", ascending: false };
-        const internalColumnName = ["Title", "Name"];
-        //const expandColumnName = ["AssetType"];
-        let filterQuery = `Title eq '${myParam}'`;
-        const ListDetails: IAllItems = {
-          listName: "Image Gallery",
-          selectQuery: internalColumnName.join(','),
-         // expandQuery: expandColumnName.join(','),
-          filterQuery: filterQuery,
-          // topQuery: parseInt(maxItems.toString()),
-          // orderByQuery: orderByQuery
-        };
-    
-        await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
-    
-          if (listData && listData.length > 0) {
-            console.log("ListDetails:", listData[0].ExternalApi);
-            console.log("Library Details is now:", listData);
-            // var externalurl = listData[0].ExternalApi;
-            // var weburl="listData[0].ExternalApi";
-            // var url=this.props.apiURL+externalurl;
-    
-            // this.getDetails(url);
-            // listItems.push(url);
-           // sp_url=listdata[0].Url;
-          }
+        var titlename="ImageGallery/"+myParam;
         
-        }).catch((error) => {
-          console.log(error);
-          this.setState({
-            isDataLoading: false
+       // let titlename="ImageGallery/TEAMPHOTOS";
+        this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
+          
+          `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
+          SPHttpClient.configurations.v1,
+          {
+            headers: {
+              'Accept': 'application/json;odata=nometadata',
+              //'Content-type': 'application/json;odata=nometadata',
+              'odata-version': ''
+            }
+          })
+          .then((response: SPHttpClientResponse) => {
+            debugger;
+            if (response.ok) {
+              response.json().then((responseJSON) => {
+                console.log("data is >>>>", responseJSON);
+                var imgurl=responseJSON.Files;
+                listItems.push(imgurl);
+               // this.getLibraryDetails(imgurl);
+                this.setState({ list: imgurl,isDataLoading: false});
+                
+              });
+            }
           });
-    
-        });
       }
-
-      // public async getLibrarydata() {
-    
-      //   let category=window.location.href;
-      //   var myParam = location.search.split('category=')[1];
-      //   var titlename="ImageGallery/"+`'${myParam}'`;
-      //   this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
-          
-      //     `/_api/Web/GetFolderByServerRelativeUrl('titlename')?$expand=Folders,Files`,
-      //     SPHttpClient.configurations.v1,
-      //     {
-      //       headers: {
-      //         'Accept': 'application/json;odata=nometadata',
-      //         //'Content-type': 'application/json;odata=nometadata',
-      //         'odata-version': ''
-      //       }
-      //     })
-      //     .then((response: SPHttpClientResponse) => {
-      //       debugger;
-      //       if (response.ok) {
-      //         response.json().then((responseJSON) => {
-      //           console.log("data is >>>>", responseJSON.Files);
-      //           let imgurl=responseJSON.Files;
-      //           this.getLibraryDetails(imgurl);
-      //         });
-      //       }
-      //     });
-      // }
-      // private async getLibraryDetails(imgurl: string) {
-      //   axios.get(imgurl)
-      //     .then((result) => {
-      //       console.log('This is api list data', result.data);
-      //       this.setState({ list: result.data,
-      //         isDataLoading:false });
-          
-      //     }
-    
-      //     );
-      //     }
-
+     
 
     
 
@@ -220,7 +181,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
           {
               this.state.list.map((detail, index) => {
-                let imgSrc = detail.image_url;
+                let imgSrc = detail.image_url || detail.ServerRelativeUrl;
                 return (
                //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
                <div key={index} className="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">

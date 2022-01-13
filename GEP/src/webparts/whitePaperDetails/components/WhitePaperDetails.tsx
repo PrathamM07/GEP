@@ -68,7 +68,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
   public async componentDidMount() {
     this.getHomePageDetails();
     this.getIconDetails();
-    this. getLibrarydata();
+    
   }
 
   public async componentWillReceiveProps(nextProps) { 
@@ -167,31 +167,31 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
       });
     }
   }
-  public async getLibrarydata() {
+  // public async getLibrarydata() {
     
 
-    this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
+  //   this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
       
-      `/_api/Web/GetFolderByServerRelativeUrl('ImageGallery/OFFICES')?$expand=Folders,Files`,
+  //     `/_api/Web/GetFolderByServerRelativeUrl('ImageGallery/OFFICES')?$expand=Folders,Files`,
      
 
-      SPHttpClient.configurations.v1,
-      {
-        headers: {
-          'Accept': 'application/json;odata=nometadata',
-          //'Content-type': 'application/json;odata=nometadata',
-          'odata-version': ''
-        }
-      })
-      .then((response: SPHttpClientResponse) => {
-        debugger;
-        if (response.ok) {
-          response.json().then((responseJSON) => {
-            console.log("data is >>>>", responseJSON.Files);
-          });
-        }
-      });
-  }
+  //     SPHttpClient.configurations.v1,
+  //     {
+  //       headers: {
+  //         'Accept': 'application/json;odata=nometadata',
+  //         //'Content-type': 'application/json;odata=nometadata',
+  //         'odata-version': ''
+  //       }
+  //     })
+  //     .then((response: SPHttpClientResponse) => {
+  //       debugger;
+  //       if (response.ok) {
+  //         response.json().then((responseJSON) => {
+  //           console.log("data is >>>>", responseJSON.Files);
+  //         });
+  //       }
+  //     });
+  // }
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
