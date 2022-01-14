@@ -8,6 +8,7 @@ import { Web } from '@pnp/sp/presets/all';
 import './../../../Frameworks/common/css/bootstrap.min.css';
 //import './Body.css';
 import '../../../asset/Body.css';
+import ''
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
@@ -241,6 +242,8 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                     <div className="card">
 
                       <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
+                      <img className="play" src="" alt="playButton"/>
+                     
                       {/* {(props.play === '') ? '' : <img className="play" src={props.play} alt="playButton" onClick={play} />}
                   */}
                       <div className="imageContent row-no-padding">
