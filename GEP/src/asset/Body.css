@@ -353,7 +353,7 @@ html {
 
 .video-popup .video-popup__inner span {
     position: absolute;
-    top: 0px;
+    top: 70px;
     right: 20px;
     font-size: 30px;
     color: #fff;

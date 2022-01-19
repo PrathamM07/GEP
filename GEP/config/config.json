@@ -33,6 +33,14 @@
           "manifest": "./src/webparts/imagegallery/ImagegalleryWebPart.manifest.json"
         }
       ]
+    },
+    "upcoming-events-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/upcomingEvents/UpcomingEventsWebPart.js",
+          "manifest": "./src/webparts/upcomingEvents/UpcomingEventsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "localizedResources": {
@@ -40,6 +48,7 @@
     "BodyApplicationCustomizerStrings": "lib/extensions/body/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
     "GepListingPageWebPartStrings": "lib/webparts/gepListingPage/loc/{locale}.js",
-    "ImagegalleryWebPartStrings": "lib/webparts/imagegallery/loc/{locale}.js"
+    "ImagegalleryWebPartStrings": "lib/webparts/imagegallery/loc/{locale}.js",
+    "UpcomingEventsWebPartStrings": "lib/webparts/upcomingEvents/loc/{locale}.js"
   }
 }

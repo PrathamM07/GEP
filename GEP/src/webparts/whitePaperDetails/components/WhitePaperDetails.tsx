@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import styles from './WhitePaperDetails.module.scss'
 import { IWhitePaperDetailsProps } from './IWhitePaperDetailsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import axios from "axios";
@@ -8,7 +7,6 @@ import { Web } from '@pnp/sp/presets/all';
 import './../../../Frameworks/common/css/bootstrap.min.css';
 //import './Body.css';
 import '../../../asset/Body.css';
-import ''
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
@@ -17,6 +15,7 @@ import { IAllItems } from '../../../Services/IListOperation';
 import { DetailsList, List } from 'office-ui-fabric-react';
 import ReactLoading from "react-loading";
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+import styles from './WhitePaperDetails.module.scss';
 export interface IWhitePaperDetailsStates {
   list: IPageItem[];
   currentPageItems: IPageItem[];
@@ -37,12 +36,13 @@ export interface IPageItem {
   ImageThumbnail: string;
   ExternalApi: string;
   PageDetailUrl: string;
-
+  IconImage: string;
 }
 
 let listItems: any;
 let logoimage: string;
 export default class WhitePaperDetails extends React.Component<IWhitePaperDetailsProps, IWhitePaperDetailsStates> {
+
 
   public _ops: GDService;
   private ServiceInatance: GDService;
@@ -63,26 +63,26 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     };
     this.getHomePageDetails = this.getHomePageDetails.bind(this);
     this.getIconDetails = this.getIconDetails.bind(this);
-    
+
   }
 
   public async componentDidMount() {
     this.getHomePageDetails();
     this.getIconDetails();
-    
+
   }
 
-  public async componentWillReceiveProps(nextProps) { 
-   
-     this.getHomePageDetails();
-     this.getIconDetails();
-     this.setState({
+  public async componentWillReceiveProps(nextProps) {
+
+    this.getHomePageDetails();
+    this.getIconDetails();
+    this.setState({
       buttonColor: nextProps.buttonColor
     });
   }
   public async getHomePageDetails() {
     this.ServiceInatance = new GDService(this.props.context);
-    const internalColumnName = ["Title", "ImageThumbnail", "ExternalApi"];
+    const internalColumnName = ["Title", "ImageThumbnail", "ExternalApi", "IconImage"];
     // let maxItems = this.props.maxItems;
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
     const SitePagesList: IAllItems = {
@@ -96,7 +96,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
       if (pageData && pageData.length > 0) {
         console.log("Content data type is >>>>>>>>>>>>>", pageData);
-        this.setState({ list: pageData,isDataLoading: false });     
+        this.setState({ list: pageData, isDataLoading: false });
         var listdata = pageData;
         this.getData(listdata.toString());
         //this.mapPageData(pageData, web);
@@ -159,7 +159,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
       this.setState({
         defaultIcon: tempPageItem.defaultImageUrl,
-         
+
       });
     } catch (error) {
       console.log(error);
@@ -169,12 +169,12 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     }
   }
   // public async getLibrarydata() {
-    
+
 
   //   this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + 
-      
+
   //     `/_api/Web/GetFolderByServerRelativeUrl('ImageGallery/OFFICES')?$expand=Folders,Files`,
-     
+
 
   //     SPHttpClient.configurations.v1,
   //     {
@@ -199,86 +199,115 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
 
     let str = this.props.webparttitle;
 
+    const video = this.props.video;
+    const audio = this.props.audio;
+    //console.log("Video file", this.props.video)
+    const play = () => {
+     // console.log(video);
+     document.getElementById('video-popup').style.display = 'block';
+    document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML=(this.props.audio==''||this.props.video=='')?'<video src='+video+' controls autoPlay  />':'<audio src='+audio+' controls autoPlay preload="none"/>';       
+  //  (this.props.audio===''||this.props.video==='')?'<audio src='+audio+' controls autoPlay preload="none"/>':'<video src='+video+' controls autoPlay  />';       
+  
+    }
+    const closeButton = () => {
+      document.getElementById('video-popup').style.display = 'none';
+      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML=
+      //(this.props.audio===''||this.props.video==='')?'<audio src='+audio+' controls pause/>':'<video src='+video+' controls pause  />';       
 
+      (this.props.audio===''||this.props.video==='')?'<video src='+video+' controls pause  />':'<audio src='+audio+' controls pause/>';       
+   
+    }
 
     // console.log("new list icon", this.state.list);
     return (
+     
       <section className="section__content bg-white">
-         {
+        {
           this.state.isDataLoading ?
             <ReactLoading className="mainpageLoader"
-              type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'}/>
+              type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
 
             :
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              {
+            <div className="container">
+              <div className="row">
+              
+                <div className="col-md-12">
+                  {
 
-                (this.props.contenttype == "") ?
+                    (this.props.contenttype == "") ?
 
-                  // <div className="heading">PROMOTIONAL CONTENT</div>
-                  <div className="heading"><img src={this.state.defaultIcon} alt="icon" className="icon" />{this.props.contenttype}</div>
-                  :
-                  <div className="heading"><img src={this.state.defaultIcon} alt="icon" className="icon" />{this.props.contenttype}</div>
+                      // <div className="heading">PROMOTIONAL CONTENT</div>
+                      <div className="heading"><img src={this.state.defaultIcon} alt="icon" className="icon" />{this.props.contenttype}</div>
+                      :
+                      <div className="heading"><img src={this.state.defaultIcon} alt="icon" className="icon" />{this.props.contenttype}</div>
 
-              }
-            </div>
+                  }
+                </div>
 
-            {
-
-
-              this.state.list.slice(0, this.props.maxItem).map((detail, index) => {
-                let imgSrc = detail.ImageThumbnail;
-
-                var title = (detail.Title).replace(/\s+/g, '-');
-                var subtitle = (detail.Title).replace('-', " ");
-
-                //console.log("detailpage is ***",title);            
-                return (
-
-                  //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
-                  <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                    <div className="card">
-
-                      <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
-                      <img className="play" src="" alt="playButton"/>
-                     
-                      {/* {(props.play === '') ? '' : <img className="play" src={props.play} alt="playButton" onClick={play} />}
-                  */}
-                      <div className="imageContent row-no-padding">
-                        <div className="row align-items-end">
-                          <div className="col-9 col-md-9">
-                            <h3 className="mb-0">{subtitle}</h3>
-                          </div>
+                {
 
 
-                          <div className="col-3 col-md-3 text-right">
-                            {/* {(this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ? */}
-                                  {(this.props.contenttype != "") ?
-                             
-                              <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(`https://prathameshneo.sharepoint.com/sites/GEP/SitePages/GepListing-Page.aspx?category=${title}`); return false; }}>View all</a>
+                  this.state.list.slice(0, this.props.maxItem).map((detail, index) => {
+                    let imgSrc = detail.ImageThumbnail;
+
+                    var title = (detail.Title).replace(/\s+/g, '-');
+                    var subtitle = (detail.Title).replace('-', " ");
+                    return (
+
+                      <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div className="card">
+
+                          <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
+                          {
+                            (detail.IconImage === null) ?
+                              ''
                               :
-                              <a href="#" ></a>
-                            }
+                              <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={play} />
+                          }
+                          {/* {(props.play === '') ? '' : <img className="play" src={props.play} alt="playButton" onClick={play} />}
+                  */}
+                          <div className="imageContent row-no-padding">
+                            <div className="row align-items-end">
+                              <div className="col-9 col-md-9">
+                                <h3 className="mb-0">{subtitle}</h3>
+                              </div>
+
+
+                              <div className="col-3 col-md-3 text-right">
+                                {/* {(this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ? */}
+                                {(this.props.contenttype != "") ?
+
+                                  <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(`https://prathameshneo.sharepoint.com/sites/GEP/SitePages/GepListing-Page.aspx?category=${title}`); return false; }}>View all</a>
+                                  :
+                                  <a href="#" ></a>
+                                }
+                              </div>
+
+
+                            </div>
                           </div>
 
 
+
+                          <div className="video-popup" id="video-popup">
+                            <div className="video-popup__inner" id="video-popup__inner">
+                              <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
+                              <div className="video-con" id="video-con">
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                        <br></br>
                       </div>
 
-                    </div>
-                    <br></br>
-                  </div>
-
-                );
-              })
-            }
+                    );
+                  })
+                }
 
 
-          </div>
-        </div>
-  }
+              </div>
+            </div>
+        }
       </section>
     );
   }

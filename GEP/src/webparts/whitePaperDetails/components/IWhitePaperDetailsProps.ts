@@ -10,4 +10,6 @@ export interface IWhitePaperDetailsProps {
   assettype:string;
   contenttype:string;
   buttonColor: string;
+  audio:string;
+  video:string;
 }
