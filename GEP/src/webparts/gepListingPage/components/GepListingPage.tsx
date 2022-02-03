@@ -6,7 +6,7 @@ import axios from "axios";
 import GDService from '../../../Services/GetDataService';
 import { Web } from '@pnp/sp/presets/all';
 import './../../../Frameworks/common/css/bootstrap.min.css';
-import './Body.css';
+import './DetailPage.css';
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
