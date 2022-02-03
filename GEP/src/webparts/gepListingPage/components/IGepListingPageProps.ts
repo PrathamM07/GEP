@@ -9,4 +9,5 @@ export interface IGepListingPageProps {
   webparttitle:string;
   assettype:string;
   buttonColor: string;
+  descriptionlength: number;
 }

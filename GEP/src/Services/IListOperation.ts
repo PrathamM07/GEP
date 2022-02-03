@@ -8,8 +8,6 @@ export interface IAllItems {
     orderByQuery?: { columnName: string, ascending: boolean };
     topQuery?: number;
   }
-  
-  
 export interface IListOperationsService {
     getAllListItems(Item: IAllItems): Promise<any[]>;
 }

@@ -296,7 +296,7 @@ html {
     width: 100%;
      padding-right: 12px; 
      padding-left: 12px;
-     margin-bottom: 30px; 
+     margin-bottom: 5px; 
      
 }
 .imageLibrary {
@@ -375,7 +375,38 @@ html {
     cursor: pointer;
 }
 
-
+/* lightbox css--start */
+#lightbox-img {
+    height: 80vh;
+    max-width: 90vw;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  #lightbox {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  button {
+    color: white;
+    border: 2px solid transparent;
+    background-color: transparent;
+    font-size: 1.2rem;
+  }
+  
+  .svg-inline--fa {
+    font-size: 2rem;
+ }
+  /*lightbox-css end  */
 
 @media (max-width:991px) {
     .video-popup__inner video {
@@ -410,10 +441,3 @@ html {
         font-size: 1.8rem;
     }
 }
-
-/* 
-@media (max-width:540px){
-    .video-popup__inner video{
-        width: 50%;
-    }
-} */

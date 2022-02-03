@@ -34,10 +34,7 @@ html {
     width: 43px;
     height: 32px;
     margin-right: 10px;
-
 }
-
-
 
 .heading {
     font-family: 'Roboto', sans-serif;
@@ -47,8 +44,20 @@ html {
     text-transform: uppercase;
     vertical-align: middle;
     margin-bottom: 15px;
-    
+    margin-left: -10px;  
 }
+.TilesTitle{
+    font-size:1.3rem;
+    color: #006BAA;
+    font-family:'Roboto', sans-serif;
+}
+.Tilesdescription{
+    font-size:1.1rem;
+    color:black;
+    font-family:'Roboto', sans-serif;
+    margin-top: -10px;
+}
+
 .mainLoader {
     margin: 0;
     position: absolute;
@@ -71,25 +80,19 @@ html {
     height: 230px;
     cursor: pointer;
     display: block;
-
 }
 
 .card .imageCardTv {
-    
     cursor: pointer;
-
 }
-
 
 .card .play {
     width: 91px;
     height: 91px;
-
 }
 .card .Tvad_Play {
     width: 91px;
     height: 91px;
-
 }
 
 .card::before {
@@ -100,7 +103,6 @@ html {
     height: 100%;
     left: 0;
     top: 0;
-  
     cursor: pointer;
 }
 
@@ -133,7 +135,6 @@ html {
     text-align: left;
     padding: 0px;
     margin-top: 3px;
-
 }
 
 .imageContentTv p {
@@ -145,7 +146,6 @@ html {
     text-align: left;
     padding: 0px;
     margin-top: -9px;
-
 }
 
 
@@ -171,13 +171,11 @@ html {
 }
 
 .Tvad_Play {
-
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 40%;
-
 }
 
 
@@ -296,7 +294,7 @@ html {
     width: 100%;
      padding-right: 12px; 
      padding-left: 12px;
-     margin-bottom: 30px; 
+     margin-bottom:-15px; 
      
 }
 .imageLibrary {

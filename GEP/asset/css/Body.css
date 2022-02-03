@@ -234,7 +234,8 @@ html {
     border: 1px solid #026AAA;
     color: #026AAA !important;
     background-color: white;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
     font-weight: bold;
     padding: 6px 14px;
     border-radius: 4px;

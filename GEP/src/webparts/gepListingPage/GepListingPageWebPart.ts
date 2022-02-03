@@ -22,6 +22,7 @@ export interface IGepListingPageWebPartProps {
   webpartname: string;
   dropdownTitle: string;
   color: string;
+  descriptioncharacterlimit: number;
 
 }
 var propertypaneitem = [];
@@ -39,6 +40,8 @@ export default class GepListingPageWebPart extends BaseClientSideWebPart<IGepLis
         apiURL: this.properties.apiURL ? this.properties.apiURL :"https://webdev.gep.com/",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
+        descriptionlength: this.properties.descriptioncharacterlimit ? this.properties.descriptioncharacterlimit : 50,
+
       }
     );
   

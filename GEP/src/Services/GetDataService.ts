@@ -35,9 +35,7 @@ export default class GetDataService implements IListOperationsService {
       }
  
     public getListData(listName) {
-
         return axios.get(listName);
-
     }
    
    

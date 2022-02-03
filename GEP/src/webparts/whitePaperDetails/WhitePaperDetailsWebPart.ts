@@ -47,8 +47,8 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
         contenttype:this.properties.dropdowncontent?this.properties.dropdowncontent:"Promotional Content",
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
-        video:this.properties.videolink?this.properties.videolink:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        audio:this.properties.audiolink?this.properties.audiolink:"",//"https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
+        video:this.properties.videolink?this.properties.videolink:"",
+        audio:this.properties.audiolink?this.properties.audiolink:"",
 
       }
     );

@@ -34,21 +34,69 @@ html {
     width: 43px;
     height: 32px;
     margin-right: 10px;
-
 }
-
-
 
 .heading {
     font-family: 'Roboto', sans-serif;
     color: #006BAA;
     font-weight: bold;
-    font-size:2.7rem;
+    font-size:2.2rem;
     text-transform: uppercase;
     vertical-align: middle;
     margin-bottom: 15px;
     margin-top: 15px;
 }
+/* EventCalender css start */
+.title-103 span {
+     font-family: 'Roboto', sans-serif;
+    color: #006BAA;
+    font-weight: bold;
+    font-size:2.2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    /* background-image: url('../../../asset/IconImage/Path 15872.png'); */
+}
+.i_c_ce1e465e .av_c_ce1e465e {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 0px;
+    margin-bottom: 2.5px;
+    text-align: left;
+    color: #A9A9A9;
+    margin-left: 13px;
+}
+.i_c_ce1e465e .ax_c_ce1e465e {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #2D69A5;
+    font-size: 16px;
+    padding: 0px;
+    text-align: left;
+    text-transform: uppercase;
+}
+.i_c_ce1e465e .az_c_ce1e465e {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    margin-top:-5px;
+    text-align: left;
+    color: black;
+}
+.ba_c_ce1e465e{
+    font-family: 'Roboto', sans-serif;
+    color: #A9A9A9;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 0px;
+    text-align: left;
+}
+.root-40 {
+    margin-left:-50px;
+}
+/* EventCalender css end */
 .mainLoader {
     margin: 0;
     position: absolute;
@@ -116,12 +164,21 @@ html {
     padding: 10px;
 }
 
-.imageContent h3 {
+.imageContent .mb-0  {
     color: white;
     font-size: 18px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
+
+}
+.imageContent a h3{
+    color: white;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 45px;
 
 }
 .imageContentTv h4 {
@@ -203,10 +260,14 @@ html {
     padding: 0px 29px 0px 16px;
     min-height: 151px;
 }
+.eventcard .content {
+    padding: 0px 29px 0px 16px;
+    min-height: 151px;
+    
+}
 
-
-.cards .content p {
-    font-family: 'Roboto', sans-serif;;
+.card .content p {
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 11px;
     padding: 0px;
@@ -215,7 +276,26 @@ html {
     color: #A9A9A9;
 }
 
-.cards .content h4 {
+.card .content h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #2D69A5;
+    font-size: 18px;
+    padding: 0px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+.eventcontent p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 0px;
+    margin-bottom: 2.5px;
+    text-align: left;
+    color: #A9A9A9;
+}
+
+.eventcontent h3 {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: #2D69A5;
@@ -225,12 +305,13 @@ html {
     text-align: left;
 }
 
+
 .dates {
     margin-bottom: 9px;
 }
 
 .dates h5 {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 13px;
     padding: 0px;
@@ -240,33 +321,38 @@ html {
 }
 
 .dates p {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     color: #A9A9A9;
     font-weight: 500;
     font-size: 13px;
     padding: 0px;
     margin: 0px;
     text-align: left;
-
 }
-
-
 /* cards Button */
 .addtocalender a {
     border: 1px solid #026AAA;
     color: #026AAA !important;
     background-color: white;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    padding: 6px 14px;
+    font-size: 10px;
+    padding: 6px 4px;
     border-radius: 4px;
     margin-bottom: 14px;
-    width: 141px;
+    width: 150px;
     text-transform: uppercase;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
     text-align: center;
+}
+.addtocalender h4{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #026AAA !important;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .cards {
@@ -278,10 +364,13 @@ html {
     text-transform: uppercase;
     color: #006BAA;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
     
 }
-
+[dir=ltr] .v_c_fc885fa4.w_c_fc885fa4>div>div {
+    margin-right: 10px;
+}
 /* .row {
     --bs-gutter-x: 1.5rem;
      --bs-gutter-y: 1.5rem;
@@ -383,7 +472,7 @@ html {
 
     }
     .heading {
-        font-size: 2.4rem;
+        font-size: 2.0rem;
     }
 }
 
@@ -394,7 +483,7 @@ html {
 
     }
     .heading {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
 }
