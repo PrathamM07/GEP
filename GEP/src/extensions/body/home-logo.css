@@ -73,3 +73,37 @@
             display: none;
          }
 }
+@media all and (max-width:767px){
+    .logoImg-50{max-width: 100%;
+        max-height: 22px;}
+        .shyLogoImg-69{
+            max-width: 100%;
+            max-height: 20px;
+         }
+         .logoImg{max-width: 100%;
+            max-height: 24px;}
+            .shyLogoImg{
+                max-width: 100%;
+                max-height: 20px;
+             }
+         .shyTitle-70{
+            display: none;
+         }
+}
+@media all and (max-width:575px) {
+    .logoImg-50{max-width: 100%;
+        max-height: 22px;}
+        .shyLogoImg-69{
+            max-width: 100%;
+            max-height: 20px;
+         }
+         .logoImg{max-width: 100%;
+            max-height: 24px;}
+            .shyLogoImg{
+                max-width: 100%;
+                max-height: 20px;
+             }
+         .shyTitle-70{
+            display: none;
+         }
+}

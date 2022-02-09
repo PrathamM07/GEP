@@ -22,13 +22,10 @@ html {
   }
   
 
-
-/* ------------
 .section__content {
-    margin-top: 45px;
-    margin-bottom: 45px;
+    margin-top: -38px;
 }
- */
+ 
 
 .section__content .icon {
     width: 43px;
@@ -66,6 +63,7 @@ html {
 /*--- card styling--- */
 .card{
     cursor: pointer;
+    /* background: transparent 0% 0% no-repeat padding-box; */
 }
 .card .imageCard {
     height: 230px;
@@ -100,10 +98,23 @@ html {
     height: 100%;
     left: 0;
     top: 0;
-  
+    background: linear-gradient(360deg,
+  rgba(255, 255, 255, 0) 0%, 
+  rgba(4, 20, 51, 0.2) 100%);
     cursor: pointer;
 }
-
+.lz_ap_9f38462c.bb_ap_9f38462c {/* Listingpage title*/
+    font-size: 32px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color: #006BAA;
+    font-weight: bold;
+    font-size: 2.3rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    letter-spacing: -1px;
+    margin-left: 5px;
+}
 /* ------------- */
 
 .imageContent {
@@ -282,11 +293,10 @@ html {
     
 }
 
-/* .row {
-    --bs-gutter-x: 1.5rem;
-     --bs-gutter-y: 1.5rem;
+ .row {
+    --bs-gutter-x: 0rem;
     
-} */
+}
 .a_a_50a7110f:not(.b_a_50a7110f) {
     padding: 0px;
     margin: 24px 0;
@@ -294,9 +304,9 @@ html {
 .col-12, .col-sm-8, .col-md-6 .col-lg-4, .col-xl-4{
     position: relative;
     width: 100%;
-     padding-right: 12px; 
-     padding-left: 12px;
-     margin-bottom: 5px; 
+     padding-right: 7px; 
+     padding-left: 7px;
+     margin-bottom: -5px; 
      
 }
 .imageLibrary {
@@ -319,7 +329,12 @@ html {
     cursor: pointer;
     text-decoration: none;
 }
-
+.container-fluid{
+   
+     width: 100%;
+     padding-right: 5px;
+    padding-left: 5px;
+}
 .blueBorder {
     width: 100%;
     height: 6px;

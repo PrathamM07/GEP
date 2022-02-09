@@ -53,6 +53,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
   }
   public componentDidMount() {
     this.getLibrarydata();
+    this.getPromotionaldata();
     // this.getGalleryDetails();
   }
   public async getLibrarydata() {
@@ -81,6 +82,31 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
       });
   }
 
+  public async getPromotionaldata() {
+    let category = window.location.href;
+    var myParam = location.search.split('category=')[1];
+    var titlename = "PromotionalLibrary/" + myParam;
+    this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl +
+      `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
+      SPHttpClient.configurations.v1,
+      {
+        headers: {
+          'Accept': 'application/json;odata=nometadata',
+          //'Content-type': 'application/json;odata=nometadata',
+          'odata-version': ''
+        }
+      })
+      .then((response: SPHttpClientResponse) => {
+        if (response.ok) {
+          response.json().then((responseJSON) => {
+            console.log("data is >>>>", responseJSON);
+            var imgurl = responseJSON.Files;
+            listItems.push(imgurl);
+            this.setState({ list: imgurl, isDataLoading: false });
+          });
+        }
+      });
+  }
   public render(): React.ReactElement<IImagegalleryProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -144,7 +170,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
             <ReactLoading className="mainLoader"
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
-            <div className="container">
+            <div className="container-fluid">
               <div className="row">
                 {
                   this.state.list.map((detail, index) => {

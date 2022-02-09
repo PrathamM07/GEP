@@ -96,7 +96,17 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
   }
 
   private async getDetails(url: string) {
-    axios.get(url)
+    // axios({
+    //   method: 'GET',
+    //   url: url,//urldownload
+  
+    //   headers: {
+    //     'Accept': 'application/json;odata=nometadata',
+    //     'Content-type': 'application/json;odata=nometadata',
+    //     'Access-Control-Allow-Origin': '*'
+    //   },
+    // })
+     axios.get(url)
       .then((result) => {
         console.log('This is api list data', result.data.data[2].list);
         this.setState({
@@ -113,26 +123,26 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     var title = titlealias;
     const payload = {
       usragent: 'ipad_retina',
-      title_alias: 'white-papers/optimizing-third-party-risk-management-with-a-unified-procurement-platform',
+      title_alias: 'webcasts/the-advent-of-strategic-procurement-ushering-a-new-era-of-digital-led-transformation',
       //'titlealias',
       //  var fileExtension = fileName.split('.').pop(); 
       usrcode: 85
     };
     axios({
       method: 'POST',
-      url: 'https://www.gep.com/WhitePaperDetail',//urldownload
+      url: 'https://webdev.gep.com/WebinarDetail',//urldownload
       data: payload, // you are sending body instead
       headers: {
         'Accept': 'application/json;odata=nometadata',
         'Content-type': 'application/json;odata=nometadata',
-        'Access-Control-Allow-Origin': '*'
+        // 'Access-Control-Allow-Origin': '*'
       },
     })
       .then((response) => {
         console.log("new details >>>>>>>>>>>>>", response.data);
         this.setState({
           items: response.data
-        })
+        });
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -152,7 +162,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
             <ReactLoading className="mainLoader"
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
-            <div className="container">
+            <div className="container-fluid">
               <div className="row">
                 {
                   this.state.list.map((detail, index) => {
@@ -167,13 +177,14 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
                               <div className="col-9 col-md-9">
                               </div>
                               <div className="col-3 col-md-12">
-                                <a href={weburl + detail.title_alias} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a>
+                              <a href="#" target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a>
+                                {/* <a href={weburl + detail.title_alias} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a> */}
                               </div>
                             </div>
                           </div>
                         </div>
                         <p className="TilesTitle">{detail.service_title}</p>
-                        <p className="Tilesdescription">{description.substring(0, 1).toUpperCase() + description.substring(1, this.props.descriptionlength) + '...'}</p>
+                        {/* <p className="Tilesdescription">{description.substring(0, 1).toUpperCase() + description.substring(1, this.props.descriptionlength) + '...'}</p> */}
                         <br></br>
                       </div>
                     );

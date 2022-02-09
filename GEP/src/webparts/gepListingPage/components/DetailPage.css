@@ -21,14 +21,9 @@ html {
     overflow: hidden;
   }
   
-
-
-/* ------------
 .section__content {
-    margin-top: 45px;
-    margin-bottom: 45px;
+    margin-top: -15px;
 }
- */
 
 .section__content .icon {
     width: 43px;
@@ -47,9 +42,20 @@ html {
     margin-left: -10px;  
 }
 .TilesTitle{
-    font-size:1.3rem;
-    color: #006BAA;
+    /* //font-size:1.3rem; */
+    /* font-size:1.4rem;
+    color:#026aaa;
     font-family:'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: bolder; */
+    text-align: left;
+    font: normal normal bold 1.4rem 'Roboto', sans-serif;
+    letter-spacing: 0px;
+    color: #026AAA;
+    text-transform: uppercase;
+    opacity: 1;
+    margin-top: 5px;
+   
 }
 .Tilesdescription{
     font-size:1.1rem;
@@ -57,7 +63,23 @@ html {
     font-family:'Roboto', sans-serif;
     margin-top: -10px;
 }
-
+.lz_ap_9f38462c.bb_ap_9f38462c {/* Listingpage title*/
+    font-size: 32px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color: #006BAA;
+    font-weight: bold;
+    font-size: 2.3rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    letter-spacing: -1px;
+    margin-left: 7px;
+}
+.container-fluid{
+    padding-left: 55px;
+    padding-right: 25px;
+    width: 100%;
+}
 .mainLoader {
     margin: 0;
     position: absolute;
@@ -292,8 +314,8 @@ html {
 .col-12, .col-sm-8, .col-md-6 .col-lg-4, .col-xl-4{
     position: relative;
     width: 100%;
-     padding-right: 12px; 
-     padding-left: 12px;
+     padding-right: 7px; 
+     padding-left: 7px;
      margin-bottom:-15px; 
      
 }

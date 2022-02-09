@@ -164,13 +164,18 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     document.getElementById('video-popup').style.display = 'block';
     mediaType = Mediatype;
     if (Mediatype == "Audio") {
+      
       document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';
+    
     }
     else {
       document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
     }
   }
 
+  public imageLibrary(title: string){
+    window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`));
+  }
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -183,8 +188,10 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
           '<video src=' + mediaType + ' controls pause  />'
           :
           '<audio src=' + mediaType + ' controls pause/>';
-    }
-
+    }; 
+    const imageClick = () => {
+      console.log('Click');
+    } 
     return (
       <section className="section__content bg-white">
         {
@@ -193,7 +200,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
             <div className="container-fluid">
-              <div className="row">
+              <div className="row MainDiv">           
                 <div className="col-md-12">
                   {
                     (this.props.contenttype == "") ?
@@ -208,15 +215,21 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                     let imgSrc = detail.ImageThumbnail;
                     var title = (detail.Title).replace(/\s+/g, '-');
                     var subtitle = (detail.Title).replace('-', " ");
-                    return (
+                    return (               
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" >
-                        <div className="card" onClick={() => window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`), "_blank")}>
-                          {
+                        <div className="card" onClick={() => window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`), "_blank")}> 
+                        {/* <td onClick={()=> window.open("https://www.facebook.com", "_blank")}> */}
+                        <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" onClick={(event) => this.imageLibrary(detail.Title)}/>               
+                          {/* {                           
                             (this.props.contenttype === 'Image Library') ?
-                              <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
+                            // <div className="ImageLibrary" onClick={() => window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`), "_blank")} >
+                         //   <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }}  className="ImageLibrary" onClick={(event) => window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`)} >
+                      
+                            <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" onClick={()=> window.open("https://www.facebook.com", "_blank")} />
                               :
                               <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
-                          }
+                          } */}
+                        
                           {/* <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard"/> */}
                           {
                             (detail.IconImage === null) ?
