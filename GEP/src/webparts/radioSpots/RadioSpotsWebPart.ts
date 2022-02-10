@@ -13,6 +13,13 @@ import { IRadioSpotsProps } from './components/IRadioSpotsProps';
 
 export interface IRadioSpotsWebPartProps {
   description: string;
+  apiURL: string;
+  webpartname: string;
+  dropdownTitle: string;
+  dropdowncontent:string;
+  color: string;
+  videolink:string;
+  audiolink:string;
 }
 
 export default class RadioSpotsWebPart extends BaseClientSideWebPart<IRadioSpotsWebPartProps> {
@@ -21,7 +28,13 @@ export default class RadioSpotsWebPart extends BaseClientSideWebPart<IRadioSpots
     const element: React.ReactElement<IRadioSpotsProps> = React.createElement(
       RadioSpots,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        context: this.context,
+        apiURL: this.properties.apiURL ? this.properties.apiURL : "",
+        webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
+        buttonColor: this.properties.color ? this.properties.color : "#0083cf",
+        video:this.properties.videolink?this.properties.videolink:"",
+        audio:this.properties.audiolink?this.properties.audiolink:"",
       }
     );
 

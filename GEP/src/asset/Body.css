@@ -319,7 +319,7 @@ html {
     padding: 0px;
     margin: 24px 0;
 }
-.col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4{
+.col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4, .col-xl-4{
     position: relative;
     width: 100%;
      padding-right: 7px; 
