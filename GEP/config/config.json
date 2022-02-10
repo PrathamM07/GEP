@@ -41,6 +41,14 @@
           "manifest": "./src/webparts/upcomingEvents/UpcomingEventsWebPart.manifest.json"
         }
       ]
+    },
+    "radio-spots-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/radioSpots/RadioSpotsWebPart.js",
+          "manifest": "./src/webparts/radioSpots/RadioSpotsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "localizedResources": {
@@ -49,6 +57,7 @@
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
     "GepListingPageWebPartStrings": "lib/webparts/gepListingPage/loc/{locale}.js",
     "ImagegalleryWebPartStrings": "lib/webparts/imagegallery/loc/{locale}.js",
-    "UpcomingEventsWebPartStrings": "lib/webparts/upcomingEvents/loc/{locale}.js"
+    "UpcomingEventsWebPartStrings": "lib/webparts/upcomingEvents/loc/{locale}.js",
+    "RadioSpotsWebPartStrings": "lib/webparts/radioSpots/loc/{locale}.js"
   }
 }

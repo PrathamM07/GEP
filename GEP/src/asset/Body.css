@@ -6,37 +6,30 @@ html {
 /* ------------ */
 .header {
     align-items: left;
-
 }
-
 
 *{
     margin: 0px;
     padding:0px;
-    
-  
   }
   .wrapper{
     width: 100%;
     overflow: hidden;
   }
-  
 .section__content {
     margin-top: 15px;
     margin-bottom: 10px;
-}
- 
- .container-fluid{
-    padding-left: 55px;
-    padding-right: 25px;
-    width: 100%;
 }
 .section__content .icon {
     width: 42px;
     height: 30px;
     margin-right: 10px;
 }
-
+.container-fluid{
+    padding-left: 40px;
+    padding-right: 10px;
+    width: 100%;
+}
 .heading {
     font-family: 'Roboto', sans-serif;
     color: #006BAA;
@@ -49,90 +42,6 @@ html {
     margin-left: -8px;
     letter-spacing: -1px;
 }
-/* EventCalender css start */
-.title-103 span {/*event title*/
-     font-family: 'Roboto', sans-serif;
-    color: #006BAA;
-    font-weight: bold;
-    font-size:2.2rem;
-    text-transform: uppercase;
-    vertical-align: middle;
-    margin-bottom: 15px;
-    /* margin-top: 15px; */
-    letter-spacing: -1px;
-    /* background-image: url('../../../asset/IconImage/Path 15872.png'); */
-}
-.ak_h_658c9e0a {/*event title*/
-    margin-top: -15px;
-}
-.i_c_ce1e465e .av_c_ce1e465e {/*event category*/
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 11px;
-    padding: 0px;
-    margin-bottom: 2.5px;
-    text-align: left;
-    color: #A9A9A9;
-    margin-left: 13px;
-}
-.i_c_ce1e465e .ax_c_ce1e465e {/*event main pupose/Title*/
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    color: #2D69A5;
-    font-size: 16px;
-    padding: 0px;
-    text-align: left;
-    text-transform: uppercase;
-}
-.i_c_ce1e465e .az_c_ce1e465e {/*event location*/
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    /* margin-top:-5px; */
-    text-align: left;
-    color: black;
-    
-}
-.ba_c_ce1e465e{
-    font-family: 'Roboto', sans-serif;
-    color: #A9A9A9;
-    font-weight: 500;
-    font-size: 11px;
-    padding: 0px;
-    text-align: left;
-}
-.a_b_50a7110f:not(.b_b_50a7110f):not(.e_b_50a7110f) {/*event backcolor*/
-    padding: 0 16px;
-    background-color: #EFF7FE;
-    margin-top:5px;
-}
-
-.ms-Stack .ms-CardSection .az_c_ce1e465e {
-    margin-top: -3px;/*event Date*/
-}
-.aj_h_658c9e0a {/*Event calender div margin left*/
-    margin-left: -10px;
-}
-.b_b_fc885fa4 .h_b_fc885fa4 {/*Event margin top*/
-    width: 100%;
-    overflow: hidden;
-    margin-top: -15px;
-}
-.ac_c_ce1e465e.ae_c_ce1e465e {
-    background-image:linear-gradient(
-        1turn
-        ,rgba(51,51,51,.9),rgba(51,51,51,0) 50%)!important;
-     }
-     /* .ac_c_ce1e465e {
-        background-image:linear-gradient(
-            1turn
-            ,rgba(51,51,51,.9),rgba(51,51,51,0) 0%);
-     } */
-/* .root-40 {
-    margin-left:-50px;
-} */
-
-/* EventCalender css end */
 
 .mainLoader {
     margin: 0;
@@ -164,22 +73,16 @@ html {
     display: block;
 
 }  */
-.card .imageCardTv {
-    
+.card .imageCardTv {   
     cursor: pointer;
-
 }
-
-
 .card .play {
     width: 91px;
     height: 91px;
-
 }
 .card .Tvad_Play {
     width: 91px;
     height: 91px;
-
 }
 
 .card::before {
@@ -190,7 +93,6 @@ html {
     height: 100%;
     left: 0;
     top: 0;
-  
     cursor: pointer;
    background: linear-gradient(360deg,
   rgba(255, 255, 255, 0) 0%, 
@@ -208,7 +110,6 @@ html {
     cursor: pointer;
     padding: 10px;
 }
-
 .imageContent .mb-0  {
     color: white;
     font-size: 18px;
@@ -289,10 +190,10 @@ html {
 /* .library >.card>.imageContent>h3 {
     text-align: left!important;
 } */
-
+/* 
 .bg {
     background-color: #EFF7FE;
-}
+} */
 
 
 /* Cards Style for Upcoming Event */
@@ -305,11 +206,11 @@ html {
     padding: 0px 29px 0px 16px;
     min-height: 151px;
 }
-.eventcard .content {
+/* .eventcard .content {
     padding: 0px 29px 0px 16px;
     min-height: 151px;
     
-}
+} */
 
 .card .content p {
     font-family: 'Roboto', sans-serif;
@@ -340,7 +241,7 @@ html {
     color: #A9A9A9;
 }
 
-.eventcontent h3 {
+/* .eventcontent h3 {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: #2D69A5;
@@ -349,11 +250,9 @@ html {
     margin-bottom: 16px;
     text-align: left;
 }
-
-
 .dates {
     margin-bottom: 9px;
-}
+} 
 
 .dates h5 {
     font-family: 'Roboto', sans-serif;
@@ -375,6 +274,7 @@ html {
     text-align: left;
 }
 /* cards Button */
+/*
 .addtocalender a {
     border: 1px solid #026AAA;
     color: #026AAA !important;
@@ -399,7 +299,7 @@ html {
     font-weight: bold;
     text-transform: uppercase;
 }
-
+*/
 .cards {
     min-height: 302px;
     margin-bottom: 30px;
@@ -411,22 +311,14 @@ html {
     font-weight: bold;
     font-size: 10px;
     font-family: 'Roboto', sans-serif;
-    
 }
 [dir=ltr] .v_c_fc885fa4.w_c_fc885fa4>div>div {
     margin-right: 10px;
 }
-/* .row {
-    --bs-gutter-x: 1.5rem;
-     --bs-gutter-y: 1.5rem;
-    
-} */
 .a_a_50a7110f:not(.b_a_50a7110f) {
     padding: 0px;
     margin: 24px 0;
 }
-/* ms-Stack ms-CardSection aj_c_ce1e465e css-142 */
-
 .col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4{
     position: relative;
     width: 100%;
@@ -434,9 +326,6 @@ html {
      padding-left: 7px; 
      margin-top: -5px;
 }
-/* .MainDiv{
-    margin-top: -10px;
-} */
 .imageLibrary {
     display: flex;
     justify-content: space-between;
@@ -462,7 +351,6 @@ html {
     width: 100%;
     height: 6px;
     background-color: #1e7fd3;
-
 }
 
 .video-popup {
@@ -493,26 +381,19 @@ html {
 }
 .video-con{
     /* background-image: url('http://arbordayblog.org/wp-content/uploads/2016/06/tree.jpg'); */
-    background-image: url('../../src/asset/IconImage/Group861.png');
+    background-image: url('../../src/asset/IconImage/Group862.png');
     background-size: cover;
     position: relative;
     height: 250px;
     width: 500px;
 }
-/* .video-popup__inner audio {
-    width: 600px;
-    height: 330px;
-    z-index: 9;
-    background-color: crimson;
-} */
 .video-popup__inner audio {
     /* width: 400px; */
     /* height: 330px; */
     z-index: 9;
-    margin-left: 7px;
     margin-top: 228px;
     height: 20px;
-    width: 97%;
+    width: 100%;
     /* margin-right: 50px; */
 }
 .video-popup .video-popup__inner span {
@@ -537,55 +418,171 @@ html {
     background: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
- /*audio::-webkit-media-controls-play-button,
-     audio::-webkit-media-controls-panel {
-     background-color: #000;
-     color: #000;
-     position: fixed;
-     left: 0;
-     top: 0;
-     width: 100%;
-     height: 100%; */
-     
-#canvas {
-    position: fixed;
-    left: 0;
-    top: 0;
+  /* EventCalender css start */
+.title-103 span {/*event title*/
+     font-family: 'Roboto', sans-serif;
+    color: #006BAA;
+    font-weight: bold;
+    font-size:2.2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin-bottom: 15px;
+    /* margin-top: 15px; */
+    letter-spacing: -1px;
+    /* background-image: url('../../../asset/IconImage/Path 15872.png'); */
+}
+.ak_h_658c9e0a {/*event title*/
+    margin-top: -15px;
+}
+.i_c_ce1e465e .av_c_ce1e465e {/*event category*/
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 0px;
+    margin-bottom: 2.5px;
+    text-align: left;
+    color: #A9A9A9;
+    margin-left: 13px;
+}
+.i_c_ce1e465e .ax_c_ce1e465e {/*event main pupose/Title*/
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #2D69A5;
+    font-size: 16px;
+    padding: 0px;
+    text-align: left;
+    text-transform: uppercase;
+}
+.i_c_ce1e465e .az_c_ce1e465e {/*event location*/
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    /* margin-top:-5px; */
+    text-align: left;
+    color: black;
+    
+}
+.ba_c_ce1e465e{
+    font-family: 'Roboto', sans-serif;
+    color: #A9A9A9;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 0px;
+    text-align: left;
+}
+.a_c_50a7110f:not(.b_c_50a7110f):not(.i_c_50a7110f) {
+    height: 450px;
+    background-color: #eff7fe;
+    margin-left: -15px;
+    width: 103%;
+}
+
+.a_b_50a7110f:not(.b_b_50a7110f):not(.e_b_50a7110f) {/*event backcolor*/
+    padding: 0 16px;
+    /* background-color: #EFF7FE; */
+    margin-top:5px;
+}
+.a_a_50a7110f:not(.b_a_50a7110f).h_a_50a7110f {
     width: 100%;
-    height: 100%;
-  }
+    margin-left: -10px;
+}
+/* .a_e_50a7110f:not(.b_e_50a7110f) {
+    /* padding: 8px; */
+    /* margin: 24px 0; */
+ */
+.ms-Stack .ms-CardSection .az_c_ce1e465e {
+    margin-top: -3px;/*event Date*/
+}
+.aj_h_658c9e0a {/*Event calender div margin left*/
+    margin-left: -10px;
+}
+.b_b_fc885fa4 .h_b_fc885fa4 {/*Event margin top*/
+    width: 100%;
+    overflow: hidden;
+    margin-top: -15px;
+}
+.ac_c_ce1e465e.ae_c_ce1e465e {/*event opacity*/
+    background-image:linear-gradient(
+        1turn
+        ,rgba(51,51,51,.9),rgba(51,51,51,0) 50%)!important;
+     }
+     .aj_g_658c9e0a{
+         margin-top: -30px;
+     }
+
+/* EventCalender css end */
 
 @media (max-width:991px) {
     .video-popup__inner video {
         width: 700px;
         height: 380px;
-
     }
     .heading {
         font-size: 2.0rem;
     }
+    .title-103 span {/*event title*/
+        font-size:2.0rem;
+     }
+    .carouselItemWrapper{
+        padding-left: 10px;
+        margin-right: 10px;
+    }
+    .c_c_ce1e465e .aj_c_ce1e465e {
+        height: 150px;
+        width: 100%;
+        min-width: 100%;
+        margin-left: 10px;
+    }
+
+    
 }
 
 @media (max-width:767px) {
     .video-popup__inner video {
         width: 500px;
         height: 350px;
-
     }
     .heading {
         font-size: 1.8rem;
     }
-
+    .title-103 span {/*event title*/
+        font-size:1.8rem;
+     }
+    .carouselItemWrapper{
+        padding-left: 10px;
+        margin-right: 10px;
+    }
+    .c_c_ce1e465e .aj_c_ce1e465e {
+        height: 150px;
+        width: 100%;
+        min-width: 100%;
+        margin-left: 10px;
+    }
 }
 
 @media (max-width:575px) {
     .video-popup__inner video {
         width: 320px;
         height: 300px;
-
     }
     .heading {
         font-size: 1.8rem;
+    }
+    .title-103 span {/*event title*/
+        font-size:1.8rem;
+     }
+    .carouselItemWrapper{
+        padding-left: 10px;
+        margin-right: 10px;
+    }
+    .c_c_ce1e465e .aj_c_ce1e465e {
+        height: 150px;
+        width: 100%;
+        min-width: 100%;
+        margin-left: 10px;
+    }
+    .col-3 ,.col-md-3{
+        padding-right: 10px;
     }
 }
 

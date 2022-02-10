@@ -28,6 +28,9 @@
  .ms-HorizontalNavItems {
     padding: 10px 30px;
 }
+a.title-142, a.title-143, a.title-160,a.title-158, a.title-159, a.title-152, a.title-150, a.title-149{
+    display: none;
+}
 @media all and (max-width:1024px){
     .logoImg-50{max-width: 100%;
         max-height: 32px;
@@ -54,6 +57,9 @@
  }.shyTitle-70{
     display: none;
  }
+ a.title-142, a.title-143, a.title-160, a.title-159, a.title-152, a.title-150, a.title-149{
+    display: none;
+}
 }
 
 @media all and (max-width:991px){
@@ -72,6 +78,13 @@
          .shyTitle-70{
             display: none;
          }
+         .title-53{
+            display: none;
+            
+        }
+        a.title-142, a.title-143, a.title-160, a.title-159, a.title-152, a.title-150, a.title-149{
+            display: none;
+        }
 }
 @media all and (max-width:767px){
     .logoImg-50{max-width: 100%;
@@ -89,6 +102,9 @@
          .shyTitle-70{
             display: none;
          }
+         a.title-142, a.title-143, a.title-160, a.title-159, a.title-152, a.title-150, a.title-149{
+            display: none;
+        }
 }
 @media all and (max-width:575px) {
     .logoImg-50{max-width: 100%;
@@ -106,4 +122,7 @@
          .shyTitle-70{
             display: none;
          }
+         a.title-142, a.title-143, a.title-160, a.title-159, a.title-152, a.title-150, a.title-149{
+            display: none;
+        }
 }

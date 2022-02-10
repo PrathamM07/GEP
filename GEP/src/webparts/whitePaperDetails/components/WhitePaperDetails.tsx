@@ -15,7 +15,6 @@ import { IAllItems } from '../../../Services/IListOperation';
 import { DetailsList, List } from 'office-ui-fabric-react';
 import ReactLoading from "react-loading";
 import styles from './WhitePaperDetails.module.scss';
-
 export interface IWhitePaperDetailsStates {
   list: IPageItem[];
   currentPageItems: IPageItem[];
@@ -176,6 +175,11 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
   public imageLibrary(title: string){
     window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`));
   }
+   
+  public imgClick(){
+    console.log('Click');
+  } 
+  
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -189,9 +193,8 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
           :
           '<audio src=' + mediaType + ' controls pause/>';
     }; 
-    const imageClick = () => {
-      console.log('Click');
-    } 
+  
+
     return (
       <section className="section__content bg-white">
         {
@@ -217,20 +220,14 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                     var subtitle = (detail.Title).replace('-', " ");
                     return (               
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" >
-                        <div className="card" onClick={() => window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`), "_blank")}> 
-                        {/* <td onClick={()=> window.open("https://www.facebook.com", "_blank")}> */}
-                        <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" onClick={(event) => this.imageLibrary(detail.Title)}/>               
-                          {/* {                           
+                        <div className="card">
+                         {                           
                             (this.props.contenttype === 'Image Library') ?
-                            // <div className="ImageLibrary" onClick={() => window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`), "_blank")} >
-                         //   <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }}  className="ImageLibrary" onClick={(event) => window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`)} >
-                      
-                            <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" onClick={()=> window.open("https://www.facebook.com", "_blank")} />
-                              :
-                              <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
-                          } */}
                         
-                          {/* <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard"/> */}
+                            <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard1" className="imageCard" onClick={(e)=>this.imageLibrary(detail.Title)} />
+                              :
+                              <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard2" className="imageCard" onClick={(e)=>this.imgClick()} />
+                          } 
                           {
                             (detail.IconImage === null) ?
                               ''
@@ -243,7 +240,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                           <div className="imageContent row-no-padding">
                             <div className="row align-items-end">
                               <div className="col-9 col-md-9">
-                                <h3 className="mb-0">{subtitle}</h3>
+                                <h3 className="mb-0" onClick={(e)=>this.imageLibrary(detail.Title)}>{subtitle}</h3>
                                 {/* {(this.props.contenttype === 'Image Library') ?                              
                                     <h3>{subtitle}</a></h3>
                                   :
@@ -262,13 +259,13 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                               </div>
                             </div>
                           </div>
-                          <div className="video-popup" id="video-popup">
+                          {/* <div className="video-popup" id="video-popup">
                             <div className="video-popup__inner" id="video-popup__inner">
                               <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
                               <div className="video-con" id="video-con">
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         <br></br>
                       </div>

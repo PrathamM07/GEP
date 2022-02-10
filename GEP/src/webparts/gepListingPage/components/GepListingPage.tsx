@@ -11,6 +11,7 @@ import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import ReactLoading from "react-loading";
 
 export interface IGEPListingPageStates {
@@ -30,9 +31,12 @@ export interface IPageItem {
   title_alias: string;
   ServerRelativeUrl: string;
   download_url: string;
+   MediaItemLink: string;
+  MediaType: string;
 }
 
 let listItems: any[] = [];
+let mediaType: string;
 export default class GepListingPage extends React.Component<IGepListingPageProps, IGEPListingPageStates, {}> {
   private ServiceInatance: GDService;
   public tempPageItems: IPageItem[] = [];
@@ -52,6 +56,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
   public componentDidMount() {
     this.getSitePageDetails();
+    this.getLibrarydata();
   }
 
   public async getSitePageDetails() {
@@ -93,6 +98,31 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
         isDataLoading: false
       });
     });
+  }
+  public async getLibrarydata() {
+    let category = window.location.href;
+    var myParam = location.search.split('category=')[1];
+    var titlename = "PromotionalLibrary/" + myParam;
+    this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl +
+      `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
+      SPHttpClient.configurations.v1,
+      {
+        headers: {
+          'Accept': 'application/json;odata=nometadata',
+          //'Content-type': 'application/json;odata=nometadata',
+          'odata-version': ''
+        }
+      })
+      .then((response: SPHttpClientResponse) => {
+        if (response.ok) {
+          response.json().then((responseJSON) => {
+            console.log("data is >>>>", responseJSON);
+            var imgurl = responseJSON.Files;
+            listItems.push(imgurl);
+            this.setState({ list: imgurl, isDataLoading: false });
+          });
+        }
+      });
   }
 
   private async getDetails(url: string) {
@@ -149,6 +179,21 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
       });
   }
 
+  public play(mediaitemlink: string, Mediatype: string)//get parameter from iconimage
+  {
+    document.getElementById('video-popup').style.display = 'block';
+    mediaType = Mediatype;
+    if (Mediatype == "Audio") {
+      
+      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';
+    
+    }
+    else {
+      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
+    }
+  }
+
+
   public render(): React.ReactElement<IGepListingPageProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -167,11 +212,11 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.image_url || detail.ServerRelativeUrl;
-                    let description = detail.description.replace(/(?:\r\n|\r|\n|\t|&gt;|&lt|;p|&amp|;rsquo;s|&lt;p&gt;|;mdash;|;rsquo;t|)/g, '').toLowerCase();
+                  //  let description = detail.description.replace(/(?:\r\n|\r|\n|\t|&gt;|&lt|;p|&amp|;rsquo;s|&lt;p&gt;|;mdash;|;rsquo;t|)/g, '').toLowerCase();
                     return (
-                      <div key={index} className="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">
-                        <div className="card" onClick={() => this.getdetailsUrl(detail.title_alias)}>
-                          <img src={imgSrc} alt="imageCard" className="imageCard" />
+                      <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                         <div className="card" onClick={() => this.getdetailsUrl(detail.title_alias)}>                       
+                          <img src={imgSrc} alt="imageCard" className="imageCard" />         
                           <div className="imageContent row-no-padding">
                             <div className="row align-items-end">
                               <div className="col-9 col-md-9">

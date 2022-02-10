@@ -41,6 +41,20 @@ html {
     margin-bottom: 15px;
     margin-left: -10px;  
 }
+.mf_as_9f38462c.bn_as_9f38462c {
+    /* font-size: 32px; */
+  
+    font-family: 'Roboto', sans-serif;
+    color: #006BAA;
+    font-weight: bold;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    /* margin-bottom: 15px; */
+    margin-left: 7px;
+    letter-spacing: -1px;
+
+}
 .TilesTitle{
     /* //font-size:1.3rem; */
     /* font-size:1.4rem;
@@ -311,7 +325,7 @@ html {
     padding: 0px;
     margin: 24px 0;
 }
-.col-12, .col-sm-8, .col-md-6 .col-lg-4, .col-xl-4{
+.col-12, .col-sm-6, .col-md-6 .col-lg-4, .col-xl-4{
     position: relative;
     width: 100%;
      padding-right: 7px; 
@@ -382,7 +396,10 @@ html {
     z-index: 10;
     cursor: pointer;
 }
-
+.card .play {
+    width: 91px;
+    height: 91px;
+}
 .video-popup .video-popup__inner::before {
     content: "";
     position: absolute;
@@ -394,46 +411,47 @@ html {
     background: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
-
-
-
 @media (max-width:991px) {
-    .video-popup__inner video {
-        width: 700px;
-        height: 380px;
-
+    .lz_ap_9f38462c.bb_ap_9f38462c {/* Listingpage title*/       
+        font-size: 2.0rem;
     }
-    .heading {
-        font-size: 2.4rem;
+    .TilesTitle{
+        font: normal normal bold 1.1rem 'Roboto', sans-serif;
     }
+    /* .d-block{
+    margin-top: -25px;
+    margin-right: -10px;
+    padding-left: 1px;
+    } */
 }
 
 @media (max-width:767px) {
-    .video-popup__inner video {
-        width: 500px;
-        height: 350px;
-
+    .lz_ap_9f38462c.bb_ap_9f38462c {/* Listingpage title*/       
+        font-size: 1.8rem;
     }
-    .heading {
-        font-size: 2rem;
+    .TilesTitle{
+        font: normal normal bold 1.0rem 'Roboto', sans-serif;
     }
-
+    /* .d-block{
+        margin-top: -25px;
+        margin-right: -10px;
+        padding-left: 1px;
+        } */
 }
 
 @media (max-width:575px) {
-    .video-popup__inner video {
-        width: 320px;
-        height: 300px;
-
-    }
-    .heading {
+    .lz_ap_9f38462c.bb_ap_9f38462c {/* Listingpage title*/       
         font-size: 1.8rem;
     }
+    .TilesTitle{
+        font: normal normal bold 1.0rem 'Roboto', sans-serif;
+    }
+    /* .d-block{
+    margin-top: -25px;
+    margin-right: -10px;
+    padding-left: 1px;
+    } */
 }
 
-/* 
-@media (max-width:540px){
-    .video-popup__inner video{
-        width: 50%;
-    }
-} */
+
+

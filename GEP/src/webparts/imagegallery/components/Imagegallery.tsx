@@ -177,7 +177,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
                     let imgSrc = detail.ServerRelativeUrl;
                     return (
                       //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
-                      <div key={index} className="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4" onClick={() => showImage(detail.ServerRelativeUrl)}>
+                      <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4" onClick={() => showImage(detail.ServerRelativeUrl)}>
                         <div className="card">
                           <img src={imgSrc} alt="imageCard" className="imageCard" />
                         </div>

@@ -12,12 +12,11 @@ import "@pnp/sp/items";
 import "@pnp/sp/site-groups/web";
 import * as $ from 'jquery';
 import * as strings from 'BodyApplicationCustomizerStrings';
-import {Constant} from '../../Frameworks/Constants/Constant';
 import { Web } from '@pnp/sp/webs';
 import GDService from '../../Services/GetDataService';
-import "./home-logo.css";
+// import "./home-logo.css";
 //import * as strings from 'BodyApplicationCustomizerStrings';
-require('./../../../node_modules/bootstrap/dist/css/bootstrap.min.css');
+//  require('./../../../node_modules/bootstrap/dist/css/bootstrap.min.css');
 const LOG_SOURCE: string = 'BodyApplicationCustomizer';
 
 /**
@@ -37,12 +36,18 @@ export default class BodyApplicationCustomizer
   @override
   public onInit(): Promise<void> {
  
-if(window.location.href== "https://prathameshneo.sharepoint.com/sites/GEP/SitePages/Home.aspx")
+if(window.location.href.toLowerCase().indexOf("sitepages")>0)
 {
   pnpSetup({
     spfxContext: this.context
   });
-    this.applyLogo();
+    //this.applyLogo();
+    const head: any = document.getElementsByTagName("head")[0];
+    var link:HTMLLinkElement = document.createElement('link');
+    link.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css';
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    head.insertAdjacentElement("beforeEnd",link);
 }
     return Promise.resolve();
   }
