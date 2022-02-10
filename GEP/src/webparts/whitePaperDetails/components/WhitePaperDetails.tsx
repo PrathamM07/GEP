@@ -252,7 +252,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                                 {/* {(this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ? */}
                                 {
                                 
-                                (this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ?
+                                (this.props.contenttype != "" && this.props.contenttype == "Informational Content") ?
                                   <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`); return false; }}>View all</a>
                                   :
                                   <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages//RadioSpots.aspx?category=${title}`); return false; }}>View all</a>

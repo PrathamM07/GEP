@@ -4,6 +4,7 @@ import { IRadioSpotsProps } from './IRadioSpotsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from "@pnp/sp";
 import { Web } from '@pnp/sp/presets/all';
+import './../../../Frameworks/common/css/bootstrap.min.css';
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
@@ -112,48 +113,53 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       <section className="section__content bg-white">
         {
           this.state.isDataLoading ?
-            <ReactLoading className="mainpageLoader"
+            <ReactLoading className="mainLoader"
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
             <div className="container-fluid">
-              <div className="row">                      
+              <div className="row">
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;
-                    return (     
+                    return (
+                      //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                      <div className="card">
+                        <div className="card">
                         <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
-                      </div>
-                      <br></br>
-                    </div>          
-                      // <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4" >
-                      //   <div className="card">     
+                        {
+                            (detail.IconImage === null) ?
+                              ''
+                              :
+                              (detail.MediaType == 'Audio') ?
+                                <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
+                                :
+                                <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
+                          }
+                           <div className="imageContent row-no-padding">
+                            <div className="row align-items-end">
+                              <div className="col-9 col-md-9">
+                               
+                              </div>
+                              <div className="col-3 col-md-3 text-right">
+                              
+                              </div>
+                            </div>
+                          </div>
+                           <div className="video-popup" id="video-popup">
+                            <div className="video-popup__inner" id="video-popup__inner">
+                              <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
+                              <div className="video-con" id="video-con">
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
                         
-                      //       <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard1" className="imageCard"/>                          
-                      //     {
-                      //       (detail.IconImage === null) ?
-                      //         ''
-                      //         :
-                      //         (detail.MediaType == 'Audio') ?
-                      //           <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
-                      //           :
-                      //           <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
-                      //     }
-                      
-                      //      <div className="video-popup" id="video-popup">
-                      //       <div className="video-popup__inner" id="video-popup__inner">
-                      //         <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
-                      //         <div className="video-con" id="video-con">
-                      //         </div>
-                      //       </div>
-                      //     </div> 
-                      //   </div>
-                      //   <br></br>
-                      // </div>
+                        <br></br>
+                      </div>
                     );
                   })
                 }
+               
               </div>
             </div>
         }
