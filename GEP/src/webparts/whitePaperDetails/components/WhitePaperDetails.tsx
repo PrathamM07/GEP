@@ -249,17 +249,22 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                                 } */}
                               </div>
                               <div className="col-3 col-md-3 text-right">
-                                {/* {(this.props.contenttype == "Promotional Content" || this.props.contenttype == "Informational Content") ? */}
                                 {
-                                
+                                (this.props.contenttype != "Image Library")?
                                 (this.props.contenttype != "" && this.props.contenttype == "Informational Content") ?
                                   <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`); return false; }}>View all</a>
                                   :
-                                  <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages//RadioSpots.aspx?category=${title}`); return false; }}>View all</a>
-                                }
+                                  <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/RadioSpots.aspx?category=${title}`); return false; }}>View all</a>        
+                                  :
+                                  <a href='#'></a>
+                               }
                               </div>
                             </div>
                           </div>
+                          {
+                          (detail.IconImage === null) ?
+                          ''
+                          :
                            <div className="video-popup" id="video-popup">
                             <div className="video-popup__inner" id="video-popup__inner">
                               <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
@@ -267,6 +272,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                               </div>
                             </div>
                           </div> 
+                          }
                         </div>
                         <br></br>
                       </div>

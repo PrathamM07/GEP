@@ -1,10 +1,10 @@
 import * as React from 'react';
-import './RadioSpots.css';
 import { IRadioSpotsProps } from './IRadioSpotsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from "@pnp/sp";
 import { Web } from '@pnp/sp/presets/all';
 import './../../../Frameworks/common/css/bootstrap.min.css';
+import './RadioSpots.css';
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
@@ -55,6 +55,7 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
       const SitePagesList: IAllItems = {
         listName: 'Radio Spots List',
+       //listName:'Television Spots List',
         selectQuery: internalColumnName.join(','),
         // expandQuery: expandColumnName.join(','),
         // topQuery: parseInt(maxItems),
@@ -87,10 +88,8 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
     {
       document.getElementById('video-popup').style.display = 'block';
       mediaType = Mediatype;
-      if (Mediatype == "Audio") {
-        
-        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';
-      
+      if (Mediatype == "Audio") { 
+        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';    
       }
       else {
         document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
@@ -135,16 +134,7 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
                                 :
                                 <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
                           }
-                           <div className="imageContent row-no-padding">
-                            <div className="row align-items-end">
-                              <div className="col-9 col-md-9">
-                               
-                              </div>
-                              <div className="col-3 col-md-3 text-right">
-                              
-                              </div>
-                            </div>
-                          </div>
+                           
                            <div className="video-popup" id="video-popup">
                             <div className="video-popup__inner" id="video-popup__inner">
                               <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
