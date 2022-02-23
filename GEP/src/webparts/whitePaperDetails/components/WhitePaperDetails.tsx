@@ -163,7 +163,6 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
   public ImageClickData(title: string ,id:string)//get imageclick tiles title
   {
     debugger;
-    var idd=id;
     (this.props.contenttype != 'Image Library') ?
       (title != "DIGITAL-BANNERS" && title != 'ADVERTORIALS') ?
         (title == 'RADIO-SPOTS') ?
@@ -210,6 +209,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;
                     var title = (detail.Title).replace(/\s+/g, '-');
+                    let id=(detail.ID);
                     var subtitle = (detail.Title).replace('-', " ");
                     return (
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" >
@@ -241,7 +241,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                                             :
                                             <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/TelevisionSpots.aspx?category=${title}`); return false; }}>View all</a>
                                           :
-                                          <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`); return false; }}>View all</a>
+                                          <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/Groups.aspx?category=${id}`); return false; }}>View all</a>
                                         :
                                         <a href='#'></a>
                                     }

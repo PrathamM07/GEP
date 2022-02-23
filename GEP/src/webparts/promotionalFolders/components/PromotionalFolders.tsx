@@ -28,7 +28,6 @@ export interface IPageItem {
   ImageThumbnail: string;
   Title:string;
 }
-let listItems: any[] = [];
 export default class PromotionalFolders extends React.Component<IPromotionalFoldersProps,IPromotionalFolderStates, {}> {
   private ServiceInatance: GDService;
   public tempPageItems: IPageItem[] = [];
@@ -48,7 +47,6 @@ export default class PromotionalFolders extends React.Component<IPromotionalFold
   }
   public componentDidMount() {
    this.getFolderDetails();
-   
   }
 
   public async getFolderDetails() {
