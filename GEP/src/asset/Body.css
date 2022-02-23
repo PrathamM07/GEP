@@ -25,9 +25,21 @@ html {
     height: 30px;
     margin-right: 10px;
 }
+.container{
+    width: 100%;
+     padding-left: 0px;
+    padding-right: 0px; 
+}
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+    
+    margin-right: 0px;
+    margin-left: 0px;
+}
 .container-fluid{
-    padding-left: 40px;
-    padding-right: 10px;
+    padding-left:100px;
+    padding-right:100px;
     width: 100%;
 }
 .heading {
@@ -112,7 +124,7 @@ html {
 }
 .imageContent .mb-0  {
     color: white;
-    font-size: 18px;
+    font-size: 19px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
@@ -136,9 +148,7 @@ html {
     text-align: left;
     padding: 0px;
     margin-top: 3px;
-
 }
-
 .imageContentTv p {
     color: #393939;
     font-size: 14px;
@@ -148,10 +158,7 @@ html {
     text-align: left;
     padding: 0px;
     margin-top: -9px;
-
 }
-
-
 .imageContent a {
     color: white;
     text-transform: uppercase;
@@ -162,8 +169,6 @@ html {
     text-underline-offset: 3px;
     text-align: right;
 }
-
-
 .play {
     position: absolute;
     top: 50%;
@@ -172,15 +177,12 @@ html {
     width: 40%;
     cursor: pointer;
 }
-
 .Tvad_Play {
-
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 40%;
-
 }
 
 
@@ -206,12 +208,6 @@ html {
     padding: 0px 29px 0px 16px;
     min-height: 151px;
 }
-/* .eventcard .content {
-    padding: 0px 29px 0px 16px;
-    min-height: 151px;
-    
-} */
-
 .card .content p {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
@@ -221,7 +217,6 @@ html {
     text-align: left;
     color: #A9A9A9;
 }
-
 .card .content h3 {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
@@ -231,80 +226,10 @@ html {
     margin-bottom: 16px;
     text-align: left;
 }
-.eventcontent p {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 11px;
-    padding: 0px;
-    margin-bottom: 2.5px;
-    text-align: left;
-    color: #A9A9A9;
-}
-
-/* .eventcontent h3 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    color: #2D69A5;
-    font-size: 18px;
-    padding: 0px;
-    margin-bottom: 16px;
-    text-align: left;
-}
-.dates {
-    margin-bottom: 9px;
-} 
-
-.dates h5 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    padding: 0px;
-    margin: 0px;
-    text-align: left;
-    color: black;
-}
-
-.dates p {
-    font-family: 'Roboto', sans-serif;
-    color: #A9A9A9;
-    font-weight: 500;
-    font-size: 13px;
-    padding: 0px;
-    margin: 0px;
-    text-align: left;
-}
-/* cards Button */
-/*
-.addtocalender a {
-    border: 1px solid #026AAA;
-    color: #026AAA !important;
-    background-color: white;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    font-size: 10px;
-    padding: 6px 4px;
-    border-radius: 4px;
-    margin-bottom: 14px;
-    width: 150px;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-}
-.addtocalender h4{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    color: #026AAA !important;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-*/
 .cards {
     min-height: 302px;
     margin-bottom: 30px;
 }
-
 .content h4 {
     text-transform: uppercase;
     color: #006BAA;
@@ -326,11 +251,14 @@ html {
      padding-left: 7px; 
      margin-top: -5px;
 }
+.col-9, .col-md-9, .col-3 , .col-md-3{
+    padding-right: 0px;
+    padding-left: 0px;
+}
 .imageLibrary {
     display: flex;
     justify-content: space-between;
 }
-
 .imageLibrary a {
     border: 1px solid #006BAA;
     color: #006BAA !important;
@@ -346,13 +274,10 @@ html {
     cursor: pointer;
     text-decoration: none;
 }
-
 .blueBorder {
     width: 100%;
     height: 6px;
-    background-color: #1e7fd3;
-}
-
+    background-color: #1e7fd3;}
 .video-popup {
     position: fixed;
     top: 0px;
@@ -363,7 +288,6 @@ html {
     height: 100%;
     display: none;
 }
-
 .video-popup__inner {
     width: 100%;
     height: 100%;
@@ -371,13 +295,17 @@ html {
     align-items: center;
     justify-content: center;
 }
-
 .video-popup__inner video {
-    width: 800px;
-    height: 430px;
+    /* width: 800px;
+    height: 430px;  */
+    width: 600px;
+    height: 340px;
     z-index: 9;
-    margin-left: -20px;
-  
+    margin-left: -50px;
+   /* z-index: 9;
+   margin-top: 1px;
+   height: 283px;
+   width: 100%; */
 }
 .video-con{
     /* background-image: url('http://arbordayblog.org/wp-content/uploads/2016/06/tree.jpg'); */
@@ -398,8 +326,10 @@ html {
 }
 .video-popup .video-popup__inner span {
     position: absolute;
-    top: 120px;
-    right: 150px;
+    top: 133px;
+    right: 330px;
+    /* top: 120px;
+    right: 150px; */
     font-size: 30px;
     color: #fff;
     font-weight: bold;
@@ -419,7 +349,7 @@ html {
     cursor: pointer;
 }
   /* EventCalender css start */
-.title-103 span {/*event title*/
+.title-103 span ,.title-90 span ,.title-123 span ,.title-116 span ,.title-114 span{/*event title*/
      font-family: 'Roboto', sans-serif;
     color: #006BAA;
     font-weight: bold;
@@ -430,7 +360,7 @@ html {
     /* margin-top: 15px; */
     letter-spacing: -1px;
     /* background-image: url('../../../asset/IconImage/Path 15872.png'); */
-}
+}   
 .ak_h_658c9e0a {/*event title*/
     margin-top: -15px;
 }
@@ -484,7 +414,7 @@ html {
 }
 .a_a_50a7110f:not(.b_a_50a7110f).h_a_50a7110f {
     width: 100%;
-    margin-left: -10px;
+    margin-left: 40px;
 }
 /* .a_e_50a7110f:not(.b_e_50a7110f) {
     /* padding: 8px; */
@@ -511,16 +441,29 @@ html {
      }
 
 /* EventCalender css end */
+.title-53{
+    display: none;
+}
 
 @media (max-width:991px) {
     .video-popup__inner video {
-        width: 700px;
-        height: 380px;
+        /* width: 700px;
+        height: 380px; */
+        width: 550px;
+        margin-top: -30px;
+    }
+    .video-popup .video-popup__inner span {  
+        top: 138px;
+        right: 198px;
+    }
+    .video-con{
+        width: 50%;
+        background-repeat: no-repeat;
     }
     .heading {
         font-size: 2.0rem;
     }
-    .title-103 span {/*event title*/
+    .title-103 span ,.title-90 span ,.title-123 span ,.title-116 span ,.title-114 span{/*event title*/
         font-size:2.0rem;
      }
     .carouselItemWrapper{
@@ -532,20 +475,47 @@ html {
         width: 100%;
         min-width: 100%;
         margin-left: 10px;
+    }  
+    .container
+    {
+        max-width: 100%;
     }
-
+    .a_a_50a7110f:not(.b_a_50a7110f).h_a_50a7110f {
+        margin-left: 0px;
+    }
+    .a_c_50a7110f:not(.b_c_50a7110f):not(.i_c_50a7110f) {
+        width: 108%;
+    }
+    
+    .a_b_50a7110f:not(.b_b_50a7110f):not(.e_b_50a7110f) {/*event backcolor*/
+        padding: 0px;
+    }
+    .aq_g_658c9e0a {
+        margin-right: 40px;
+    }
     
 }
 
 @media (max-width:767px) {
     .video-popup__inner video {
-        width: 500px;
-        height: 350px;
+        /* width: 500px;
+        height: 350px; */
+        width: 450px;
+        margin-top: -50px;
+        /* margin-top: -20px; */
+    }
+    .video-popup .video-popup__inner span {  
+        top: 151px;
+        right: 86px;
+    }
+    .video-con{
+        width: 60%;
+        background-repeat: no-repeat;
     }
     .heading {
         font-size: 1.8rem;
     }
-    .title-103 span {/*event title*/
+    .title-103 span ,.title-90 span ,.title-123 span ,.title-116 span ,.title-114 span{/*event title*/
         font-size:1.8rem;
      }
     .carouselItemWrapper{
@@ -558,17 +528,55 @@ html {
         min-width: 100%;
         margin-left: 10px;
     }
+    .container
+    {
+        max-width: 100%;
+    }
+    .a_a_50a7110f:not(.b_a_50a7110f).h_a_50a7110f {
+        margin-left: 0px;
+    }
+    .a_c_50a7110f:not(.b_c_50a7110f):not(.i_c_50a7110f) {
+        width: 108%;
+    }
+    
+    .a_b_50a7110f:not(.b_b_50a7110f):not(.e_b_50a7110f) {/*event backcolor*/
+        padding: 0px;
+    }
+    .aq_g_658c9e0a {
+        margin-right: 40px;
+    }
+   
 }
 
 @media (max-width:575px) {
+    .video-con{
+        width: 60%;
+        background-repeat: no-repeat;     
+        height: 150px;
+    }
     .video-popup__inner video {
-        width: 320px;
-        height: 300px;
+        margin-top: -80px;
+        width: 340px;
+        /* width: 360px;
+        height: 320px; */
+        /* margin-top: -100px;
+        margin-left: 1px;
+        width: 100%; */
+    }
+    .video-popup__inner audio {
+        margin-top: 120px;
+        /* margin-right: 50px; */
+    }
+    .video-popup .video-popup__inner span {  
+        top: 210px;
+        right: 16px;
+        /* top: 130px;
+        right: 10px; */
     }
     .heading {
         font-size: 1.8rem;
     }
-    .title-103 span {/*event title*/
+    .title-103 span ,.title-90 span ,.title-123 span ,.title-116 span ,.title-114 span{/*event title*/
         font-size:1.8rem;
      }
     .carouselItemWrapper{
@@ -583,6 +591,26 @@ html {
     }
     .col-3 ,.col-md-3{
         padding-right: 10px;
+    }
+    .container
+    {
+        max-width: 100%;
+    }
+    .a_a_50a7110f:not(.b_a_50a7110f).h_a_50a7110f {
+        margin-left: 0px;
+    }
+    .a_c_50a7110f:not(.b_c_50a7110f):not(.i_c_50a7110f) {
+        width: 108%;
+    }
+    
+    .a_b_50a7110f:not(.b_b_50a7110f):not(.e_b_50a7110f) {/*event backcolor*/
+        padding: 0px;
+    }
+    .aq_g_658c9e0a {
+        margin-right: 20px;
+    }
+    a.title-142, a.title-143, a.title-160, a.title-159, a.title-152, a.title-150, a.title-149 a.title-120,a.title-114{ /*gep title hide*/
+        display: none;
     }
 }
 

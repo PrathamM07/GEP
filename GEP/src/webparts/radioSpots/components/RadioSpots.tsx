@@ -47,7 +47,6 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
     public async componentDidMount() {
       this.getRadioSpotsDetailsList();
     }
-  
     public async getRadioSpotsDetailsList() {
       this.ServiceInatance = new GDService(this.props.context);
       const internalColumnName = ["Title", "ImageThumbnail", "IconImage", "MediaItemLink", "MediaType"];
@@ -83,7 +82,6 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
         }
         );
     }
-
     public play(mediaitemlink: string, Mediatype: string)//get parameter from iconimage
     {
       document.getElementById('video-popup').style.display = 'block';
@@ -91,23 +89,18 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       if (Mediatype == "Audio") { 
         document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';    
       }
-      else {
-        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
-      }
+     
     }
+
   public render(): React.ReactElement<IRadioSpotsProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
-    var titlealias = window.location.protocol;
-    let str = this.props.webparttitle;
-
     const closeButton = () => {
       document.getElementById('video-popup').style.display = 'none';
-      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML =
-        (this.props.audio === '' || this.props.video === '') ?
-          '<video src=' + mediaType + ' controls pause  />'
-          :
-          '<audio src=' + mediaType + ' controls pause/>';
-    }; 
+      (mediaType === 'Video') ?
+        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaType + ' controls pause preload="none" />'
+        :
+        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaType + ' controls pause preload="none"/>';
+    };
     return (
       <section className="section__content bg-white">
         {
@@ -115,13 +108,12 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
             <ReactLoading className="mainLoader"
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
-            <div className="container-fluid">
+            <div className="container">
               <div className="row">
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;
                     return (
-                      //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
                         <div className="card">
                         <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
@@ -132,9 +124,8 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
                               (detail.MediaType == 'Audio') ?
                                 <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
                                 :
-                                <img className="play" src={JSON.parse(detail.IconImage).serverRelativeUrl} alt="playButton" onClick={(event) => this.play(detail.MediaItemLink, detail.MediaType)} />
+                                ''
                           }
-                           
                            <div className="video-popup" id="video-popup">
                             <div className="video-popup__inner" id="video-popup__inner">
                               <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
@@ -143,13 +134,11 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
                             </div>
                           </div> 
                         </div>
-                        
                         <br></br>
                       </div>
                     );
                   })
-                }
-               
+                }              
               </div>
             </div>
         }

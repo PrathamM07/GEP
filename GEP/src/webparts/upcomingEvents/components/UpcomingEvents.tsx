@@ -85,9 +85,9 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
   }
 
   public async componentDidMount() {
-    this.getHomePageDetails();
-    this.getIconDetails();
-    this.getEventdata();
+   // this.getHomePageDetails();
+    //this.getIconDetails();
+   // this.getEventdata();
   }
   public async getHomePageDetails() {
     this.ServiceInatance = new GDService(this.props.context);
@@ -241,7 +241,7 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
                           <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
                           {/* <div className="imageContent row-no-padding">
                             <div className="col-12 col-md-12 text-right">
-                              <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(`https://prathameshneo.sharepoint.com/sites/GEP/Lists/Events/calendar.aspx?`); return false; }}>
+                        
                                 ADD TO CALENDER</a>
                               {/* <a onClick={(event) => this.handleOnChangeEvent(event, addToCalendarButtonParameter)} className="addtocalender">ADD TO CALENDER</a> */}
                           {/* </div>
@@ -253,7 +253,7 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
                           <div className='dates'>
                             <h5>{this.state.startDate}</h5>
                             <p>{this.state.location}</p>
-                            {/* (`https://prathameshneo.sharepoint.com/sites/GEP/Lists/Events/calendar.aspx?`); return false; }}> */}
+                        
                           </div>
                           <div className='addtocalender'>
                             <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/Lists/Events/calendar.aspx?`); return false; }}>

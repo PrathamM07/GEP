@@ -57,6 +57,14 @@
           "manifest": "./src/webparts/televisionSpots/TelevisionSpotsWebPart.manifest.json"
         }
       ]
+    },
+    "promotional-folders-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/promotionalFolders/PromotionalFoldersWebPart.js",
+          "manifest": "./src/webparts/promotionalFolders/PromotionalFoldersWebPart.manifest.json"
+        }
+      ]
     }
   },
   "localizedResources": {
@@ -67,6 +75,7 @@
     "ImagegalleryWebPartStrings": "lib/webparts/imagegallery/loc/{locale}.js",
     "UpcomingEventsWebPartStrings": "lib/webparts/upcomingEvents/loc/{locale}.js",
     "RadioSpotsWebPartStrings": "lib/webparts/radioSpots/loc/{locale}.js",
-    "TelevisionSpotsWebPartStrings": "lib/webparts/televisionSpots/loc/{locale}.js"
+    "TelevisionSpotsWebPartStrings": "lib/webparts/televisionSpots/loc/{locale}.js",
+    "PromotionalFoldersWebPartStrings": "lib/webparts/promotionalFolders/loc/{locale}.js"
   }
 }

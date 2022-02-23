@@ -7,34 +7,32 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
-import * as strings from 'TelevisionSpotsWebPartStrings';
-import TelevisionSpots from './components/TelevisionSpots';
-import { ITelevisionSpotsProps } from './components/ITelevisionSpotsProps';
+import * as strings from 'PromotionalFoldersWebPartStrings';
+import PromotionalFolders from './components/PromotionalFolders';
+import { IPromotionalFoldersProps } from './components/IPromotionalFoldersProps';
 
-export interface ITelevisionSpotsWebPartProps {
+export interface IPromotionalFoldersWebPartProps {
   description: string;
   apiURL: string;
+  sliderproperty: number;
   webpartname: string;
   dropdownTitle: string;
-  dropdowncontent:string;
   color: string;
-  videolink:string;
-  audiolink:string;
 }
 
-export default class TelevisionSpotsWebPart extends BaseClientSideWebPart<ITelevisionSpotsWebPartProps> {
+export default class PromotionalFoldersWebPart extends BaseClientSideWebPart<IPromotionalFoldersWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<ITelevisionSpotsProps> = React.createElement(
-      TelevisionSpots,
+    const element: React.ReactElement<IPromotionalFoldersProps> = React.createElement(
+      PromotionalFolders,
       {
         description: this.properties.description,
         context: this.context,
-        apiURL: this.properties.apiURL ? this.properties.apiURL : "",
+        assettype: this.properties.dropdownTitle ? this.properties.dropdownTitle : "White Papers",
+        maxItem: this.properties.sliderproperty ? this.properties.sliderproperty : 8,
+        apiURL: this.properties.apiURL ? this.properties.apiURL :"",
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
-        video:this.properties.videolink?this.properties.videolink:"",
-        audio:this.properties.audiolink?this.properties.audiolink:"",
       }
     );
 

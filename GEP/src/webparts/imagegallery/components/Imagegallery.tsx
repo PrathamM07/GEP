@@ -48,13 +48,11 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
       buttonColor: props.buttonColor,
       isLightBoxDisplay: false,
       listimage: '',
-      //assettype: []
     };
   }
   public componentDidMount() {
     this.getLibrarydata();
     this.getPromotionaldata();
-    // this.getGalleryDetails();
   }
   public async getLibrarydata() {
     let category = window.location.href;
@@ -81,7 +79,6 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
         }
       });
   }
-
   public async getPromotionaldata() {
     let category = window.location.href;
     var myParam = location.search.split('category=')[1];
@@ -107,6 +104,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
         }
       });
   }
+
   public render(): React.ReactElement<IImagegalleryProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
@@ -124,13 +122,11 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
         isLightBoxDisplay: true
       });
     };
-
     const hideLightBox = () => {
       this.setState({
         isLightBoxDisplay: false
       });
     };
-
     //show next image in lightbox
     const showNext = (e) => {
       e.stopPropagation();
@@ -147,7 +143,6 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
         });
       }
     };
-
     //show previous image in lightbox
     const showPrev = (e) => {
       e.stopPropagation();
@@ -170,13 +165,12 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
             <ReactLoading className="mainLoader"
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
-            <div className="container-fluid">
+            <div className="container">
               <div className="row">
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ServerRelativeUrl;
                     return (
-                      //   <div key={index} className="col-12 col-lg-4 col-md-6 col-sm-6 col-xl-3">
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4" onClick={() => showImage(detail.ServerRelativeUrl)}>
                         <div className="card">
                           <img src={imgSrc} alt="imageCard" className="imageCard" />

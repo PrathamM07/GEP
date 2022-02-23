@@ -31,7 +31,7 @@ export interface IPageItem {
   title_alias: string;
   ServerRelativeUrl: string;
   download_url: string;
-   MediaItemLink: string;
+  MediaItemLink: string;
   MediaType: string;
 }
 
@@ -56,10 +56,9 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
 
   public componentDidMount() {
     this.getSitePageDetails();
-    this.getLibrarydata();
   }
-
   public async getSitePageDetails() {
+    debugger;
     let category = window.location.href;
     var myParam = location.search.split('category=')[1];
     console.log("Blog Category is ******", myParam);
@@ -86,7 +85,8 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
         var url = this.props.apiURL + externalurl;
         var downloadurl = listData[0].DownloadUrl;
         // console.log("url is:", listData[0].DownloadUrl);
-        this.getDetails(url);
+        // this.getDetails(url);
+        this.getDetails(url.toString());
         listItems.push(url);
         this.setState({
           downloadurl: listData[0].DownloadUrl
@@ -99,46 +99,10 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
       });
     });
   }
-  public async getLibrarydata() {
-    let category = window.location.href;
-    var myParam = location.search.split('category=')[1];
-    var titlename = "PromotionalLibrary/" + myParam;
-    this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl +
-      `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
-      SPHttpClient.configurations.v1,
-      {
-        headers: {
-          'Accept': 'application/json;odata=nometadata',
-          //'Content-type': 'application/json;odata=nometadata',
-          'odata-version': ''
-        }
-      })
-      .then((response: SPHttpClientResponse) => {
-        if (response.ok) {
-          response.json().then((responseJSON) => {
-            console.log("data is >>>>", responseJSON);
-            var imgurl = responseJSON.Files;
-            listItems.push(imgurl);
-            this.setState({ list: imgurl, isDataLoading: false });
-          });
-        }
-      });
-  }
 
   private async getDetails(url: string) {
-    // axios({
-    //   method: 'GET',
-    //   url: url,//urldownload
-  
-    //   headers: {
-    //     'Accept': 'application/json;odata=nometadata',
-    //     'Content-type': 'application/json;odata=nometadata',
-    //     'Access-Control-Allow-Origin': '*'
-    //   },
-    // })
-     axios.get(url)
+    axios.get(url)
       .then((result) => {
-        console.log('This is api list data', result.data.data[2].list);
         this.setState({
           list: result.data.data[2].list,
           isDataLoading: false
@@ -146,7 +110,6 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
       }
       );
   }
-
   public async getdetailsUrl(titlealias: string) {
     debugger;
     var urldownload = this.state.downloadurl;
@@ -160,12 +123,13 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     };
     axios({
       method: 'POST',
-      url: 'https://webdev.gep.com/WebinarDetail',//urldownload
+      url: urldownload,
       data: payload, // you are sending body instead
       headers: {
         'Accept': 'application/json;odata=nometadata',
         'Content-type': 'application/json;odata=nometadata',
-        // 'Access-Control-Allow-Origin': '*'
+        // 'access-control-allow-methods': 'GET,POST,PUT,OPTIONS',
+        'Access-Control-Allow-Origin': '*'
       },
     })
       .then((response) => {
@@ -178,21 +142,19 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
         console.error('There was an error!', error);
       });
   }
-
   public play(mediaitemlink: string, Mediatype: string)//get parameter from iconimage
   {
     document.getElementById('video-popup').style.display = 'block';
     mediaType = Mediatype;
     if (Mediatype == "Audio") {
-      
+
       document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';
-    
+
     }
     else {
       document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
     }
   }
-
 
   public render(): React.ReactElement<IGepListingPageProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
@@ -200,6 +162,8 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
     let weburl = this.props.apiURL;
+    let category = window.location.href;
+    var myParam = location.search.split('category=')[1];
     return (
       <section className="section__content bg-white">
         {
@@ -207,26 +171,22 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
             <ReactLoading className="mainLoader"
               type="spin" color={this.state.buttonColor} width={'70px'} height={'70px'} />
             :
-            <div className="container-fluid">
+            <div className="container">
               <div className="row">
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.image_url || detail.ServerRelativeUrl;
-                  //  let description = detail.description.replace(/(?:\r\n|\r|\n|\t|&gt;|&lt|;p|&amp|;rsquo;s|&lt;p&gt;|;mdash;|;rsquo;t|)/g, '').toLowerCase();
+                    //  let description = detail.description.replace(/(?:\r\n|\r|\n|\t|&gt;|&lt|;p|&amp|;rsquo;s|&lt;p&gt;|;mdash;|;rsquo;t|)/g, '').toLowerCase();
                     return (
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                         <div className="card" onClick={() => this.getdetailsUrl(detail.title_alias)}>                       
-                          <img src={imgSrc} alt="imageCard" className="imageCard" />         
-                          <div className="imageContent row-no-padding">
-                            <div className="row align-items-end">
-                              <div className="col-9 col-md-9">
-                              </div>
-                              <div className="col-3 col-md-12">
-                              <a href="#" target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a>
-                                {/* <a href={weburl + detail.title_alias} target="_blank" style={{ textDecoration: 'none' }} className="d-block">View More</a> */}
-                              </div>
-                            </div>
-                          </div>
+                        <div className="card" onClick={() => this.getdetailsUrl(detail.title_alias)}>
+                          <img src={imgSrc} alt="imageCard" className="imageCard" />
+                          {
+                            (myParam === "PODCAST" || myParam === "WEBINARS") ?
+                              <img className="play" src={require('../components/Image/Group 817.png')} alt="playButton" />
+                              :
+                              ''
+                          }
                         </div>
                         <p className="TilesTitle">{detail.service_title}</p>
                         {/* <p className="Tilesdescription">{description.substring(0, 1).toUpperCase() + description.substring(1, this.props.descriptionlength) + '...'}</p> */}

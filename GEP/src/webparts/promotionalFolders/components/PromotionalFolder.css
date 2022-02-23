@@ -15,7 +15,7 @@ html {
     overflow: hidden;
   }
 .section__content {
-    margin-top:10px;
+    margin-top:-45px;
 }
 .section__content .icon {
     width: 43px;
@@ -59,6 +59,43 @@ html {
   rgba(4, 20, 51, 0.2) 100%);
     cursor: pointer;
 }
+/* ------------- */
+
+.imageContent {
+    position: absolute;
+    bottom: 0px;
+    z-index: 9;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+}
+.imageContent .mb-0  {
+    color: white;
+    font-size: 19px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+.imageContent a h3{
+    color: white;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 45px;
+}
+.imageContent a {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 9px;
+    text-underline-offset: 3px;
+    text-align: right;
+}
 .lz_ap_9f38462c.bb_ap_9f38462c {/* ImageGallery title*/
     font-weight: 600;
     font-family: 'Roboto', sans-serif;
@@ -95,12 +132,16 @@ html {
     padding: 0px;
     margin: 24px 0;
 }
-.col-12, .col-sm-6, .col-md-6 .col-lg-4, .col-xl-4{
+.col-12, .col-xl-3, .col-sm-6, .col-md-6, .col-lg-4, .col-xl-4{
     position: relative;
     width: 100%;
-     padding-right: 10px; 
-     padding-left: 10px;
-     /* margin-bottom: -5px;  */
+     padding-right: 7px; 
+     padding-left: 7px; 
+     margin-top: -5px;
+}
+.col-9, .col-md-9, .col-3 , .col-md-3{
+    padding-right: 0px;
+    padding-left: 0px;
 }
 .container{
     width: 100%;
@@ -113,10 +154,17 @@ html {
     margin-left: 0px;
     
 }
-.container-fluid{ 
-     width: 100%;
-     padding-right: 5px;
-    padding-left: 5px;
+.heading {
+    font-family: 'Roboto', sans-serif;
+    color: #006BAA;
+    font-weight: bold;
+    font-size:2.2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin-bottom: 15px;
+    /* margin-top: 25px; */
+    margin-left: -8px;
+    letter-spacing: -1px;
 }
 .a_c_50a7110f:not(.b_c_50a7110f):not(.i_c_50a7110f) {
      padding: 0px;
