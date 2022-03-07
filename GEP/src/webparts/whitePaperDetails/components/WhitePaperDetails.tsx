@@ -85,7 +85,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     };
     await this.ServiceInatance.getAllListItems(SitePagesList).then((pageData) => {
       if (pageData && pageData.length > 0) {
-        console.log("Content data type is >>>>>>>>>>>>>", pageData);
+       // console.log("Content data type is >>>>>>>>>>>>>", pageData);
         this.setState({ list: pageData, isDataLoading: false });
         var listdata = pageData;
         this.getData(listdata.toString());
@@ -151,14 +151,13 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
       document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />'
       :
       document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
-
   }
-  public ImageData(title: string)//get imageclick tiles title
+  public PromotionalImageData(title: string)//get imageclick tiles title
   {
     (title != "PODCAST" && title != 'WEBINARS') ?
     window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`))
     :
-    window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`))
+    window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`));
   }
   public ImageClickData(title: string ,id:string)//get imageclick tiles title
   {
@@ -170,9 +169,9 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
           :
           window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/TelevisionSpots.aspx?category=${title}`))
         :
-        window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/Groups.aspx?category=${id}`))
+        window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/Groups.aspx?category=${id}title=${title}`))
       :
-      window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`))
+      window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`));
   }
 
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
@@ -241,7 +240,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                                             :
                                             <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/TelevisionSpots.aspx?category=${title}`); return false; }}>View all</a>
                                           :
-                                          <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/Groups.aspx?category=${id}`); return false; }}>View all</a>
+                                          <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/SitePages/Groups.aspx?category=${id}title=${title}`); return false; }}>View all</a>
                                         :
                                         <a href='#'></a>
                                     }
@@ -249,9 +248,8 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                                 </div>
                               </div>
                             </div>
-                            :
-                            // <div className="card" onClick={() => window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`), "_blank")} >
-                            <div className="card" onClick={(e) => {if(!detail.MediaType)this.ImageData(title)}} > 
+                            :                      
+                            <div className="card" onClick={(e) => {if(!detail.MediaType)this.PromotionalImageData(title)}} > 
                             <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard2" className="imageCard" />
                               {
                                 (detail.IconImage === null) ?

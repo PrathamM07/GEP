@@ -24,6 +24,7 @@ export interface IImageGalleryStates {
   isLightBoxDisplay: boolean;
   buttonColor: string;
   listimage: string;
+  CardTitle:string;
 }
 export interface IPageItem {
   service_title: string;
@@ -48,6 +49,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
       buttonColor: props.buttonColor,
       isLightBoxDisplay: false,
       listimage: '',
+      CardTitle:''
     };
   }
   public componentDidMount() {
@@ -73,9 +75,13 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
           response.json().then((responseJSON) => {
             console.log("data is >>>>", responseJSON);
             var imgurl = responseJSON.Files;
+            this.setState({ CardTitle:myParam});
             listItems.push(imgurl);
-            this.setState({ list: imgurl, isDataLoading: false });
+            this.setState({ list: imgurl,
+               isDataLoading: false,
+               CardTitle:myParam });
           });
+          
         }
       });
   }
@@ -98,6 +104,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
           response.json().then((responseJSON) => {
             console.log("data is >>>>", responseJSON);
             var imgurl = responseJSON.Files;
+            this.setState({ CardTitle:myParam});
             listItems.push(imgurl);
             this.setState({ list: imgurl, isDataLoading: false });
           });
@@ -110,7 +117,9 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
     var titlealias = window.location.protocol;
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
+    var CardTitle=this.state.CardTitle.replace('-',' ').toUpperCase();
     let weburl = this.props.apiURL;
+    var pagelink=this.props.context.pageContext.web.absoluteUrl;
     // card-gallery-code
     const imageCards = this.state.list.map((data) => {
       console.log("listdata is", this.state.list);
@@ -167,6 +176,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
             :
             <div className="container">
               <div className="row">
+              <a href={pagelink}  style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ServerRelativeUrl;

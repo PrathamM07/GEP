@@ -12,6 +12,9 @@ import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import { IAllItems } from '../../../Services/IListOperation';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import fileDownload from 'js-file-download';
 import ReactLoading from "react-loading";
 
 export interface IGEPListingPageStates {
@@ -23,6 +26,9 @@ export interface IGEPListingPageStates {
   isDataLoading: boolean;
   buttonColor: string;
   downloadurl: string;
+  Iconimage: string;
+  CardTitle: string;
+  url: string;
 }
 export interface IPageItem {
   service_title: string;
@@ -36,7 +42,7 @@ export interface IPageItem {
 }
 
 let listItems: any[] = [];
-let mediaType: string;
+let FileType: string;
 export default class GepListingPage extends React.Component<IGepListingPageProps, IGEPListingPageStates, {}> {
   private ServiceInatance: GDService;
   public tempPageItems: IPageItem[] = [];
@@ -51,6 +57,9 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
       isDataLoading: true,
       buttonColor: props.buttonColor,
       downloadurl: '',
+      Iconimage: '',
+      CardTitle: '',
+      url: ''
     };
   }
 
@@ -66,7 +75,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
     //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
     const orderByQuery = { columnName: "Modified", ascending: false };
-    const internalColumnName = ["Title", "ExternalApi", "DownloadUrl"];
+    const internalColumnName = ["Title", "ExternalApi", "DownloadUrl", "IconImage"];
     //const expandColumnName = ["AssetType"];
     let filterQuery = `Title eq '${myParam}'`;
     const ListDetails: IAllItems = {
@@ -79,7 +88,7 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     };
     await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
       if (listData && listData.length > 0) {
-        // console.log("ListDetails:", listData[0].ExternalApi);
+        console.log("ListDetails:", listData[0].ExternalApi);
         var externalurl = listData[0].ExternalApi;
         var weburl = "listData[0].ExternalApi";
         var url = this.props.apiURL + externalurl;
@@ -89,7 +98,9 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
         this.getDetails(url.toString());
         listItems.push(url);
         this.setState({
-          downloadurl: listData[0].DownloadUrl
+          downloadurl: listData[0].DownloadUrl,
+          Iconimage: listData[0].IconImage,
+          CardTitle: myParam
         });
       }
     }).catch((error) => {
@@ -99,10 +110,72 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
       });
     });
   }
-
   private async getDetails(url: string) {
     axios.get(url)
       .then((result) => {
+        console.log("api result", result);
+        this.setState({
+          list: result.data.data[2].list,
+          isDataLoading: false
+        });
+      }
+      );
+  }
+
+
+  public async PaginationDetails() {
+    debugger;
+    let category = window.location.href;
+    var myParam = location.search.split('category=')[1];
+    console.log("Blog Category is ******", myParam);
+    this.ServiceInatance = new GDService(this.props.context);
+    let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
+    //  let maxItems = this.props.maxItem ? this.props.maxItem : 5;
+    const orderByQuery = { columnName: "Modified", ascending: false };
+    const internalColumnName = ["Title", "ExternalApi", "DownloadUrl", "IconImage"];
+    //const expandColumnName = ["AssetType"];
+    let filterQuery = `Title eq '${myParam}'`;
+    const ListDetails: IAllItems = {
+      listName: "Informational Content",
+      selectQuery: internalColumnName.join(','),
+      // expandQuery: expandColumnName.join(','),
+      filterQuery: filterQuery,
+      // topQuery: parseInt(maxItems.toString()),
+      // orderByQuery: orderByQuery
+    };
+    await this.ServiceInatance.getAllListItems(ListDetails).then((listData: any[]) => {
+      if (listData && listData.length > 0) {
+        console.log("ListDetails:", listData[0].ExternalApi);
+        var externalurl = listData[0].ExternalApi;
+        var weburl = "listData[0].ExternalApi";
+        var url = this.props.apiURL + externalurl;
+        var downloadurl = listData[0].DownloadUrl;
+        // console.log("url is:", listData[0].DownloadUrl);
+        // this.getDetails(url);
+        this.getpaginationDetails(url.toString());
+        listItems.push(url);
+        this.setState({
+          downloadurl: listData[0].DownloadUrl,
+          Iconimage: listData[0].IconImage,
+          CardTitle: myParam
+        });
+      }
+    }).catch((error) => {
+      console.log(error);
+      this.setState({
+        isDataLoading: false
+      });
+    });
+  }
+  private async getpaginationDetails(url: string) {
+    // let formData = new FormData();    //formdata object
+    // formData.append('page', '1');  
+    axios.get(url,{
+        params: {
+          page: 1
+        }})
+      .then((result) => {
+        console.log("api result", result);
         this.setState({
           list: result.data.data[2].list,
           isDataLoading: false
@@ -113,47 +186,80 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
   public async getdetailsUrl(titlealias: string) {
     debugger;
     var urldownload = this.state.downloadurl;
+    var api = this.props.apiURL;
     var title = titlealias;
-    const payload = {
-      usragent: 'ipad_retina',
-      title_alias: 'webcasts/the-advent-of-strategic-procurement-ushering-a-new-era-of-digital-led-transformation',
-      //'titlealias',
-      //  var fileExtension = fileName.split('.').pop(); 
-      usrcode: 85
+    var blogurl = api + title;
+    let formData = new FormData();    //formdata object
+    formData.append('usragent', 'ipad_retina');   //append the values with key, value pair
+    formData.append('title_alias', title);
+    formData.append('usrcode', '85');
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' }
     };
-    axios({
-      method: 'POST',
-      url: urldownload,
-      data: payload, // you are sending body instead
-      headers: {
-        'Accept': 'application/json;odata=nometadata',
-        'Content-type': 'application/json;odata=nometadata',
-        // 'access-control-allow-methods': 'GET,POST,PUT,OPTIONS',
-        'Access-Control-Allow-Origin': '*'
-      },
-    })
-      .then((response) => {
-        console.log("new details >>>>>>>>>>>>>", response.data);
+    axios.post(urldownload, formData, config)
+      .then(response => {
+        console.log("Post data is *******************", response.data.data[0]);
+        var download_url = response.data.data[0].download_url;
+        console.log("Output data is", download_url);
+        var ext = download_url.split('.').pop();
+        debugger;
+        if (ext === 'pdf') {
+          this.pdf(download_url);
+          //  this.getDataFromURL(download_url);
+        }
+        else if (ext === 'mp3' || ext === 'mp4') {
+          this.play(download_url);
+        }
+        else {
+          window.open(blogurl);
+        }
         this.setState({
-          items: response.data
+          url: download_url
         });
       })
       .catch(error => {
-        console.error('There was an error!', error);
+        console.log(error);
       });
   }
-  public play(mediaitemlink: string, Mediatype: string)//get parameter from iconimage
+
+  handleDownload = (url, filename) => {
+    axios.get(url, {
+      responseType: 'blob',
+    })
+      .then((res) => {
+        fileDownload(res.data, filename);
+      });
+  }
+  getDataFromURL = (url) => new Promise((resolve, reject) => {
+    setTimeout(() => {
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          resolve(data)
+        });
+    });
+  });
+  public pdf(url: string) {
+    //let doc=new Blob('landscape','px');
+    //doc.save(url)
+    // let blob = new Blob([url], { type: 'pdf' });
+    //     let tt: any =window.URL.createObjectURL;
+    //     tt.msSaveBlob(blob, url);
+
+    window.open(url);
+  }
+  public play(url: string)//get parameter from iconimage
   {
     document.getElementById('video-popup').style.display = 'block';
-    mediaType = Mediatype;
-    if (Mediatype == "Audio") {
-
-      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';
-
+    var ext = url.split('.').pop();
+    FileType = ext;
+    if (FileType == "mp3") {
+      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + url + ' controls autoPlay preload="none" />';
     }
     else {
-      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + mediaitemlink + ' controls autoPlay  />';
+      document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + url + ' controls autoPlay  />';
     }
+
   }
 
   public render(): React.ReactElement<IGepListingPageProps> {
@@ -164,6 +270,17 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
     let weburl = this.props.apiURL;
     let category = window.location.href;
     var myParam = location.search.split('category=')[1];
+    var CardTitle = this.state.CardTitle.replace('-', ' ').toUpperCase();
+    var pagelink = this.props.context.pageContext.web.absoluteUrl;
+    var ext = this.state.url.split('.').pop();
+    const closeButton = () => {
+      document.getElementById('video-popup').style.display = 'none';
+      (FileType === 'mp4') ?
+        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<video src=' + this.state.url + ' controls pause preload="none" />'
+        :
+        document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + this.state.url + ' controls pause preload="none"/>';
+    };
+
     return (
       <section className="section__content bg-white">
         {
@@ -173,22 +290,43 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
             :
             <div className="container">
               <div className="row">
+
+                <a href={pagelink} style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.image_url || detail.ServerRelativeUrl;
+                    let iconimage = this.state.Iconimage;
                     //  let description = detail.description.replace(/(?:\r\n|\r|\n|\t|&gt;|&lt|;p|&amp|;rsquo;s|&lt;p&gt;|;mdash;|;rsquo;t|)/g, '').toLowerCase();
                     return (
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                        <div className="card" onClick={() => this.getdetailsUrl(detail.title_alias)}>
+                        <div className="card" onClick={(event) => { if (myParam != "PODCAST" && myParam != "WEBINARS") this.getdetailsUrl(detail.title_alias) }}>
                           <img src={imgSrc} alt="imageCard" className="imageCard" />
+
                           {
                             (myParam === "PODCAST" || myParam === "WEBINARS") ?
-                              <img className="play" src={require('../components/Image/Group 817.png')} alt="playButton" />
+                              <img className="play" src={JSON.parse(iconimage).serverRelativeUrl} alt="playButton" onClick={(event) => this.getdetailsUrl(detail.title_alias)} />
                               :
-                              ''
-                          }
+                              ''}
+                          <div className="clickbtn">
+                            <p className="TilesTitle">{detail.service_title}</p>
+                            {
+                              (myParam === "PODCAST" || myParam === 'WEBINARS') ?
+                                (myParam === "PODCAST") ?
+                                  <button className="Readmorebtn">Listen Now&nbsp;&nbsp;<FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon><FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon></button>
+                                  :
+                                  <button className="Readmorebtn">Watch Now&nbsp;&nbsp;<FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon><FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon></button>
+                                :
+                                <button className="Readmorebtn">Read More&nbsp;&nbsp;<FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon><FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon></button>
+                            }
+                          </div>
                         </div>
-                        <p className="TilesTitle">{detail.service_title}</p>
+                        <div className="video-popup" id="video-popup">
+                          <div className="video-popup__inner" id="video-popup__inner">
+                            <span className="close__button" id="close__button" onClick={closeButton}>&times;</span>
+                            <div className="video-con" id="video-con">
+                            </div>
+                          </div>
+                        </div>
                         {/* <p className="Tilesdescription">{description.substring(0, 1).toUpperCase() + description.substring(1, this.props.descriptionlength) + '...'}</p> */}
                         <br></br>
                       </div>
@@ -196,8 +334,13 @@ export default class GepListingPage extends React.Component<IGepListingPageProps
                   })
                 }
               </div>
-            </div>}
+              <div className="loadbtn">
+                <button className="loadmorebtn" onClick={this.PaginationDetails}>Load More</button>
+              </div>
+            </div>
+        }
       </section>
     );
   }
 }
+

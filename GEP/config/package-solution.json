@@ -3,7 +3,7 @@
   "solution": {
     "name": "gep-client-side-solution",
     "id": "55a96b74-9aef-4d37-aa1c-de125dacfd48",
-    "version": "1.0.1.7",
+    "version": "1.0.0.8",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "developer": {

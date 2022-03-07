@@ -19,6 +19,7 @@ export interface IRadioSpotsStates {
   defaultIcon: string;
   isDataLoading: boolean;
   buttonColor: string;
+  CardTitle: string;
 }
 
 export interface IPageItem {
@@ -41,6 +42,7 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       defaultIcon: "",
       isDataLoading: true,
       buttonColor: props.buttonColor,
+      CardTitle: '',
     };
     this.getRadioSpotsDetailsList = this.getRadioSpotsDetailsList.bind(this);
   }
@@ -48,6 +50,8 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       this.getRadioSpotsDetailsList();
     }
     public async getRadioSpotsDetailsList() {
+      let category = window.location.href;
+      var myParam = location.search.split('category=')[1];
       this.ServiceInatance = new GDService(this.props.context);
       const internalColumnName = ["Title", "ImageThumbnail", "IconImage", "MediaItemLink", "MediaType"];
       // let maxItems = this.props.maxItems;
@@ -63,7 +67,7 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       await this.ServiceInatance.getAllListItems(SitePagesList).then((pageData) => {
         if (pageData && pageData.length > 0) {
           console.log("Content data type is >>>>>>>>>>>>>", pageData);
-          this.setState({ list: pageData, isDataLoading: false });
+          this.setState({ list: pageData, isDataLoading: false, CardTitle: myParam });
           var listdata = pageData;
           this.getData(listdata.toString());
         }
@@ -94,6 +98,8 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
 
   public render(): React.ReactElement<IRadioSpotsProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
+    var CardTitle = this.state.CardTitle.replace('-', ' ').toUpperCase();
+    var pagelink = this.props.context.pageContext.web.absoluteUrl;
     const closeButton = () => {
       document.getElementById('video-popup').style.display = 'none';
       (mediaType === 'Video') ?
@@ -110,6 +116,7 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
             :
             <div className="container">
               <div className="row">
+              <a href={pagelink} style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;

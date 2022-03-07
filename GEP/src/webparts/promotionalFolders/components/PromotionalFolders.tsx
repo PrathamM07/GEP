@@ -23,6 +23,7 @@ export interface IPromotionalFolderStates {
   isDataLoading: boolean;
   isLightBoxDisplay: boolean;
   buttonColor: string;
+  CardTitle:string;
 }
 export interface IPageItem {
   ImageThumbnail: string;
@@ -42,6 +43,7 @@ export default class PromotionalFolders extends React.Component<IPromotionalFold
       isDataLoading: true,
       buttonColor: props.buttonColor,
       isLightBoxDisplay: false,
+      CardTitle:''
    
     };
   }
@@ -50,13 +52,17 @@ export default class PromotionalFolders extends React.Component<IPromotionalFold
   }
 
   public async getFolderDetails() {
+    debugger;
     let category = window.location.href;
-    var myParam = location.search.split('category=')[1];
-    console.log("Folder Category is ******", myParam);
+    let title = window.location.href;
+    var myParam = location.search.split('title=')[0];
+    var myParamid =  myParam.split('category=')[1];
+     var myParamtitle = location.search.split('title=')[1];
+    console.log("Folder Category is ******", myParamid);
     this.ServiceInatance = new GDService(this.props.context);
     const internalColumnName = ["Title", "ImageThumbnail","Category/ID" ];
     const expandColumnName = ["Category"];
-    let filterQuery = `Category/ID eq '${myParam}'`;
+    let filterQuery = `Category/ID eq '${myParamid}'`;
     let web = Web(`${this.props.context.pageContext.web.absoluteUrl}/`);
     const SitePagesList: IAllItems = {
       listName: 'Promotional Folder Image',
@@ -67,7 +73,8 @@ export default class PromotionalFolders extends React.Component<IPromotionalFold
     await this.ServiceInatance.getAllListItems(SitePagesList).then((pageData) => {
       if (pageData && pageData.length > 0) {
         console.log("Content data type is >>>>>>>>>>>>>", pageData);
-        this.setState({ list: pageData, isDataLoading: false });
+        this.setState({ list: pageData, isDataLoading: false,
+          CardTitle: myParamtitle });
       }
     }).catch((error) => {
       console.log(error);
@@ -82,8 +89,8 @@ export default class PromotionalFolders extends React.Component<IPromotionalFold
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
     let weburl = this.props.apiURL;
-    // card-gallery-code
-  
+    var CardTitle = this.state.CardTitle.replace('-', ' ').toUpperCase();
+    var pagelink = this.props.context.pageContext.web.absoluteUrl;  
     return (
       <section className="section__content bg-white">
         {
@@ -93,6 +100,7 @@ export default class PromotionalFolders extends React.Component<IPromotionalFold
             :
             <div className="container">
               <div className="row">
+              <a href={pagelink} style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;

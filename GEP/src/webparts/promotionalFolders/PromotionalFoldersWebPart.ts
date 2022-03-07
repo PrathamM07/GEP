@@ -11,6 +11,7 @@ import * as strings from 'PromotionalFoldersWebPartStrings';
 import PromotionalFolders from './components/PromotionalFolders';
 import { IPromotionalFoldersProps } from './components/IPromotionalFoldersProps';
 
+
 export interface IPromotionalFoldersWebPartProps {
   description: string;
   apiURL: string;
