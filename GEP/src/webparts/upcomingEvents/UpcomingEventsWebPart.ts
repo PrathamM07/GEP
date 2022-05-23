@@ -22,7 +22,6 @@ export interface IUpcomingEventsWebPartProps {
   webpartname: string;
   dropdowncontent:string;
   color: string;
-  
 }
 var propertypaneitem = [];
 export default class UpcomingEventsWebPart extends BaseClientSideWebPart<IUpcomingEventsWebPartProps> {
@@ -38,7 +37,6 @@ export default class UpcomingEventsWebPart extends BaseClientSideWebPart<IUpcomi
         webparttitle: this.properties.webpartname ? this.properties.webpartname : "",
         contenttype:this.properties.dropdowncontent?this.properties.dropdowncontent:"Upcoming Events",
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
-       
       }
     );
     this.getPropertyPaneValue();

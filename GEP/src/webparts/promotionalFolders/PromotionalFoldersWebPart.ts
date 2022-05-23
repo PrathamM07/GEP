@@ -6,12 +6,9 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'PromotionalFoldersWebPartStrings';
 import PromotionalFolders from './components/PromotionalFolders';
 import { IPromotionalFoldersProps } from './components/IPromotionalFoldersProps';
-
-
 export interface IPromotionalFoldersWebPartProps {
   description: string;
   apiURL: string;
@@ -22,7 +19,6 @@ export interface IPromotionalFoldersWebPartProps {
 }
 
 export default class PromotionalFoldersWebPart extends BaseClientSideWebPart<IPromotionalFoldersWebPartProps> {
-
   public render(): void {
     const element: React.ReactElement<IPromotionalFoldersProps> = React.createElement(
       PromotionalFolders,
@@ -36,7 +32,6 @@ export default class PromotionalFoldersWebPart extends BaseClientSideWebPart<IPr
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
       }
     );
-
     ReactDom.render(element, this.domElement);
   }
 

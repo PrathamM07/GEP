@@ -6,7 +6,6 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'TelevisionSpotsWebPartStrings';
 import TelevisionSpots from './components/TelevisionSpots';
 import { ITelevisionSpotsProps } from './components/ITelevisionSpotsProps';

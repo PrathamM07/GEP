@@ -7,7 +7,6 @@ import {
   PropertyPaneTextField,
   PropertyPaneDropdown,
   IPropertyPaneDropdownOption,
-
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'WhitePaperDetailsWebPartStrings';
@@ -26,16 +25,12 @@ export interface IWhitePaperDetailsWebPartProps {
   color: string;
   videolink:string;
   audiolink:string;
-  
 }
 
 var propertypaneitem = [];
 export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhitePaperDetailsWebPartProps> {
-
   private _listFields: IPropertyPaneDropdownOption[] = [];
-
   public render(): void {
-
     const element: React.ReactElement<IWhitePaperDetailsProps> = React.createElement(
       WhitePaperDetails,
       {
@@ -49,17 +44,12 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
         video:this.properties.videolink?this.properties.videolink:"",
         audio:this.properties.audiolink?this.properties.audiolink:"",
-
       }
-    );
-       
+    );     
         this.getPropertyPaneValue();
         ReactDom.render(element, this.domElement);
-     
-        
-  }
+      }
 
-  
   public async getPropertyPaneValue() {
     // get all the items from a sharepoint list
     var reacthandler = this;
@@ -71,30 +61,24 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
         items.push({ key: data[assettype].Title, text: data[assettype].Title });
       }
       console.log(items);
-      propertypaneitem = items;
-     
+      propertypaneitem = items; 
     });
-    
   }
 
   protected get disableReactivePropertyChanges(): boolean {
     this.render();
     this.getPropertyPaneValue();
     return true;
-    
     }
   // protected onDispose(): void {
   //   ReactDom.unmountComponentAtNode(this.domElement);
   // }
-
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
-
   private listsFetched: boolean;
   private dropdownOptions: IPropertyPaneDropdownOption[];
-  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-      
+  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {   
     return {
       pages: [
         {
@@ -105,35 +89,11 @@ export default class WhitePaperDetailsWebPart extends BaseClientSideWebPart<IWhi
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-
-
-                // PropertyPaneTextField('webpartname', {
-                //   label: "Webpart Label",
-                // }),
                 PropertyPaneDropdown('dropdowncontent', {
                   label: 'Choose Page Content',
                    options: propertypaneitem,
-                   selectedKey: "Promotional Content",
-                                
+                   selectedKey: "Promotional Content",                               
                 }),
-              
-                // PropertyPaneTextField('apiURL', {
-                //   label: "News API URL"
-                // }),
-                // PropertyPaneSlider('sliderproperty', {
-                //   label: "Max Items",
-                //   min: 1,
-                //   max: 8,
-                //   showValue: true,
-                //   value: 8,
-                //   step: 1
-                // }),
-
-                // PropertyPaneDropdown('dropdownTitle', {
-                //   label: 'Choose the Asset Type',
-                //   options: propertypaneitem,
-                //   selectedKey: "White Papers"
-                // }),
               ]
             }
           ]

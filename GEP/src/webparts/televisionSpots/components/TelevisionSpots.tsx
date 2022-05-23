@@ -19,7 +19,6 @@ export interface ITelevisionSpotsStates {
   isDataLoading: boolean;
   buttonColor: string;
   CardTitle: string;
-  
 }
 export interface IPageItem {
   Title: string;
@@ -113,7 +112,10 @@ export default class TelevisionSpots extends React.Component<ITelevisionSpotsPro
             :
             <div className="container">
               <div className="row">
+              <div className='col-md-4'>
               <a href={pagelink} style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
+              </div>
+               <div className='col-md-8'></div>
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;                   

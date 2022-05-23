@@ -85,9 +85,6 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
   }
 
   public async componentDidMount() {
-   // this.getHomePageDetails();
-    //this.getIconDetails();
-   // this.getEventdata();
   }
   public async getHomePageDetails() {
     this.ServiceInatance = new GDService(this.props.context);
@@ -102,7 +99,6 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
       // filterQuery: filterQuery
     };
     await this.ServiceInatance.getAllListItems(SitePagesList).then((pageData) => {
-
       if (pageData && pageData.length > 0) {
         console.log("Content data type is >>>>>>>>>>>>>", pageData);
         this.setState({ list: pageData, isDataLoading: false });
@@ -163,11 +159,8 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
     };
     try {
       tempPageItem.defaultImageUrl = JSON.parse(libraryData[0].ImageThumbnail).serverRelativeUrl;
-      // console.log("DefaultImageurl: ", tempPageItem.defaultImageUrl);
-
       this.setState({
         defaultIcon: tempPageItem.defaultImageUrl,
-
       });
     } catch (error) {
       console.log(error);
@@ -177,8 +170,6 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
     }
   }
   public async getEventdata() {
-
-
     this.ServiceInatance = new GDService(this.props.context);
     const listTitle = "Events";
     const TODAY: Date = new Date(Date.now());
@@ -232,35 +223,14 @@ export default class UpcomingEvents extends React.Component<IUpcomingEventsProps
                 </div>
                 {
                   this.state.list.map((detail, index) => {
-
                     let imgSrc = detail.ImageThumbnail;
                     console.log("detail data", detail)
                     return (
                       <div key={index} className="contentcard col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div className="card">
                           <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard" className="imageCard" />
-                          {/* <div className="imageContent row-no-padding">
-                            <div className="col-12 col-md-12 text-right">
-                        
-                                ADD TO CALENDER</a>
-                              {/* <a onClick={(event) => this.handleOnChangeEvent(event, addToCalendarButtonParameter)} className="addtocalender">ADD TO CALENDER</a> */}
-                          {/* </div>
-                          </div> */}
                         </div>
-                        <div className="container eventcontent">
-                          <p >{this.state.category}</p>
-                          <h3>{this.state.eventTitle}</h3>
-                          <div className='dates'>
-                            <h5>{this.state.startDate}</h5>
-                            <p>{this.state.location}</p>
-                        
-                          </div>
-                          <div className='addtocalender'>
-                            <a href="javascript:void(0);" target="_blank" style={{ textDecoration: 'none' }} className="d-block" onClick={(e) => { e.preventDefault(); window.open(this.props.context.pageContext.web.absoluteUrl + `/Lists/Events/calendar.aspx?`); return false; }}>
-                              {/* <a onClick={this.addEventToCalendar}> */}
-                              ADD TO CALENDER +</a>
-                          </div>
-                        </div>
+                       
                         <br></br>
                       </div>
                     );

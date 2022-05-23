@@ -354,7 +354,7 @@ html {
     letter-spacing: -1px;
     /* background-image: url('../../../asset/IconImage/Path 15872.png'); */
 }   
-.a_a_50a7110f:not(.c_a_50a7110f):not(.b_a_50a7110f) {/*event backcolor*/
+.a_a_50a7110f:not(.c_a_50a7110f):not(.b_a_50a7110f),.a_e_50a7110f:not(.b_e_50a7110f):not(.o_e_50a7110f) {/*event backcolor*/
     background-color: #EFF7FE;
 }
 .a_c_50a7110f:not(.b_c_50a7110f) {/* Live event backcolor*/
@@ -383,6 +383,10 @@ html {
     margin-bottom: 2.5px;
     text-align: left;
     color: #A9A9A9;
+}
+.a_e_50a7110f:not(.b_e_50a7110f),.a_c_50a7110f:not(.b_c_50a7110f) {
+    padding-left: 30px;
+    padding-right: 30px
 }
 .af_b_ce1e465e .x_b_ce1e465e,.i_c_ce1e465e .ax_c_ce1e465e{/*event main pupose/Title*/
     font-family: 'Roboto', sans-serif;

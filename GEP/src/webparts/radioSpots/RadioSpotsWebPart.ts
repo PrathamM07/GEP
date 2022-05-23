@@ -6,7 +6,6 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'RadioSpotsWebPartStrings';
 import RadioSpots from './components/RadioSpots';
 import { IRadioSpotsProps } from './components/IRadioSpotsProps';
@@ -23,7 +22,6 @@ export interface IRadioSpotsWebPartProps {
 }
 
 export default class RadioSpotsWebPart extends BaseClientSideWebPart<IRadioSpotsWebPartProps> {
-
   public render(): void {
     const element: React.ReactElement<IRadioSpotsProps> = React.createElement(
       RadioSpots,
@@ -37,7 +35,6 @@ export default class RadioSpotsWebPart extends BaseClientSideWebPart<IRadioSpots
         audio:this.properties.audiolink?this.properties.audiolink:"",
       }
     );
-
     ReactDom.render(element, this.domElement);
   }
 

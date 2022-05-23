@@ -36,7 +36,9 @@ export default class BodyApplicationCustomizer
   @override
   public onInit(): Promise<void> {
  
-if(window.location.href.toLowerCase().indexOf("sitepages")>0 || window.location.href.toLowerCase().trim() === this.context.pageContext.web.absoluteUrl.toLowerCase().trim())
+//if(window.location.href.toLowerCase().indexOf("sitepages")>0 || window.location.href.toLowerCase().trim() === this.context.pageContext.web.absoluteUrl.toLowerCase().trim())
+var windowskeyval:any = window;
+     if(windowskeyval._isSPSitePage)
 {
   pnpSetup({
     spfxContext: this.context
@@ -61,35 +63,9 @@ if(window.location.href.toLowerCase().indexOf("sitepages")>0 || window.location.
 
         var extLogo = JSON.parse(items[0].ImageThumbnail);
         var Sitelogo = extLogo.serverUrl + "" + extLogo.serverRelativeUrl;
-        var redirectUrl =  this.context.pageContext.web.absoluteUrl;//items[0].ExternalApi;
-        console.log("Sitelogo:" + Sitelogo + ", redirectUrl:" + redirectUrl );
-        // Checking for both condition if both are true will open in new Tab
-        // if (Sitelogo != "") {
-        //   $(() => {
-        //     ($('[class^="logoImg-50"]')).each(function () {
-        //       $(this).attr("src", Sitelogo);
-        //     }
-        //     );
-        //     ($('[class^="logoWrapper-49"]')).each(function () {
-        //       $(this).attr("href", redirectUrl);
-        //       $(this).attr("target", "_blank");
-        //     }
-        //     );
-        //     //On scroll set image logic logic and Url
-        //     $("div").scroll(() => {
-        //       ($('[class^="shyLogoImg-69"]')).each(function () {
-        //         $(this).attr("src", Sitelogo);
-        //       }
-        //       );
-        //       ($('[class^="shyLogoWrapper-68"]')).each(function () {
-        //         $(this).attr("href", redirectUrl);
-        //         $(this).attr("target", "_blank");
-        //       }
-        //       );
-        //     });
-        //   });
-        // }
-        //Logic for open the url in different Tab if openInNewTab is false          
+        var redirectUrl=this.context.pageContext.web.absoluteUrl;
+        //items[0].ExternalApi;
+        console.log("Sitelogo:" + Sitelogo + ", redirectUrl:" + redirectUrl );       
         if (Sitelogo != "") {
         $(() => {
           ($('[class^="logoImg"]')).each(function () {

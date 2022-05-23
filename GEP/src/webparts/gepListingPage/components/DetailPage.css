@@ -15,7 +15,7 @@ html {
     overflow: hidden;
   }
 .section__content{
-    margin-top: -50px;
+    margin-top: -55px;
 
   }
 .section__content .icon {
@@ -54,10 +54,10 @@ html {
     font-size: 2.4rem;
     text-transform: uppercase;
     vertical-align: middle;
-    margin-left: 10px;
+    margin-left: -5px;
     letter-spacing: -1px;
 }
-.mh_at_9f38462c.bq_at_9f38462c ,.mj_ar_9f38462c.bh_ar_9f38462c{
+.mh_at_9f38462c.bq_at_9f38462c ,.mj_ar_9f38462c.bh_ar_9f38462c,.ma_aq_9f38462c.bv_aq_9f38462c,.mb_ar_9f38462c.bv_ar_9f38462c{
     display: none;
 }
 .loadbtn{
@@ -74,10 +74,10 @@ margin-left: 10px;
     display: inline-block;
     letter-spacing: -1px;
     font-family: 'Roboto',sans-serif;
-    font-size: 1.6rem;
+    font-size: 2.0rem;
     cursor: pointer;
     padding: 1px;
-    width: 100px;
+    width: 120px;
 }
 .Readmorebtn{
     background-color: #fff;
@@ -170,30 +170,31 @@ margin-left: 10px;
     transform: translate(-50%, -50%);
   }
 /*--- card styling--- */
-.card{
+.Detailcard{
     cursor: pointer;
-    min-height: 360px
+    min-height: 360px;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
 }
-.card .imageCard {
+.Detailcard .imageCard {
      /* height: 200px;  */
     cursor: pointer;
     display: block;
 }
-
-.card .imageCardTv {
-    cursor: pointer;
-}
-
-.card .play {
+.Detailcard .play {
     width: 91px;
     height: 91px;
 }
-.card .Tvad_Play {
-    width: 91px;
-    height: 91px;
-}
-
-.card::before {
+.Detailcard::before {
     content: "";
     position: absolute;
     display: block;
@@ -203,7 +204,6 @@ margin-left: 10px;
     top: 0;
     cursor: pointer;
 }
-
 /* ------------- */
 
 .imageContent {
@@ -234,7 +234,6 @@ margin-left: 10px;
     padding: 0px;
     margin-top: 3px;
 }
-
 .imageContentTv p {
     color: #393939;
     font-size: 14px;
@@ -245,8 +244,6 @@ margin-left: 10px;
     padding: 0px;
     margin-top: -9px;
 }
-
-
 .imageContent a {
     color: white;
     text-transform: uppercase;
@@ -257,8 +254,6 @@ margin-left: 10px;
     text-underline-offset: 3px;
     text-align: right;
 }
-
-
 .play {
     position: absolute;
     top: 50%;
@@ -353,7 +348,6 @@ margin-left: 10px;
     width: 100%;
     cursor: pointer;
 }
-
 .cards .content {
     padding: 0px 29px 0px 16px;
     min-height: 151px;
@@ -367,7 +361,6 @@ margin-left: 10px;
     text-align: left;
     color: #A9A9A9;
 }
-
 .cards .content h4 {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
@@ -382,7 +375,6 @@ margin-left: 10px;
     min-height: 302px;
     margin-bottom: 30px;
 }
-
 .content h4 {
     text-transform: uppercase;
     color: #006BAA;
@@ -405,7 +397,6 @@ margin-left: 10px;
     display: flex;
     justify-content: space-between;
 }
-
 .imageLibrary a {
     border: 1px solid #006BAA;
     color: #006BAA !important;
@@ -421,14 +412,13 @@ margin-left: 10px;
     cursor: pointer;
     text-decoration: none;
 }
-
 .blueBorder {
     width: 100%;
     height: 6px;
     background-color: #1e7fd3;
 
 }
-.card .play {
+.Detailcard .play {
     width: 91px;
     height:91px;
 }

@@ -98,6 +98,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     });
   }
   private async getData(data: string) {
+    debugger;
     axios.get(data)
       .then((result) => {
         console.log('This is your data', result.data);
@@ -159,7 +160,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
     :
     window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/GepListing-Page.aspx?category=${title}`));
   }
-  public ImageClickData(title: string ,id:string)//get imageclick tiles title
+  public ImageClickData(title: string ,id:string,content:string)//get imageclick tiles title
   {
     debugger;
     (this.props.contenttype != 'Image Library') ?
@@ -171,7 +172,7 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
         :
         window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/Groups.aspx?category=${id}title=${title}`))
       :
-      window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}`));
+      window.open((this.props.context.pageContext.web.absoluteUrl + `/SitePages/ImageGallery.aspx?category=${title}contant=${content}`));
   }
 
   public render(): React.ReactElement<IWhitePaperDetailsProps> {
@@ -210,12 +211,13 @@ export default class WhitePaperDetails extends React.Component<IWhitePaperDetail
                     var title = (detail.Title).replace(/\s+/g, '-');
                     let id=(detail.ID);
                     var subtitle = (detail.Title).replace('-', " ");
+                    var content = (this.props.contenttype).replace(/\s+/g, '-');
                     return (
                       <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" >
                         {
                           (this.props.contenttype === 'Image Library' || this.props.contenttype === 'Promotional Content') ?
 
-                            <div className="card" onClick={(e) => {if(!detail.MediaType)this.ImageClickData(title,detail.ID)}} >
+                            <div className="card" onClick={(e) => {if(!detail.MediaType)this.ImageClickData(title,detail.ID,content)}} >
                               <img src={JSON.parse(imgSrc).serverRelativeUrl} alt="imageCard2" className="imageCard" />
                               {
                                 (detail.IconImage === null) ?

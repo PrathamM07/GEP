@@ -29,9 +29,9 @@ html {
     left: 25%;
     transform: translate(-50%, -50%);
   }
-  .mh_at_9f38462c.bq_at_9f38462c ,.mj_ar_9f38462c.bh_ar_9f38462c{
+ .mh_at_9f38462c.bq_at_9f38462c ,.mj_ar_9f38462c.bh_ar_9f38462c,.ma_aq_9f38462c.bv_aq_9f38462c,.mb_ar_9f38462c.bv_ar_9f38462c {
     display: none;
-}
+} 
   .mainpageLoader{
     margin: 0;
     position: absolute;
@@ -47,7 +47,7 @@ html {
     font-size: 2.4rem;
     text-transform: uppercase;
     vertical-align: middle;
-    margin-left: 10px;
+    margin-left: -5px;
     letter-spacing: -1px;
 }
 .card{

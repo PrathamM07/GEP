@@ -93,7 +93,6 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
       if (Mediatype == "Audio") { 
         document.querySelector('.video-popup .video-popup__inner .video-con').innerHTML = '<audio src=' + mediaitemlink + ' controls autoPlay preload="none" />';    
       }
-     
     }
 
   public render(): React.ReactElement<IRadioSpotsProps> {
@@ -116,7 +115,10 @@ export default class RadioSpots extends React.Component<IRadioSpotsProps,IRadioS
             :
             <div className="container">
               <div className="row">
+              <div className='col-md-4'>
               <a href={pagelink} style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
+              </div>
+               <div className='col-md-8'></div>
                 {
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ImageThumbnail;

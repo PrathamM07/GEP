@@ -6,7 +6,6 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'ImagegalleryWebPartStrings';
 import Imagegallery from './components/Imagegallery';
 import { IImagegalleryProps } from './components/IImagegalleryProps';
@@ -21,7 +20,6 @@ export interface IImagegalleryWebPartProps {
 }
 
 export default class ImagegalleryWebPart extends BaseClientSideWebPart<IImagegalleryWebPartProps> {
-
   public render(): void {
     const element: React.ReactElement<IImagegalleryProps> = React.createElement(
       Imagegallery,
@@ -35,7 +33,6 @@ export default class ImagegalleryWebPart extends BaseClientSideWebPart<IImagegal
         buttonColor: this.properties.color ? this.properties.color : "#0083cf",
       }
     );
-
     ReactDom.render(element, this.domElement);
   }
 

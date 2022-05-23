@@ -13,7 +13,7 @@ import ReactLoading from "react-loading";
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
+import { saveAs } from "file-saver";
 export interface IImageGalleryStates {
   list: IPageItem[];
   currentPageItems: IPageItem[];
@@ -24,7 +24,8 @@ export interface IImageGalleryStates {
   isLightBoxDisplay: boolean;
   buttonColor: string;
   listimage: string;
-  CardTitle:string;
+  CardTitle: string;
+  Subtitle:string;
 }
 export interface IPageItem {
   service_title: string;
@@ -32,7 +33,10 @@ export interface IPageItem {
   description: string;
   title_alias: string;
   ServerRelativeUrl: string;
+  ImageThumbanil: string;
+  ListItemAllFields: [];
 }
+
 let listItems: any[] = [];
 export default class Imagegallery extends React.Component<IImagegalleryProps, IImageGalleryStates, {}> {
   private ServiceInatance: GDService;
@@ -49,7 +53,8 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
       buttonColor: props.buttonColor,
       isLightBoxDisplay: false,
       listimage: '',
-      CardTitle:''
+      CardTitle: '',
+      Subtitle:'',
     };
   }
   public componentDidMount() {
@@ -58,8 +63,13 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
   }
   public async getLibrarydata() {
     let category = window.location.href;
-    var myParam = location.search.split('category=')[1];
-    var titlename = "ImageGallery/" + myParam;
+   // var myParam = location.search.split('category=')[1];
+    var myParam1 = location.search.split('contant=')[0];
+    var myParamtitle =  myParam1.split('category=')[1];
+     var myParamtitles = location.search.split('contant=')[1];
+     var myParam = (myParamtitles).replace('-', " ");
+     console.log("contentdata is",myParam);
+    var titlename = "ImageGallery/" + myParamtitle;
     this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl +
       `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
       SPHttpClient.configurations.v1,
@@ -75,13 +85,15 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
           response.json().then((responseJSON) => {
             console.log("data is >>>>", responseJSON);
             var imgurl = responseJSON.Files;
-            this.setState({ CardTitle:myParam});
+            this.setState({ CardTitle: myParamtitle });
             listItems.push(imgurl);
-            this.setState({ list: imgurl,
-               isDataLoading: false,
-               CardTitle:myParam });
+            this.setState({
+              list: imgurl,
+              isDataLoading: false,
+              CardTitle: myParamtitle,
+              Subtitle:myParam,
+            });
           });
-          
         }
       });
   }
@@ -90,7 +102,7 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
     var myParam = location.search.split('category=')[1];
     var titlename = "PromotionalLibrary/" + myParam;
     this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl +
-      `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files`,
+      `/_api/Web/GetFolderByServerRelativeUrl('${titlename}')?$expand=Folders,Files/ListItemAllFields`,
       SPHttpClient.configurations.v1,
       {
         headers: {
@@ -102,24 +114,38 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
       .then((response: SPHttpClientResponse) => {
         if (response.ok) {
           response.json().then((responseJSON) => {
-            console.log("data is >>>>", responseJSON);
-            var imgurl = responseJSON.Files;
-            this.setState({ CardTitle:myParam});
-            listItems.push(imgurl);
-            this.setState({ list: imgurl, isDataLoading: false });
+            var imageurl = responseJSON.Files;
+            this.setState({ CardTitle: myParam });
+            listItems.push(imageurl);
+            this.setState({ isDataLoading: false, list: imageurl });
           });
         }
       });
   }
-
+  public Downloadpdffile(url: string) {
+    axios({
+      url: url, //your url
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      var link = url;//console.log("data is my",link);
+      var pdffile = link.lastIndexOf('/');
+      var result = link.substring(pdffile + 1);
+      console.log("data is that", result);
+      saveAs(
+        response.data,
+        result
+      );
+    });
+  }
   public render(): React.ReactElement<IImagegalleryProps> {
     document.documentElement.style.setProperty("--button-color", this.state.buttonColor);
     var titlealias = window.location.protocol;
     let str = this.props.webparttitle;
     str = str.replace(/\s+/g, '-').toLowerCase();
-    var CardTitle=this.state.CardTitle.replace('-',' ').toUpperCase();
+    var CardTitle = this.state.CardTitle.replace('-', ' ').toUpperCase();
     let weburl = this.props.apiURL;
-    var pagelink=this.props.context.pageContext.web.absoluteUrl;
+    var pagelink = this.props.context.pageContext.web.absoluteUrl;
     // card-gallery-code
     const imageCards = this.state.list.map((data) => {
       console.log("listdata is", this.state.list);
@@ -176,8 +202,12 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
             :
             <div className="container">
               <div className="row">
-              <a href={pagelink}  style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
+                <div className='col-md-4'>
+                  <a href={pagelink} style={{ textDecoration: 'none' }} className="d-block"><p className="CardTitle">{CardTitle}</p></a>
+                </div>
+                <div className='col-md-8'></div>
                 {
+                  (this.state.Subtitle === 'Image Library')?
                   this.state.list.map((detail, index) => {
                     let imgSrc = detail.ServerRelativeUrl;
                     return (
@@ -189,6 +219,33 @@ export default class Imagegallery extends React.Component<IImagegalleryProps, II
                       </div>
                     );
                   })
+                  :
+                  (this.state.list[0].ListItemAllFields["ImageThumbanil"]===null)?
+                    this.state.list.map((detail, index) => {
+                      let imgSrc = detail.ServerRelativeUrl;
+                      return (
+                        <div key={index} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4" onClick={() => showImage(detail.ServerRelativeUrl)}>
+                          <div className="card">
+                            <img src={imgSrc} alt="imageCard" className="imageCard" />
+                          </div>
+                          <br></br>
+                        </div>
+                      );
+                    })
+                    :
+                    this.state.list.map((thumbnailimg, index) => {
+                      var img = this.state.list[index].ListItemAllFields["ImageThumbanil"];
+                      var pdffile = this.state.list[index].ServerRelativeUrl;
+                      var imgSrc = JSON.parse(img).serverRelativeUrl;
+                      return (
+                        <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4" onClick={() => this.Downloadpdffile(pdffile)}>
+                          <div className="card">
+                            <img src={imgSrc} alt="imageCard" className="imageCard" />
+                          </div>
+                          <br></br>
+                        </div>
+                      );
+                    })
                 }
                 {this.state.isLightBoxDisplay ?
                   <div id="lightbox" onClick={hideLightBox}>
