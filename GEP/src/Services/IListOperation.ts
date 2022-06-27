@@ -10,4 +10,6 @@ export interface IAllItems {
   }
 export interface IListOperationsService {
     getAllListItems(Item: IAllItems): Promise<any[]>;
+    getLibraryFolders(library: string): Promise<any[]>;
+    getAllLibraryItemsByFolder(libraryPath: string): Promise<any[]>;
 }

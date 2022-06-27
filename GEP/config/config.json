@@ -65,6 +65,30 @@
           "manifest": "./src/webparts/promotionalFolders/PromotionalFoldersWebPart.manifest.json"
         }
       ]
+    },
+    "home-tiles-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homeTiles/HomeTilesWebPart.js",
+          "manifest": "./src/webparts/homeTiles/HomeTilesWebPart.manifest.json"
+        }
+      ]
+    },
+    "informational-tiles-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/informationalTiles/InformationalTilesWebPart.js",
+          "manifest": "./src/webparts/informationalTiles/InformationalTilesWebPart.manifest.json"
+        }
+      ]
+    },
+    "promotional-tiles-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/promotionalTiles/PromotionalTilesWebPart.js",
+          "manifest": "./src/webparts/promotionalTiles/PromotionalTilesWebPart.manifest.json"
+        }
+      ]
     }
   },
   "localizedResources": {
@@ -76,6 +100,9 @@
     "UpcomingEventsWebPartStrings": "lib/webparts/upcomingEvents/loc/{locale}.js",
     "RadioSpotsWebPartStrings": "lib/webparts/radioSpots/loc/{locale}.js",
     "TelevisionSpotsWebPartStrings": "lib/webparts/televisionSpots/loc/{locale}.js",
-    "PromotionalFoldersWebPartStrings": "lib/webparts/promotionalFolders/loc/{locale}.js"
+    "PromotionalFoldersWebPartStrings": "lib/webparts/promotionalFolders/loc/{locale}.js",
+    "HomeTilesWebPartStrings": "lib/webparts/homeTiles/loc/{locale}.js",
+    "InformationalTilesWebPartStrings": "lib/webparts/informationalTiles/loc/{locale}.js",
+    "PromotionalTilesWebPartStrings": "lib/webparts/promotionalTiles/loc/{locale}.js"
   }
 }

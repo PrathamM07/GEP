@@ -242,7 +242,7 @@ html {
     width: 100%;
      padding-right: 7px; 
      padding-left: 7px; 
-     margin-top: -5px;
+     /* margin-top: -5px; */
 }
 .col-9, .col-md-9, .col-3 , .col-md-3{
     padding-right: 0px;

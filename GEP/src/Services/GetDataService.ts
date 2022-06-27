@@ -34,9 +34,21 @@ export default class GetDataService implements IListOperationsService {
         }
       }
  
-    public getListData(listName) {
-        return axios.get(listName);
-    }
+      public async getAllLibraryItemsByFolder(libraryPath: string): Promise<any[]>{
+        try {
+          return await sp.web.getFolderByServerRelativeUrl(libraryPath).expand("Folders,Files").select("Files,Folders/ListItemAllFields").get();
+        } catch (error) {
+          throw error;
+        }
+      }
+     
+      public async getLibraryFolders(libraryName: string): Promise<any[]>{
+        try {
+          return await sp.web.lists.getByTitle(libraryName).rootFolder.folders.expand("ListItemAllFields").filter("ItemCount ne 0").get();
+        } catch (error) {
+          throw error;
+        }
+      }
    
    
   
